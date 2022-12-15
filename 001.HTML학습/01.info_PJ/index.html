@@ -54,6 +54,9 @@
                 5. 그룹선택자 : ,(콤마)
                 예) h1,div,a {}
 
+                6. 자손선택자 : 띄어쓰기
+                예) div a {} -> div 하위의 모든 a 요소들
+
             */
 
             /* 기본마진 패딩 없애기 */
@@ -84,7 +87,7 @@
                  참고)
                  https://www.w3schools.com/css/css_border.asp
                 */
-                border: 5px double #d13c7a;
+                border: 5px double #f3af48;
 
                 /* 둥근 모서리 보더 : brad
                 border-radius : 값
@@ -116,7 +119,32 @@
                 
                 */
             }
-        </style>
+            
+            /* 1.상단영역 */
+            .top{
+                /* 배경색 : bgc
+                background-color */
+                background-color: rgb(177, 223, 220);
+                /* 글자중앙절렬 tac */
+                text-align: center;
+            }
+
+            /* 2.메인영역 */
+            /* 메인영역 이미지 */
+            .cont img{
+                width: 100%;
+                /* 한쪽만 크기를 주면 이미지는 자동으로 비율유지를 하면서 변경된다! 100%는 부모박스를 채움! */
+            }
+            
+            /* 3.하단영역 */
+            .info{
+                /* 배경색 */
+                background-color: rgb(227, 233, 233);
+                /* 글자중앙정렬 */
+                text-align: center;
+            }
+            
+            </style>
     </head>
     <body>
         
