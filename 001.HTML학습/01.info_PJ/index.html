@@ -9,6 +9,19 @@
         <title>네이버 요약 뉴스</title>
         <!-- 인터널 스타일시트 요소 -->
         <style>
+
+            /* 웹폰트 CDN */
+            @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR&family=Poor+Story&display=swap');
+
+            /*
+            1. 타이틀 
+            font-family: 'Jua', sans-serif;
+            2. 본문
+            font-family: 'Noto Sans KR', sans-serif;
+            3. 서브/푸터
+            font-family: 'Poor Story', cursive;
+            */
+
             /*  
                 [스타일 시트 문법 영역! - 기본문법]
 
@@ -56,6 +69,9 @@
 
                 6. 자손선택자 : 띄어쓰기
                 예) div a {} -> div 하위의 모든 a 요소들
+
+                7. 직계자식 선택자 : > (왼쪽 꺾쇠)
+                예) header>a{} -> header 바로아래 a 요소
 
             */
 
@@ -121,23 +137,71 @@
             }
             
             /* 1.상단영역 */
-            .top{
+            .top {
                 /* 배경색 : bgc
                 background-color */
                 background-color: rgb(177, 223, 220);
                 /* 글자중앙절렬 tac */
                 text-align: center;
             }
+            /* 타이틀 */
+            .top>h1{
+                /* 1.글자 스타일 fs :
+                font-style 
+                italic : 이탤릭
+                normal : 이탤릭 해제 (기본값) */
+                font-style: italic;
+                /* font-style: normal; */
+                
+                /* 2.글자두께 fw :
+                font-weight
+                normal : 두께없음
+                bold : 두껍게 */
+                font-weight: normal;
+                /* font-weight: bold; */
+
+                /* 3.글자크기 : fz숫자
+                font-size
+                글자단위 : pt,px,em,rem,vw,vh */
+                font-size: 50px;
+
+                /* 4.글자줄간격 : 
+                line-height
+                (글이 여러줄일때 사이 간격용 또는 글자 박스에서 세로중앙정렬시)
+                - 단위없으면 배수 */
+                line-height: 1.7;
+
+                /* 5.글자체 : ff
+                font-family
+                - 콤마로 여러개를 쓰면 대체체를 설정함 */
+                
+                font-family: "궁ㄹ서","굴ㄹ림","맑은ㅋ 고딕","돋움";
+
+                /* 6.글자색 : c
+                color : 해시코드/RGB/HSL/웹색상명 */
+                color: navy;
+            }
+
+            /* GNB 메뉴 */
+            #gnb a{
+                font-family: 'Jua', sans-serif;
+                /* a요소는 기본적으로 밑줄과 글자색이 셋팅됨!
+                반드시 a에서 변경해야만 적용된다!(부모에서는 안됨) */
+                /* 글자색 */
+                color: darkred;
+                /* 밑줄없앰 - text-decoration:none */
+                text-decoration: none; /* tdn */
+            }
 
             /* 2.메인영역 */
             /* 메인영역 이미지 */
-            .cont img{
+            .cont img {
                 width: 100%;
                 /* 한쪽만 크기를 주면 이미지는 자동으로 비율유지를 하면서 변경된다! 100%는 부모박스를 채움! */
             }
             
             /* 3.하단영역 */
-            .info{
+            .info {
                 /* 배경색 */
                 background-color: rgb(227, 233, 233);
                 /* 글자중앙정렬 */
