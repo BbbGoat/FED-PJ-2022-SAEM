@@ -14,9 +14,9 @@
             @import url('https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR&family=Poor+Story&display=swap');
 
             /*
-            1. 타이틀 
+            1. 타이틀 본문
             font-family: 'Jua', sans-serif;
-            2. 본문
+            2. GNB 메뉴
             font-family: 'Noto Sans KR', sans-serif;
             3. 서브/푸터
             font-family: 'Poor Story', cursive;
@@ -141,7 +141,7 @@
                 /* 배경색 : bgc
                 background-color */
                 background-color: rgb(177, 223, 220);
-                /* 글자중앙절렬 tac */
+                /* 글자중앙정렬 tac */
                 text-align: center;
             }
             /* 타이틀 */
@@ -175,7 +175,7 @@
                 font-family
                 - 콤마로 여러개를 쓰면 대체체를 설정함 */
                 
-                font-family: "궁ㄹ서","굴ㄹ림","맑은ㅋ 고딕","돋움";
+                font-family: "궁ㄹ서","굴ㄹ림","맑은ㅋ 고딕",'Jua','sans-serif';
 
                 /* 6.글자색 : c
                 color : 해시코드/RGB/HSL/웹색상명 */
@@ -184,7 +184,7 @@
 
             /* GNB 메뉴 */
             #gnb a{
-                font-family: 'Jua', sans-serif;
+                font-family: 'Noto Sans KR', sans-serif;
                 /* a요소는 기본적으로 밑줄과 글자색이 셋팅됨!
                 반드시 a에서 변경해야만 적용된다!(부모에서는 안됨) */
                 /* 글자색 */
@@ -207,7 +207,19 @@
                 /* 글자중앙정렬 */
                 text-align: center;
             }
-            
+            /* 하단주소 */
+            .info address{
+                /* 글자체 */
+                font-family: 'Poor Story', cursive;
+                /* address는 기본 이탤릭 이므로 해체하기 */
+                font-style: normal;
+                /* 글자색 */
+                color: #333;
+                /* 글자크기 */
+                font-size: 16px;
+            }
+
+
             </style>
     </head>
     <body>
