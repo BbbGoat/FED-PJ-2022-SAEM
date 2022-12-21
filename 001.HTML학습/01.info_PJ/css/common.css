@@ -84,6 +84,7 @@
             body {
                 /* 하단패딩 pb */
                 padding-bottom: 50px;
+                font-family: 'Noto Sans KR';
             }
 
             /* 박스공통 클래스 */
