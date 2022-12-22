@@ -431,7 +431,15 @@ a{
     /* 왼쪽마진 ml */
     margin-left: 100px;
 }
-
+.pnews h3 {
+    text-align: center;
+}
+/* 사진뉴스 타이틀 가상요소 아이콘 넣기*/
+/* 맨 앞 가상요소 ::before 
+태그를 사용하지 않고 요소를 넣는 방법! */
+.pnews h3::before {
+    content: '✨';
+}
 /* 사진뉴스 테이블박스 */
 .pnews table {
     /* 가로중앙이동 : 마영오
@@ -442,6 +450,16 @@ a{
     /* 테이블 기본 사이간격 없애기 */
     border-collapse: collapse;
     /* seperate(기본값) */
+}
+/* 테이블 a 요소 */
+/* 기존 .cont article a 로 세팅된것이
+더 쎄기 때문에 여기서 윗 부모를 같은 레벨로 넣어서 선택하면
+하위에 클래스가 요소(타입)보다 더 높기때문에 우선적용된다! */
+.cont .pnews a {
+    /* 글자크기 */
+    font-size: 5px;
+    /* 줄간격 */
+    line-height: 1.5;
 }
 
 /* 
@@ -487,4 +505,22 @@ a{
 .pnews tr+tr td {
     /* 보더탑 bdt */
     border-top: 2px solid #ccc;
+}
+
+
+/*****************************
+      말줄임 표시 세팅하기! 
+ ****************************/
+ul a, ol a, dl a {
+    /* 1.디자인 적용위해 block */
+    display: block;
+    /* 2.가로크기 한계주기 */
+    width: 315px;
+    /* 3.줄바꿈방지 */
+    white-space: nowrap;
+    /* 4.넘치는 자식 숨기기 */
+    overflow: hidden;
+    /* 넘치는 텍스트 말줄임표 설정 */
+    text-overflow: ellipsis;
+    /* border: 1px solid red; */
 }
