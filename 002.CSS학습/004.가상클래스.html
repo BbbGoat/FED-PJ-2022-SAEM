@@ -135,8 +135,9 @@
             margin: 0 auto;
             /* 내부 인라인요소 오른쪽정렬 */
             text-align: right;
-
-            outline: 1px solid red;
+            /* outline: 1px solid red; */
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         /* 
@@ -156,10 +157,10 @@
             /* 위에 기본 초기화 */
         }
         
-        /* ul 기본 리셋하기 */
-        ul.part1 {
+        /* 부모박스 셋팅 */
+        ul.part1, div.part2 {
             width: 800px;
-            margin: 0 auto;
+            margin: 30px auto;
             padding: 20px;
             border: 2px solid #ccc;
             /* 둥근모서리 */
@@ -174,6 +175,8 @@
             [ font 한번에 셋팅하기! ]
             font : 스타일 두께 크기/줄간격 글자체 ;
             font : 스두크/줄체
+            ->>> font 한번에 쓰기에서 글자체는 필수!
+            ->>> 2개이상 셋팅필수
         */
         /* 모든 li에 오버시 손가락모양 */
         .part1 li{
@@ -284,6 +287,37 @@
             -> 호가호위 (여우뒤의 호랑이 효과!)
             -> !important는 되도록 쓰지말것
         */
+
+
+        /* 두번째 파트
+        -> 여러종류의 요소가 섞여 있으면
+        first-of-type
+        nth-of-type(n)
+        last-of-type
+        */
+
+        /* 두번재 div
+        font - 30px "궁서"
+        글자색 - blueviolet */
+
+        .part2 div:nth-of-type(2) {
+            font: 30px "궁서";
+            color: blueviolet;
+        }
+        /* 첫번째 i
+        font - bold 20px
+        글자색 - palevioletred */
+        .part2 i:first-of-type {
+            font: bold 20px "굴림";
+            color: palevioletred;
+        }
+
+        /* 세번째 div 이후 div 형제요소 모두
+        font - 궁서체, 글자색 - red */
+        .part2 div:nth-of-type(3)~div {
+            font: "궁서체";
+            color: red;
+        }
 
 
         /* 
