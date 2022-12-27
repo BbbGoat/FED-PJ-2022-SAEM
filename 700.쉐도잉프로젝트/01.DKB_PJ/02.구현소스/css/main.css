@@ -84,17 +84,17 @@ body {
 }
 
 /* 캐릭터 이름 이미지 중 첫번째 이미지 처음에 숨기기 */
-.ci figcaption img:first-child{
+.ci figcaption img:first-child {
     display: none;
 }
 
 /* .cat박스에 마우스 오버시 진한 이미지 보이기 */
-.cat:hover .ci figcaption img:first-child{
+.cat:hover .ci figcaption img:first-child {
     display: inline;
 }
 
 /* .cat박스에 마우스 오버시 흐린 이미지 숨기기 */
-.cat:hover .ci figcaption img:last-child{
+.cat:hover .ci figcaption img:last-child {
     display: none;
 }
 
