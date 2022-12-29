@@ -211,6 +211,40 @@
             opacity: 1;
         }
 
+        /* 최하위 요소일지라도 fixed 되면
+        보이는 화면으로 기준하여 변경됨! */
+        .f3{
+            position: fixed;
+            top: 40%;
+            right: -140px;
+            z-index: 99999;
+        }
+        /* 마우스 오버시 나오기 */
+        .f3:hover {
+            right: 0;
+            transition: .3s ;
+        }
+        .f3 span{ /* 글자박스 */
+            position: absolute;
+            right: 100%;
+            /* 부모는? .f3 */
+            width: 50px;
+            height: 100%;
+            /* 글자세로모드 */
+            writing-mode: vertical-lr;
+            background-color: lightpink;
+            padding-left: 20px;
+            /* 둥근모서리 : 왼쪽위, 왼쪽아래
+            border-radius: 왼위 오른위 오른아래 왼아래
+            왼쪽위부터 시계방향! */
+            border-radius: 10px 0 0 10px;
+        }
+        .f3 img{
+            height: 200px;
+            /* 하단간극없앰 */
+            vertical-align: middle;
+        }
+
     </style>
 </head>
 <body>
