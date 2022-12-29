@@ -119,6 +119,7 @@ body {
         overflow:auto -> 자동으로 y 스크롤
     */
     overflow: auto;
+    
     /* 배경넣기 */
     background: url(../images/eachBG.jpg) no-repeat bottom/cover;
 
@@ -137,7 +138,6 @@ body {
 /* 캐릭터 설명 타이틀 */
 .cd h3{
     font-family: 'Gugi', cursive;
-    padding: 15px;
     font-size: 24px;
     font-weight: normal;
     padding: 15px 10px 5px;
