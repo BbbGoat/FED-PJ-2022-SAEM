@@ -23,3 +23,39 @@ body{
     /* 배경이미지 채우기 */
     background: url(../ab_img/space.jpg) no-repeat fixed center/cover;
 }
+
+/* 1. 전체 타이틀 */
+.tit{
+    font-family: 'Monoton', sursive;
+    color: #fff;
+    font-size: 70px;
+    /* 글자두께 보통 */
+    font-weight: normal;
+    text-align: center;
+    /* 위아래 패딩 */
+    padding: 50px 0;
+}
+
+/* 2. 메인 캐릭터 박스 */
+.abx{
+    width: 300px;
+    height: 400px;
+    /* 배경이미지 */
+    background: url(../ab_img/ab0.jpg) no-repeat center/cover;
+    /* 둥근모서리 -> 원형 50% */
+    border-radius: 50%;
+    /* 마영오! */
+    margin: 0 auto;
+    /* 글로우 효과 : 박스그림자 응용
+    box-shadow: x y blur spread color */
+    box-shadow: 0 0 30px 10px cyan,
+    /* inset은 내부그림자 */
+    inset 0 0 20px lightgreen;
+}
+
+/* 캐릭터박스 */
+.cbx{
+    /* 앱솔루트 포지션
+    위치값 주기 전 상태: 모두겹침, 싸고있는 박스 안에 그대로 있음(젠틀), 크기는 내용만큼 자동, 나중것이 기본 위 */
+    position: absolute;
+}
