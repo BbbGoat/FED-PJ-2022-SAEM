@@ -26,7 +26,7 @@ a{
 }
 body{
     /* 배경이미지 채우기 */
-    background: url(../ab_img/space.jpg) no-repeat fixed center/cover;
+    background: url(../ab_img/space.jpg) no-repeat fixed top/cover;
     /* 전체 body 스크롤바 숨기기 */
     /* overflow: hidden; */
 }
@@ -56,11 +56,12 @@ html,body{
     z-index: 9999; /* 가장 위 */
     
     font-family: 'Monoton', sursive;
-    color: #fff;
+    color: #488597;
     font-size: 70px;
     /* 글자두께 보통 */
     font-weight: normal;
     text-align: center;
+    text-shadow: 3px 3px 1px #fff;
     /* 위아래 패딩 */
     padding: 50px 0;
 }
@@ -86,9 +87,9 @@ html,body{
     margin: 0 auto;
     /* 글로우 효과 : 박스그림자 응용
     box-shadow: x y blur spread color */
-    box-shadow: 0 0 30px 10px cyan,
+    box-shadow: 0 0 30px 10px rgb(95, 151, 168),
     /* inset은 내부그림자 */
-    inset 0 0 20px lightgreen;
+    inset 0 0 20px rgb(18, 109, 89);
 }
 
 /* 캐릭터박스 */
@@ -144,7 +145,7 @@ html,body{
     border-radius: 50%;
 
     /* 글로우 효과 */
-    box-shadow: 0 0 30px 10px lightgreen;
+    box-shadow: 0 0 30px 10px rgb(243, 243, 243);
 }
 
 /* body에 오버시 전체 opacity 보이게하기 */
@@ -287,10 +288,10 @@ body:hover .cbx:nth-child(5){
 }
 /* 가상클래스로 화살표모양 넣기 */
 #pg1 .gobtn::after{
-    content: '👇';
+    content: '🎬';
 }
 #pg2 .gobtn::after{
-    content: '👆';
+    content: '🎭';
 }
 /* 개별위치 */
 #pg1 .gobtn{
@@ -301,7 +302,13 @@ body:hover .cbx:nth-child(5){
 }
 /* 오버시 a 변경 */
 .gobtn:hover{
-    color: hotpink;
+    color: #008275;
+    font-weight: bold;
     text-decoration: overline;
     text-decoration-style: wavy;
+    text-shadow:
+    1px 0 #fff,
+    -1px 0 #fff,   
+    0 1px #fff,   
+    0 -1px #fff;  
 }
