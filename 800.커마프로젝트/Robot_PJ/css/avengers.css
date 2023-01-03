@@ -67,15 +67,15 @@ html,body{
 
      /* 트랜스폼
     -> y축 상단이동 + x축회전 90도 + 스케일 0(안보임) */
-    transform: translateY(-200px) rotateX(90deg) scale(0);
+    /* transform: translateY(-200px) rotateX(90deg) scale(0); */
 
     /* 트랜지션 */
-    transition: transform 2s ease-in-out;
+    /* transition: transform 2s ease-in-out; */
 }
 
 body:hover .tit{
     /* 트랜스폼 : 원래 그자리로! */
-    transform: translateY(0px) rotateX(720deg) scale(1);
+    /* transform: translateY(0px) rotateX(720deg) scale(1); */
 }
 
 
