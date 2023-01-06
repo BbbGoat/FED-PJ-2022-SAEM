@@ -172,5 +172,64 @@ body * {
     border-radius: 0 50% 50% 0;
 }
 
+/************* 로봇몸통 *************/
+.body {
+    position: relative;
+    /* 부모자격 - 하위 직계 div들 */
+    width: 200px;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 130px;
+}
+/* 몸통 하위 직계 div 모두 앱솔루트! */
+.body>div{
+    position: absolute;
+}
+/* 몸통 가상요소로 상단 만들기 */
+.body::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: -50px;
+    width: 300px;
+    height: 200px;
+    background-color: #fff;
+    /* 그라데이션 */
+    background-image: linear-gradient(90deg, #eee, #777, rgb(170, 170, 170), rgb(99, 99, 99));
+    /* 몸깎기 */
+    clip-path: polygon(0 0, 10% 100%, 90% 100%, 100% 0);
+}
+/* 몸통 가상요소로 하단 만들기 */
+.body::after{
+    content: '';
+    display: block;
+    position: absolute;
+    left: -50px;
+    bottom: 0;
+    width: 300px;
+    height: 150px;
+    background-color: #fff;
+    /* 그라데이션 */
+    background-image: linear-gradient(90deg, #eee, rgb(108, 78, 114), rgb(161, 124, 172), rgb(87, 51, 99));
+    /* 몸깎기 */
+    clip-path: polygon(10% 0, 0% 20%, 0% 50%, 10% 100%,90% 100%, 100% 50%, 100% 20%, 90% 0);
+}
+
+/* 목 */
+.neck{
+    top: -40px;
+    left: 65px;
+    width: 70px;
+    height: 70px;
+    border-radius: 0 0 20px 70px;
+    z-index: -2;
+}
+/* 왼팔 */
+/* 오른팔 */
+/* 왼다리 */
+/* 오른다리 */
+/* 왼어깨 */
+/* 오른어깨 */
+/* TV */
 
 /******************* 3. 하단영역 *******************/
