@@ -39,11 +39,12 @@ body * {
     position: relative;
     /* 부모자격 - 하위 div들의 부모 */
     width: 250px;
-    height: 250px;
+    height: 150px;
     /* 마영오! */
     margin: 0 auto;
     /* 턱깎기 */
-    border-radius: 30px 30px 50% 50%;
+    /* border-radius: 30px 30px 50% 50%; */
+    /* clip-path: polygon(0 0,0 50%,30% 100%,70% 100%, 100% 50%,100% 0); */
 }
 
 /* 로봇머리 직계하위 div는 모두 앱솔루트 */
@@ -63,6 +64,21 @@ body * {
     height: 230px;
     /* background-color: #900; */
     background: url(../images/hair.png) no-repeat top center/cover;
+}
+/* 머리박스 가상요소로 턱만들기 */
+.head::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 100%;
+    /* 부모박스 높이만큼 밀어준다! */
+    z-index: -1;
+    width: 250px;
+    height: 100px;
+    /* 배경이미지 */
+    background: url(../images/metal01.jpg) no-repeat bottom/100%;
+    /* 턱깎기 */
+    clip-path: polygon(0 0,33.33% 100%,66.66% 100%,100% 0);
 }
 
 /* 눈공통 */
@@ -98,7 +114,7 @@ body * {
 .nose{
     /* top: 100px;
     left: 100px; */
-    top: calc(50% - 35px);
+    top: 100px;
     left: calc(50% - 25px);
     width: 50px;
     height: 70px;
@@ -108,12 +124,37 @@ body * {
 }
 /* 입 */
 .mouth{
-    top: 70%;
+    top: 180px;
     left: calc(50% - 50px);
     width: 100px;
     height: 40px;
     background: url(../images/mouth.png) no-repeat 0/100% 100%;
 }
+/* 입 옆에 별모양점 가상요소로 만들기 */
+.mouth::before,.mouth::after{
+    content: '';
+    display: block;
+    position: absolute;
+    /* 부모는? .mouth */
+    top: -25px;
+    right: -25px;
+    width: 20px;
+    height: 20px;
+    background-color: purple;
+    clip-path: polygon(0 100%,50% 0,100% 100%);
+}
+.mouth::after{
+    transform: rotate(180deg) translateY(-30%);
+}
+/* 
+    [ CSS 클리핑 속성 ]
+    -> clip-path: polygon(x1 y1,x2 y2,...) 
+    -> 각 좌표쌍은 띄어쓰기로 각 점은 콤마로 구분
+    -> 각 점을 연결하여 도형모양만 출력한다!
+    -> px은 각 도형 크기 내부의 수치로 쓰고
+    %는 도형을 기준한 위치를 %로 나타낸다!
+*/
+
 /* 귀공통 */
 .ear{
     top: 80px;
