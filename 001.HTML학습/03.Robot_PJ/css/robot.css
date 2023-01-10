@@ -237,7 +237,8 @@ body * {
     transform-origin: center 10%;
 }
 /* 팔 공통 가상요소로 연결부분 만들기 */
-.arm::before{
+.arm::before,
+.arm::after{
     content: '';
     display: block;
     position: absolute;
@@ -252,6 +253,12 @@ body * {
 
     /* 보더,패딩포함 크기유지 */
     box-sizing: border-box;
+}
+/* 팔연결부분 내부박스 */
+.arm::after{
+    transform: scale(.8);
+    /* 선형 그라데이션 */
+    background-image: linear-gradient(-45deg,#222 10%,#ccc 60%,#eee);
 }
 /* 팔 하단 */
 .arm span{
@@ -310,23 +317,36 @@ body * {
     top: 90%;
     /* 부모박스 높이만큼 아래로 밀어냄 */
     width: 85px;
-    height: 250px;
+    height: 300px;
     z-index: -1;
     border-radius: 30px;
-    /* 회전축변경 : 가로중앙 세로15%지점 */
-    transform-origin: center 15%;
+}
+/* 다리공통 가상요소로 연결부분 만들기 */
+.leg::before{
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: -40px;
+    z-index: 1;
+    width: 85px;
+    height: 85px;
+    background-color: #ccc;
+    border-radius: 20px;
+    border: 4px solid #333;
+    /* 트랜스폼 : 먼저x축 축소하고 회전
+    -> 무엇을 먼저 했느냐에 따라 결과 달라짐! */
+    transform: scaleX(.8) rotate(45deg);
 }
 /* 다리하단공통 */
 .leg span{
     position: absolute;
     top: 100%;
+    left: 8px;
     /* 부모는? .arm */
     display: block;
-    width: 85px;
+    width: 70px;
     height: 300px;
     border-radius: 25px;
-    /* 회전축변경 : 세로방향 top */
-    transform-origin: top;
 }
 /* 왼다리 */
 .l1{
