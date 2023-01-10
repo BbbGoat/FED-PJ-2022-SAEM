@@ -417,5 +417,35 @@ body * {
     transform: rotate(9deg);
 }
 /* TV */
+.tv{
+    top: 40px;
+    left: 0px;
+    width: 200px;
+    height: 138px;
+    border-radius: 20px;
+    background: url(../images/tv.jpg) no-repeat center/cover;
+}
 
+/* 스크린 */
+.screen{
+    position: absolute;
+    top: 10px;
+    left: 11px;
+    width: 142px;
+    height: 108px;
+    border-radius: 10px;
+    background-color: #000;
+    /* 자식요소 아이프레임 넘치는 부분 숨기기 */
+    overflow: hidden;
+}
+/* 동영상 iframe */
+.screen iframe{
+    position: absolute;
+    top: 0;
+    left: -19px;
+    width: 180px;
+    height: 108px;
+    /* 아이프레임 기본보더없앰 */
+    border: none;
+}
 /******************* 3. 하단영역 *******************/
