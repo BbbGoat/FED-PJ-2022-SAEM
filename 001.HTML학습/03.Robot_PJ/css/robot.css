@@ -304,8 +304,38 @@ body * {
 .a2 span{
     transform: rotate(-20deg);
 }
+
+/* 다리공통 */
+.leg{
+    top: 90%;
+    /* 부모박스 높이만큼 아래로 밀어냄 */
+    width: 85px;
+    height: 250px;
+    z-index: -1;
+    border-radius: 30px;
+    /* 회전축변경 : 가로중앙 세로15%지점 */
+    transform-origin: center 15%;
+}
+/* 다리하단공통 */
+.leg span{
+    position: absolute;
+    top: 100%;
+    /* 부모는? .arm */
+    display: block;
+    width: 85px;
+    height: 300px;
+    border-radius: 25px;
+    /* 회전축변경 : 세로방향 top */
+    transform-origin: top;
+}
 /* 왼다리 */
+.l1{
+    left: -15px;
+}
 /* 오른다리 */
+.l2{
+    right: -15px;
+}
 /* 어깨 공통 */
 .shd{
     width: 70px;
