@@ -13,6 +13,14 @@
     /* 부모자격 - .tmenu */
     height: 128px;
 }
+
+/* 속박스 안에 로고와 탑메뉴를 감싼 박스 */
+.tarea{
+    position: relative;
+    /* 부모자격 - .tmenu */
+}
+
+
 /* 1-1.로고 */
 h1.logo{
     outline: 1px solid red;
@@ -60,20 +68,37 @@ nav.gnb ul{
 }
 /* 상위메뉴 오버시 서브배경 보이기 */
 .gnb>ul>li.sm:hover::before{
-    height: 200px;
+    /* height: 200px; */
     border-bottom: 2px solid red;
 }
 
 /* GNB 서브메뉴 */
+.smbx{
+    position: relative;
+    /* .smenu 앱솔루트의 부모! */
+}
 .smenu{
+    position: absolute;
+    /* 가로방향 중앙위치 */
+    left: 50%;
+    transform: translateX(-50%);
+    
     text-align: center;
+    
+    /* 줄바꿈방지 */
+    white-space: nowrap;
+    padding: 0 5px;
     background-color: #fff;
     /* 숨기기 */
-    /* height: 0;
-    overflow: hidden; */
+    height: 0;
+    overflow: hidden;
     /* 트랜지션 */
     transition: .4s ease-out;
+    
+    outline: 2px dashed red;
 }
+
+
 /* 상위메뉴 오버시 하위메뉴 보이기 */
 .gnb>ul>li:hover .smenu{
     height: 120px;
