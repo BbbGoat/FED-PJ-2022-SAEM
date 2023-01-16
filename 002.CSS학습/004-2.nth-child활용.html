@@ -73,12 +73,27 @@
         }
 
         /* 4. 2의배수+1번째
-        nth-child(3n) -> 2의배수+1번째
+        nth-child(2n+1) -> 2의배수+1번째
         n에 0부터 대입된 결과임! */
         #rdo4:checked ~ ul > li:nth-child(2n+1) {
             background-color: lightslategray;
         }
 
+        /* 5. 1부터 20번째 까지 : nth-child(-n+20)
+        nth-child(-n+20) -> 20부터 뒤로 빼나감!
+        n에 0부터 대입된 결과임!
+        -n이므로 뒤에서부터 선택되어 첫번재까지 선택됨 -> (20-n)라고 쓰면 문법오류임! */
+        #rdo5:checked ~ ul > li:nth-child(-n+20) {
+            background-color: lightgoldenrodyellow;
+        }
+        
+        /* 6. 21부터 37번째 까지 : li:nth-child(20) ~ li:nth-child(-n+37)
+        출발은 20번째 요소 뒤!!의 21번 요소부터 // 틸드~ 선택자
+        nth-child(-n+37) -> 37부터 뒤로 빼나감!
+        n에 0부터 대입된 결과임! 끝에서부터 거꾸로 번호를 선택함! */
+        #rdo6:checked ~ ul > li:nth-child(20) ~ li:nth-child(-n+37) {
+            background-color: lightsteelblue;
+        }
     </style>
 </head>
 <body>
@@ -106,6 +121,9 @@
     
     <input type="radio" id="rdo5" name="rdo">
     <label for="rdo5">5. 1부터 20번째 까지 : nth-child(-n+20)</label><br>
+
+    <input type="radio" id="rdo6" name="rdo">
+    <label for="rdo6">6. 21부터 37번째 까지 : nth-child(20) ~ li:nth-child(-n+37)</label><br>
 
     <ul class="ball">
         <li>1</li>
