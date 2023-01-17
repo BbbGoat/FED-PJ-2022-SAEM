@@ -7,9 +7,9 @@
 @import url(./core.css);
 
 /* 공사중 표시 */
-body * {
+/* body * {
     outline: 1px dashed ghostwhite;
-}
+} */
 
 /* 전체배경색 */
 body{
@@ -21,6 +21,8 @@ body{
 .top{
     position: relative;
     /* 부모자격 - .gnb */
+    z-index: 999;
+    /* GNB서브메뉴를 올리기위한 설정! */
     height: 80px;
     /* 배경이미지 */
     background: url(../images/curtain.jpg) repeat-x;
@@ -48,22 +50,94 @@ body{
 /* 1-2. GNB메뉴 */
 .gnb {
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 15px;
+    right: 10px;
 }
 /* ul 박스 */
 .gnb ul {
     display: flex;
+    font-family: 'Jua', sans-serif;
 }
-/* 상위 li 두번째부터 */
+/* 상위 li */
+.gnb ul>li {
+    position: relative;
+    /* 부모자격 : .smenu */
+}
+/* 상위 li 두번째부터 (+ 대신 ~ 써도됨!) */
 .gnb ul>li + li {
     margin-left: 10px;
 }
+/* .gnb ul>li ~ li {
+    margin-left: 10px;
+} */
+
 /* 상위메뉴 a */
 .gnb ul>li>a{
-    font-family: 'Jua', sans-serif;
     font-size: 2rem;/* 20px */
 }
+
+/* 서브메뉴 */
+.smenu {
+    position: absolute;
+    /* 부모박스 가로방향 중앙맞추기 */
+    left: 50%;
+    /* 부모는? - .gnb ul>li */
+    transform: translate(-50%,5px);
+    /* x축은 자기크기의 50%만큼 왼쪽이동, y축은 5px 이동 */
+    width: 140px;
+    padding: 3px;
+    background: url(../images/bg_smenu.png) no-repeat center/cover;
+    border-radius: 5px;
+    box-shadow: 0 0 5px #fff;
+
+    /* 처음에 서브메뉴 숨기기 */
+    display: none;
+}
+/* 상위메뉴 li에 오버시 서브메뉴 노출 */
+.gnb ul>li:hover .smenu {
+    display: block;
+}
+
+/* 메뉴박스 가상요소로 삼각형 만들기 */
+.smenu::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+
+    /* 삼각형만들기:보더사용 */
+    border-bottom: 10px solid #383838;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+/* 서브메뉴 ol */
+.smenu ol {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+/* 서브메뉴 a */
+.smenu a {
+    /* display: block; */
+    /* a요소확장 */
+    font-size: 1.6rem;
+    line-height: 1.7;
+}
+/* 서브마우스 오버시 */
+.smenu a:hover {
+    color: red;
+}
+/* 오버시 가상요소로 이모티콘 */
+.smenu a:hover::after {
+    content: '🎬';
+    /* 오른쪽 끝으로 보내기 */
+    float: right;
+}
+
 
 /******************************* 2. 메인영역 *******************************/
 /* 속박스 */
