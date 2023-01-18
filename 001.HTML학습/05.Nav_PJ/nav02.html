@@ -8,9 +8,14 @@
         h1 {
             text-align: center;
         }
-        ul,ol{
+        ul{
+            /* 3無 */
+            margin: 0;
+            padding: 0;
             list-style: none;
         }
+
+        /* GNB 메뉴 */
         .gnb {
             border-top: 1px solid #ccc;
             border-bottom: 1px solid #ccc;
@@ -20,16 +25,18 @@
             display: flex;
             /* 진행방향정렬: 중앙 */
             justify-content: center;
-
-            /* 3無 */
-            margin: 0;
-            padding: 0;
-            list-style: none;
         }
-        .gnb > ul > li {
+        /* 상위메뉴 하단보더 셋팅 */
+        .gnb > ul > li > a {
             /* 투명하단보더 */
             border-bottom: 3px solid transparent;
         }
+        /* li오버시 a */
+        .gnb > ul > li:hover > a {
+            /* 하단보더색넣기 */
+            border-bottom-color: darkblue;
+        }
+
         /* 상위 li에 서브메뉴 배경 넣기 */
         .gnb > ul > li::after {
             content: '';
@@ -41,8 +48,9 @@
             width: 100%;
             height: 80px;
             /* 앱솔루트 Y축 위치미세조정 */
-            margin-top: 4px;
-            background-color: lightgray;
+            margin-top: 1px;
+            background-color: rgb(245, 245, 245);
+            border-bottom: 5px solid darkblue;
 
             /* 처음에 안보임 */
             display: none;
@@ -51,19 +59,16 @@
         .gnb > ul > li:hover::after{
             display: block;
         }
-        /* 두번째 li부터 */
+        /* 두번째 li부터 사이간격 */
         .gnb > ul > li + li {
-            margin-left: 10px;
-        }
-        .gnb > ul > li:hover {
-            /* 하단보더색넣기 */
-            border-bottom: 3px solid darkblue;
+            padding-left: 10px;
         }
         /* li오버시 a */
         .gnb > ul > li:hover > a {
             /* 글자색 */
             color: darkblue;
         }
+
         .gnb > ul > li > a {
             /* a 확장! */
             display: block;
@@ -81,7 +86,7 @@
             position: absolute;
             z-index: 1;
             padding: 25px 20px;
-            outline: 1px dashed gray;
+            /* outline: 1px dashed gray; */
             /* 처음에 안보임! */
             display: none;
         }
