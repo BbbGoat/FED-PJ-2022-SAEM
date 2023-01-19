@@ -320,6 +320,7 @@ body{
 /* 몸통 하위 직계 div 모두 앱솔루트! */
 .body>div{
     position: absolute;
+    box-shadow: 0 0 10px 5px cyan;
 }
 /* 몸통 가상요소로 상단 만들기 */
 .body::before{
