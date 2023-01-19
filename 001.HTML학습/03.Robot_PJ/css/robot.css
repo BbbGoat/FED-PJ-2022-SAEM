@@ -18,8 +18,9 @@ html{
 }
 
 /* 전체가로스크롤방지 */
-body{
+html,body{
     overflow-x: hidden;
+    overflow-y: auto;
 }
 
 /* 초기화 */
@@ -407,6 +408,7 @@ body{
     border-radius: 25px;
     /* 회전축변경 : 세로방향 top */
     transform-origin: top;
+    box-shadow: 0 0 10px 5px cyan;
 }
 /* 팔 하단 가상요소로 손박스 만들기 */
 .arm span::after{
@@ -496,6 +498,7 @@ body{
     width: 70px;
     height: 300px;
     border-radius: 25px;
+    box-shadow: 0 0 10px 5px cyan;
 }
 /* 다리하단 가상요소로 발 만들기 */
 .leg span::after{
