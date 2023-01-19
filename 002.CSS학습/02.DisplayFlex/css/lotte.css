@@ -160,7 +160,7 @@
 }
 
 /* .info {
-    position: sticky;
+    position: sticky; // 위치이동시 relative와 같아서 스크롤 발생함!
     bottom: 0;
     width: 100vw;
     text-align: center;
