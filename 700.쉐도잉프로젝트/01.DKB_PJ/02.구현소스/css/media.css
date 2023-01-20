@@ -61,7 +61,7 @@
 /* 1024px 사이즈 이하 미디어쿼리 끝 */
 
 /* 500px 사이즈 이하 미디어쿼리 시작 */
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 780px) {
     /* 디스플레이 없애기 */
     .tmenu, .gnb {
         display: none;
@@ -101,6 +101,9 @@
     /* 하단링크 일부 숨기기(li:1~4) */
     .blink li:nth-child(-n+3) {
         display: none;
+    }
+    .ham {
+        display: block;
     }
 }
 /* 500px 사이즈 이하 미디어쿼리 끝 */
