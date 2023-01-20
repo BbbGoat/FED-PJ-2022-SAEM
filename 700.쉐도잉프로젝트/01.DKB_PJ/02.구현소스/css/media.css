@@ -66,8 +66,20 @@
     .tmenu, .gnb {
         display: none;
     }
+    /* x 좌우 스크롤 없애기 */
+    html,body{
+        width: 100vw;
+        overflow-x: hidden;
+    }
+    /* 햄버거 버튼 보이기 */
+    .ham {
+        display: block;
+    }
     /* 상단영역 */
     .top {
+        position: relative;
+        /* 햄버거 버튼의 부모 역할
+        -> 햄버거 버튼이 가로스크롤 문제를 발생시키므로 부모자격 주기! */
         height: 80px;
     }
     /* 캐릭터박스 한줄에 하나 */
@@ -101,9 +113,6 @@
     /* 하단링크 일부 숨기기(li:1~4) */
     .blink li:nth-child(-n+3) {
         display: none;
-    }
-    .ham {
-        display: block;
     }
 }
 /* 780px 사이즈 이하 미디어쿼리 끝 */
