@@ -298,6 +298,31 @@
             var msg;
 
             // 4. 지역명을 switch case문으로 분류하여 메시지 넣기
+            switch(txt){
+                case "서울": msg = "02"; break;
+                case "경기": msg = "031"; break;
+                case "인천": msg = "032"; break;
+                case "부산": msg = "051"; break;
+                default: msg = "esc";
+            } ////// switch case문 //////////////////
+
+            console.log("메시지:",msg);
+
+            // 5. 메시지 만들기 ////////////////
+            // msg 변수에 최종 출력내용을 다시 담아서 변경함
+            if(msg === "esc"){
+                msg = "등록되지 않은 지역입니다!"
+            } //// if /////////
+            else {
+                msg = `${txt}의 지역번호는 ${msg}입니다!`;
+            } //// else ///////
+            // 우항에서 좌항으로 대입되는 순서! 기억!!
+
+            // 6. 화면출력
+            // 출력대상: #info -> info
+            info.innerText = msg;
+            // msg 변수에는 최종 출력 메시지가 할당되어있다!
+            
 
       } //////////////////// local 함수 /////////////////////
 
