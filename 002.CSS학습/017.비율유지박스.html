@@ -138,6 +138,34 @@
             4. 앱솔루트 속박스를 만들어 컨텐츠 공간 확보
             (단, 비율유지박스에 부모자격 필수!)
         **********************************************/
+
+        /* 5. 비율유지박스 :aspect-ratio 속성사용 */
+        .arbx {
+            aspect-ratio: 16 / 9;
+            /* 
+                [ aspect-ratio 속성 사용하기 ]
+                aspect-ratio: 가로비 / 세로비;
+
+                -> width값은 셋팅하고 height값은 auto임!
+                -> 값을 하나만 쓰면 가로비만 세로를 1로 볼때 설정됨!
+
+                예)
+                1:1비율
+                aspect-ratio: 1 / 1;
+                aspect-ratio: 1;
+
+                16:9비율
+                aspect-ratio: 16 / 9;
+
+                세로에 대한 가로 80% 비율
+                aspect-ratio: .8;
+
+                세로에 대한 가로 200% 비율
+                aspect-ratio: 2;
+            */
+        }
+
+        
     </style>
 </head>
 <body>
