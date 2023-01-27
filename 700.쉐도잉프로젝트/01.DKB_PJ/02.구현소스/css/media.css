@@ -12,7 +12,6 @@
 }
 /* 1200px 사이즈 이하 미디어쿼리 끝 */
 
-
 /* 1024px 사이즈 이하 미디어쿼리 시작 */
 @media screen and (max-width: 1024px) {
     /* 전체 글자크기 변경 */
@@ -56,19 +55,22 @@
         position: absolute;
         z-index: 1;
     }
-    
 }
 /* 1024px 사이즈 이하 미디어쿼리 끝 */
 
 /* 780px 사이즈 이하 미디어쿼리 시작 */
 @media screen and (max-width: 780px) {
-    /* x 좌우 스크롤 없애기 */
-    html,body{
+    /* 가로스크롤 없애기 */
+    html,
+    body {
         width: 100vw;
         overflow-x: hidden;
     }
     /* 디스플레이 없애기 */
-    .tmenu,.gnb > ul > li > a::after {
+    .tmenu,
+    .smbx,
+    .gnb,
+    .gnb > ul > li > a::after {
         display: none;
     }
     /* GNB메뉴 변경하기
@@ -84,13 +86,13 @@
         z-index: 999;
     }
     /* 플렉스박스 방향을 세로로 변경! */
-    nav.gnb ul{
+    nav.gnb ul {
         flex-direction: column;
         text-align: center;
         margin-top: 15vh;
     }
     /* GNB 상위메뉴 a 변경 */
-    .gnb>ul>li>a {
+    .gnb > ul > li > a {
         font-size: 5vh;
         line-height: 10vh;
         color: #fff;
@@ -101,7 +103,7 @@
         position: relative;
         z-index: 9999;
     }
-    
+
     /* 햄버거 버튼 보이기 */
     .ham {
         display: block;
@@ -113,9 +115,9 @@
         transform: scale(1.5);
     }
     .top.on .ham::before {
-        content: 'x';
+        content: "x";
     }
-    
+
     /* 상단영역 */
     .top {
         position: relative;
@@ -124,17 +126,16 @@
         height: 80px;
     }
     /* 캐릭터박스 한줄에 하나 */
-    .cat{
+    .cat {
         width: 99%;
     }
     /* 캐릭터 설명박스 */
-    .cd{
+    .cd {
         /* 자리차지 포지션으로 전환! */
         position: static;
-        margin-top: 3vw;
     }
     /* 설명박스 제목 */
-    .cd h3{
+    .cd h3 {
         font-size: 4.5vw;
     }
     /* 설명박스 문단 */
@@ -152,7 +153,7 @@
         top: auto;
     }
     /* 하단링크 일부 숨기기(li:1~4) */
-    .blink li:nth-child(-n+3) {
+    .blink li:nth-child(-n + 3) {
         display: none;
     }
 }
