@@ -219,8 +219,8 @@ body {
 /* 웃는여자 */
 .spani4 {
     position: absolute;
-    top: 50px;
-    right: 50px;
+    top: 7vh;
+    right: 0;
     width: 256px;
     height: 407px;
     /* 전체 height 1222px / 3줄 */
