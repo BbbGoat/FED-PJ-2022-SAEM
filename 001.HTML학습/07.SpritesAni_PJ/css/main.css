@@ -153,6 +153,9 @@ body {
 
         [ 여러줄 애니메이션 처리법 ]
         배경이미지 이동을 x,y축으로 분리하여 셋팅함
+        -> 시간설정은 x축은 적당히 설정 후
+        y축은 x축애니시간*줄수 로 설정한다!
+        예) x축 애니를 2초로 설정후 y축은 5줄이면 -> 2초*5줄=10초
 
         1. x축이동 : steps(장면수)
             background-position-x : 값;
@@ -162,17 +165,88 @@ body {
 */
 
 /* 3-2.꼬마 */
+.spani2{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 72px;
+    background: url(../images/spAni01.png) no-repeat;
+    
+    animation: spani2 1s steps(10) infinite;
+}
 
 /* 꼬마 키프레임 */
+@keyframes spani2 {
+    to{
+        background-position: -500px 0;
+    }
+}
 /* 키프레임 */
 
 /* 3-3.몬스터 */
+.spani3 {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 118px;
+    height: 118px;
+    background: url(../images/spAni02.png) no-repeat;
+
+    /* 애니메이션: 이시이지반방마 */
+    animation:
+    spani3X 1s steps(6) infinite,
+    spani3Y 3s steps(3) infinite;
+    /* x축은 6장면을 1초간 작동
+    y축은 3줄을 3초간 작동 */
+}
 
 /* 몬스터 키프레임 X축 */
+@keyframes spani3X {
+    to {
+        background-position-x: -710px;
+    }    
+    /* x축은 가로크기를 마이너스로 씀 */
+}
+/* 몬스터 키프레임 Y축 */
+@keyframes spani3Y {
+    to {
+        background-position-y: -355px;
+    }    
+    /* y축은 세로크기를 마이너스로 씀 */
+}
 
 /* 웃는여자 */
+.spani4 {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 256px;
+    height: 407px;
+    /* 전체 height 1222px / 3줄 */
+    background: url(../images/girl_frames.png) no-repeat;
 
+    border: 20px ridge brown;
+    transform: scale(.5);
+    
+    /* 애니메이션: 이시이지반방마 */
+    animation: 
+    spani4X .8s steps(5) infinite,
+    spani4Y 2.4s steps(3) infinite;
+    /* y축시간은 x축시간*줄수 */
+}
 /* 웃는여자 키프레임 X축 */
+@keyframes spani4X {
+    to {
+        background-position-x: -1280px;
+    }
+}
+/* 웃는여자 키프레임 Y축 */
+@keyframes spani4Y {
+    to {
+        background-position-y: -1222px;
+    }
+}
 
 /* 확대애니메이션 class */
 
