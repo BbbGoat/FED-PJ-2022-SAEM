@@ -88,46 +88,78 @@ body {
     /* 배경넣기 */
     background: url(../images/street.jpg) repeat-x;
     background-size: auto 100%;
+
+    /* 애니메이션 : 이시이지반방마 */
+    animation: street 4s linear infinite;
 }
 
 /* 스크린배경이동 키프레임 */
+@keyframes street {
+    to{
+        background-position: -388px 0;
+    }
+}
 
 /* 키프레임 */
 
 /* 3-1.걷는존 */
+.spani1 {
+    position: relative;
+    width: 100px;
+    height: 176px;
+    margin: 0 auto;
+    margin-top: 35px;
+    background: url(../images/spAni03.png) no-repeat;
+    background-size: auto 100%;
+
+    /* 애니메이션: 이시이지반방마 */
+    animation: spani1 1s steps(8) infinite;
+    
+    outline: 2px solid red;
+}
 
 /* 걷는존 키프레임 */
+@keyframes spani1 {
+    to{
+        background-position: -797px 0;
+    }
+    /* 배경이미지 x축 이동일 경우
+    줄였을 때 이미지 전체 가로크기를
+    마이너스 값으로 써주면 된다! */
+}
 
 /* 키프레임 */
 
 /* 
-            [ 스프라이츠를 이용한 장면 넘기기 애니를 하려면? ]
-            1. 배경이미지 전체 길이를 알아야함
-            -> 이유: 이동셋팅시 가로이동일 경우에 전체길이값을 써야함!
+    [ 스프라이츠를 이용한 장면 넘기기 애니를 하려면? ]
+    1. 배경이미지 전체 길이를 알아야함
+    -> 이유: 이동셋팅시 가로이동일 경우에 전체길이값을 써야함!
 
-            (비율이 유지되는 이미지이므로 가로/세로중 한쪽값을 변경하면
-            다른쪽값은 자동으로 변경된다!)
+    (비율이 유지되는 이미지이므로 가로/세로중 한쪽값을 변경하면
+    다른쪽값은 자동으로 변경된다!)
 
-            참고) 비례식사용
-                가로 : 세로 = 1472px : 325px = x : 176px
-                x = 1472*176/325 = 797.14
-                전체가 8장면 이므로 한 장면당 100px(99.625px)로 정해짐
-            
-            2. 코딩법:
+    참고) 비례식사용
+        가로 : 세로 = 1472px : 325px = x : 176px
+        x = 1472*176/325 = 797.14
+        전체가 8장면 이므로 한 장면당 100px(99.625px)로 정해짐
 
-                animation: 이름 시간 steps(장면개수) infinite;
+        -> 더 편한 방법은 그림판에서 축소/확대를 사용하여 길이를 알아내면 된다!
 
-                -> 장면찍는 steps를 사용할때는 이징(가속도)불필요!
+    2. 코딩법:
 
-                [ 여러줄 애니메이션 처리법 ]
-                배경이미지 이동을 x,y축으로 분리하여 셋팅함
+        animation: 이름 시간 steps(장면개수) infinite;
 
-                1. x축이동 : steps(장면수)
-                    background-position-x : 값;
+        -> 장면찍는 steps를 사용할때는 이징(가속도)불필요!
 
-                2. y축이동 : steps(줄수)
-                    background-position-y : 값;
-         */
+        [ 여러줄 애니메이션 처리법 ]
+        배경이미지 이동을 x,y축으로 분리하여 셋팅함
+
+        1. x축이동 : steps(장면수)
+            background-position-x : 값;
+
+        2. y축이동 : steps(줄수)
+            background-position-y : 값;
+*/
 
 /* 3-2.꼬마 */
 
