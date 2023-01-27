@@ -115,7 +115,7 @@ body {
     /* 애니메이션: 이시이지반방마 */
     animation: spani1 1s steps(8) infinite;
     
-    outline: 2px solid red;
+    /* outline: 2px solid red; */
 }
 
 /* 걷는존 키프레임 */
