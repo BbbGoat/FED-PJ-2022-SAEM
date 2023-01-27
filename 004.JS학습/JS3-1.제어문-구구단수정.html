@@ -362,23 +362,25 @@
             함수명: gugu
             기능: 구구단을 출력한다!
       ******************************************************/
-      function gugu(U){ // U는 자기자신을 보내는 값을 담는 변수
+      function gugu(){ // 파라미터 안쓰고 sel 변수선언으로 동일한 작동하게끔 코딩한 방식
         // 1. 호출확인
-        console.log("구구단을 외자!",U);
+        var sel = document.querySelector("#sel");
+        console.log("구구단을 외자!",sel);
         // 전달변수 U에 this로 전송된 요소자신이 왔으므로
         // 내부의 선택값이 무엇인지 읽을 수 있다!
 
         // 2. 대상선정 : 출력대상 - .g1
         var tg = document.querySelector(".g1");
 
+
         // 3. 선택값 가져오기
-        var opt = U.value;
+        var opt = sel.value;
         console.log("선택값: ",opt);
 
         // 4. 구구단 만들기
+        
         // 코드변수
         var hcode = `<h2>${opt}단</h2>`;
-
 
         // for문
         // for(시;한;증){코드}
@@ -389,6 +391,7 @@
 
         // 5. 화면출력하기
         tg.innerHTML = hcode;
+
 
       } ////////////////// gugu 함수 ////////////////////
 
@@ -501,7 +504,7 @@
     <!-- for문 연습 -->
     <h2>for문 연습</h2>
     <h3>구구단 출력하기</h3>
-    <select name="sel" id="sel" onchange="gugu(this)">
+    <select name="sel" id="sel" onchange="gugu()">
         <!-- 함수에 this라고 보내면 요소자신을 함수에 전송한다! -->
         <option value="1">구구단을 선택하세요!</option>
         <option value="2">2단</option>
