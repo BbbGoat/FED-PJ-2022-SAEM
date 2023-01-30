@@ -73,6 +73,10 @@
     .gnb > ul > li > a::after {
         display: none;
     }
+    /* 탑메뉴도 .top.on 일때 나타남! */
+    .top.on .tmenu {
+        display: block;
+    }
     /* GNB메뉴 변경하기
     -> .top에 .on을 준 경우 적용됨!
     -> 메뉴를 fixed로 고침 */
@@ -89,7 +93,13 @@
     nav.gnb ul {
         flex-direction: column;
         text-align: center;
-        margin-top: 15vh;
+        margin-top: 20vh;
+    }
+    /* li셋팅 */
+    .gnb > ul > li {
+        margin: 0;
+        height: 10vh;
+        /* li가 6개이므로 보이는 높이의 60% 차지함 */
     }
     /* GNB 상위메뉴 a 변경 */
     .gnb > ul > li > a {
@@ -117,6 +127,37 @@
     .top.on .ham::before {
         content: "x";
     }
+    
+    /* 탑메뉴 */
+    aside.tmenu {
+        position: fixed;
+        z-index: 99999;
+        width: 100vw;
+        top: 85vh;
+    }
+    .tmenu ul {
+        /* 플렉스 진행방향 중앙 */
+        justify-content: center;
+        /* 플렉스 랩핑설정 -> 줄바꿈 */
+        flex-wrap: wrap;
+    }
+    .tmenu > ul > li:last-child{
+        /* 마지막 li 100% -> 한줄 차지하게! */
+        width: 100%;
+    }
+    .tmenu > ul > li > a {
+        /* 글자크기,색 */
+        color: #fff;
+        font-size: 6vw;
+    }
+    /* sns메뉴 */
+    .tmenu ol {
+        display: flex;
+        justify-content: center;
+        margin-top: 2vh;
+        transform: scale(1.5);
+    }
+
 
     /* 상단영역 */
     .top {
