@@ -90,3 +90,16 @@ table tbody tr:nth-child(even) td{
     text-decoration: overline;
     text-decoration-style: double;
 }
+
+/* 구분테이블 박스 */
+.gubun {
+    width: 1000px;
+    margin: 0 auto;
+    outline: 1px solid red;
+    margin-bottom: 100px;
+}
+/* 구분테이블 */
+table#gubun {
+    font-size: 20px;
+    border: 1px solid #999;
+}
