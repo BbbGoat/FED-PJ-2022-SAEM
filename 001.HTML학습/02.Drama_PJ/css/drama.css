@@ -69,7 +69,7 @@ html,body{
 }
 /* 본문 배경색 짝수만 넣기
 짝수 - even , 홀수 - odd */
-table tbody tr:nth-child(even) td{
+#drama tbody tr:nth-child(even) td{
     background-color: rgb(240, 240, 240);
 }
 
@@ -98,7 +98,7 @@ table tbody tr:nth-child(even) td{
     outline: 1px solid red;
     margin-bottom: 100px;
     overflow: hidden;
-    /* oh - 자식요소 float 감싸줌 */
+    /* oh - 자식요소 float을 감싸줌 */
 }
 /* 구분테이블 */
 table#gubun {
@@ -106,4 +106,24 @@ table#gubun {
     border: 1px solid #999;
     /* 오른쪽 끝으로 보내기 */
     float: right;
+
+    /* td(테이블셀)에 사이간격 주기 */
+    border-collapse: separate;
+    border-spacing: 10px;
+    /* 쉘 사이간격
+    border-spacing: 가로 세로;
+    border-spacing: 양방향; */
+}
+
+/* 구분테이블 td */
+#gubun td {
+    padding: 10px;
+}
+/* 구분테이블 첫번째 tr의 첫번째 td에 오른쪽 점선넣기 */
+#gubun tr:first-child td:first-child {
+    border-right: 1px dotted #999;
+}
+/* 구분테이블 두번째 tr부터 끝까지 td에 위쪽 점선넣기 */
+#gubun tr + tr td {
+    border-top: 4px dotted #999;
 }
