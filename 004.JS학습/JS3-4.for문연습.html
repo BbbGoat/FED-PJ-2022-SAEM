@@ -42,19 +42,22 @@
             기능: 로딩후 바로 실행하는 코드구역
         **********************************************/
         function loadFn(){
-            // 1. 로딩함수 호출확인
+            // 1. 로딩함수 호출확인 ///////////////////////////
             console.log("로딩완료!");
 
-            // 2. 대상선정
+            // 2. 대상선정 ///////////////////////////////////
             // 2-1. 이벤트 대상: .mini 
             var mini = document.querySelectorAll(".mini");
             
             // 2-2. 변경대상: .Bcase
             var Bcase = document.querySelector(".Bcase");
+
+            // 2-3. 리셋버튼: .rbtn
+            var rbtn = document.querySelector(".rbtn");
             
             // console.log(mini, Bcase);
 
-            // 3. 이벤트 셋팅하기
+            // 3. 이벤트 셋팅하기 ////////////////////////////
             // 이벤트 종류 : click
             // for문으로 버튼개수만큼 돌아서 셋팅하기!
             // for(시;한;증){코드}
@@ -80,7 +83,6 @@
                     for(var j = 0; j < cnt; j++){
                         Bcase.innerHTML += `
                         <img src="./images/Minions.png" alt="미니언즈">`;
-
                     } ///////////// for문 /////////////
 
                 }; ///////// click 이벤트함수 /////////
@@ -88,6 +90,20 @@
                 // mini[순번]
 
             } /////////// for문 ///////////
+
+            // 4. 리셋버튼 셋팅하기
+            // 대상: 이벤트대상 - rbtn / 변경대상 - Bcase
+            // 변경내용: Bcase의 내용지우기
+            rbtn.onclick = function(){
+                // 1. 호출확인
+                console.log("다지워~!");
+                // 2. 파란상자내용 지우기
+                Bcase.innerHTML = "";
+            }; //////////// click 이벤트함수 ////////////
+
+            // 리셋버튼 디자인변경
+            rbtn.style.fontSize = "40px";
+            rbtn.style.margin = "10px";
             
         } /////////////////// loadFn 함수 ///////////////////
     </script>
