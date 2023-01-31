@@ -97,9 +97,13 @@ table tbody tr:nth-child(even) td{
     margin: 0 auto;
     outline: 1px solid red;
     margin-bottom: 100px;
+    overflow: hidden;
+    /* oh - 자식요소 float 감싸줌 */
 }
 /* 구분테이블 */
 table#gubun {
     font-size: 20px;
     border: 1px solid #999;
+    /* 오른쪽 끝으로 보내기 */
+    float: right;
 }
