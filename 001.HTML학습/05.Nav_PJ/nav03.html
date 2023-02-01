@@ -69,6 +69,7 @@
         }
         /* #top에 오버시 가상요소 */
         #top:hover::after {
+            border-top: 1px solid #ccc;
             height: 400px;
         }
         
@@ -185,7 +186,18 @@
             line-height: 40px;
         }
         .gnb dd a {
-            color: #000;
+            color: #555;
+            font-size: 14px;
+        }
+        /* dd첫번째 간격밀기 */
+        .gnb dd:first-of-type {
+            margin-top: 30px;
+        }
+
+        /* story의 마지막 dd 변경 */
+        .gnb dl:first-child dd:last-child {
+            line-height: 20px;
+            padding-top: 10px;
         }
 
         /* 3. 기타파트 : .tlink */
@@ -231,6 +243,67 @@
         }
         
     </style>
+    <!-- JS코드구역 -->
+    <script>
+        window.addEventListener("load",function(){
+            // 호출확인
+            console.log("로딩완료");
+
+            // 구현내용 : 메뉴 이미지 오버시 이미지 변경하기
+            // 1. 대상선정:
+            // .simg img:last-child,
+            // .lang img:last-child,
+            // .store img:last-child
+            var tg = document.querySelectorAll(`
+            .simg img:last-child,
+            .lang img:last-child,
+            .store img:last-child
+            `);
+
+            console.log("대상: ", tg);
+
+            // 2. 이벤트 설정 및 구현하기
+            // 대상의 수만큼 for문으로 설정함!
+
+            // 한계수 셋팅 : 대상의 개수
+            var limit = tg.length;
+
+            for (var i = 0; i < limit; i++) {
+                // console.log("나야나", i);
+
+                // 대상요소를 구체적으로 선택함
+                // i는 0,1,2 순으로 들어옴
+                // tg에는 대상이 컬렉션집합으로 들어있으므로
+                // tg.item(순번) / tg[순번] 으로 구체적으로 선택함
+                // 사용이벤트속성 : onmouseover / onmouseout
+
+                // [ 대상에 마우스 오버시 ]
+                tg[i].onmouseover = function(){
+                    // this키워드로 오버된 요소 자신의 정보를 알아낸다!
+                    // this === tg[i]
+
+                    // 1) 이미지의 설명 속성값을 읽어옴!
+                    // 이미지설명 속성값으로 대상을 구분함!
+                    var ialt = this.alt;
+                    console.log("이미지경로: ", ialt);
+
+                    // 2) 변경될 이미지의 경로를 대상별로 할당
+                    var isrc;
+                    // switch case문으로 분기!
+                    switch(ialt){
+                        case "스토리이미지": isrc="./images/nav03/story_gray_s.png"; break;
+                        case "다국어아이콘": isrc="./images/nav03/lang_i.png"; break;
+                        case "스토어": isrc="./images/nav03/store_i3.png"; break;
+                    } //////// switch case문 ////////
+
+                }; //////// mouseover 이벤트함수 ////////
+                
+                
+            } //////////// for문 ////////////
+
+            
+        }); ////////// 로드구역 ///////////
+    </script>
 </head>
 <body>
     <h1 class="tit">
@@ -269,7 +342,7 @@
                         <dd><a href="#">셀리턴 스토리</a></dd>
                         <dd><a href="#">뷰티풀 셀리턴</a></dd>
                         <dd><a href="#">아름다운 공장</a></dd>
-                        <dd><a href="#">알파레이S 개발스토리</a></dd>
+                        <dd><a href="#">알파레이S<br>개발스토리</a></dd>
                     </dl>
                     <!-- 2. Aboudt US -->
                     <dl>
