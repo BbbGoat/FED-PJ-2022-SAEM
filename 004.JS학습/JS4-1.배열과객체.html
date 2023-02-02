@@ -377,7 +377,7 @@
             /******************************************** 
                 [ 미션: 내가 만든 객체 ]
                 1. 주제: 영화정보
-                2. 조건: 변수명,객체속성명 모두 자신이 지은 이름사용
+                2. 조건: 객체변수명만 자신이 지은 이름 사용
                 3. 객체를 쌤께 전송!
             ********************************************/
 
@@ -394,8 +394,12 @@
                 // 5. 관람가
                 관람가: "12세 관람가",
                 // 6. 예고편
-                예고편: function(msrc){ /// msrc 전달변수
-                    alert("예고편:"+msrc);
+                예고편: function(){
+                    // alert("예고편:");
+
+                    // 플레이함수 호출
+                    playMv("K4KR4J-yBMw");
+
                 } //////// 예고편 메서드 //////////
             }; ///////////////// SMObj 객체 ////////////////////
 
@@ -416,10 +420,39 @@
             // 손가락모양
             tg[5].style.cursor = "pointer";
 
-            // 클릭시
+            // 타이틀
+            tg[5].setAttribute("title",SMObj.제목+"의 예고편을 확인하세요! 바로클릭!");
+
+            // 예고편 메서드 호출
             tg[5].onclick = function(){
                 SMObj.예고편();
             }; //////////// click 이벤트함수 ///////////
+
+            // 예고편 동영상용 박스
+            var mvbx = document.querySelector("#mvbx");
+            console.log(mvbx);
+
+            /********************************************** 
+                함수명: playMv
+                기능: 영화예고편 화면에 띄우기
+            **********************************************/
+            var playMv = function(mvcode){ // mvcode 예고편아이디
+                    
+                // 1. 함수호출확인 
+                console.log("플레이어!",mvcode);
+
+                // 2. 영화박스에 아이프레임 넣기
+                // 대상: #mvbx -> mvbx
+                mvbx.innerHTML = `
+                    <div id="mv">
+                        <!-- 유튜브 아이프레임 -->
+                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${mvcode}" allow="autoplay" ></iframe>
+                        <!-- 닫기버튼 -->
+                        <button class="cbtn"></button>
+                    </div>
+                `;
+
+            }; ////////////////// playMv 함수 //////////////////
             
         }); ////////////////////// 로드구역 ///////////////////////
     </script>
@@ -436,7 +469,9 @@
     <div class="cont"></div>
 
     <!-- 예고편 동영상용 박스 -->
-    <aside id="mvbx"></aside>
+    <aside id="mvbx">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/K4KR4J-yBMw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </aside>
 
 </body>
 
