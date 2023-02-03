@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>For문 옵션</title>
+    <style>
+        .forCls {
+            height: 100px;
+            border: 4px dotted lightseagreen;
+        }
+
+        .forCls img {
+            height: 100px;
+        }
+    </style>
+    <!-- JS코드구역 -->
+    <script>
+        // 로드구역 ////////////
+        window.addEventListener("DOMContentLoaded", function(){
+
+            // 로딩확인
+            console.log("로딩완료!");
+
+            /********************************* 
+                [ JS기능정의 ]
+                -> 버튼 클릭시 해당버튼의 내용으로 연결된 대상에 이미지 연속으로 넣어주기
+
+                1. 이벤트대상 : button
+                2. 이벤트종류 : click
+                3. 변경대상 : .forCls
+                4. 변경내용 : 대상에 이미지 삽입
+                -> 연속된 이미지 for문으로 넣기
+
+            *********************************/
+
+            // 1. 이벤트 대상선정 : button
+            var btns = document.querySelectorAll("button");
+            console.log(btns);
+
+            // 2. 이벤트 종류 : click
+            // for문의 의미 ->> 버튼의 개수만큼 증가하며 돈다!
+            for (var i = 0; i < btns.length; i++) {
+                console.log("for문 확인", i);
+
+                // 1. click 이벤트 설정하기
+                btns[i].onclick = function(){
+                    // 1) 버튼요소 텍스트 읽기
+                    var btxt = this.innerText;
+                    console.log("버튼이름 읽어오기:", btxt);
+                    // 2) 이미지 출력하기
+                    var tg = this.parentElement.querySelector(".forCls");
+                    console.log("출력할요소:",tg);
+
+                    for (var j = 1; j <= 10; j++){
+                        // j = 1~10까지 이미지 인터폴레이션 넣을 용
+
+                        // 두번째버튼 4,7번 생략 출력
+                        if (btxt === "for문옵션1" && (j === 4 || j === 7)) continue;
+
+                        // 세번째버튼 6번째에 나감
+                        if (btxt === "for문옵션2" && j === 6) break;
+
+                        // 네번째버튼 2~4,9 빼고 출력
+                        if (btxt === "for문옵션연습" && (j >=2 && j < 5) || j === 9) continue;
+
+                        // 이미지 넣을 대상은?
+                        // .forCls 담은 tg 변수
+                        tg.innerHTML += `
+                        <img src="./images/num/num_0${j}.png" alt="숫자이미지">
+                        `;
+
+                    } ////////// for문 끝 ////////////
+
+                }; ////////// onclick 이벤트 함수 끝 ///////////
+
+
+            } //////////  for문 ///////////
+
+            
+            
+        }); /////////////////// 이벤트 로드 끝 ///////////////
+    </script>
+</head>
+
+<body>
+    <h1>for문 옵션</h1>
+    <hr>
+
+    <div>
+        <h2>기본for문</h2>
+        <button>기본호출</button>
+        <br><br>
+        <div class="forCls"></div>
+    </div>
+    <hr>
+
+    <div>
+        <h2>4번과 7번빼고 돌리기</h2>
+        <button>for문옵션1</button>
+        <br><br>
+        <div class="forCls"></div>
+    </div>
+
+    <hr>
+
+    <div>
+        <h2>5번까지만 돌리기</h2>
+        <button>for문옵션2</button>
+        <br><br>
+        <div class="forCls"></div>
+    </div>
+
+    <div>
+        <h2>2~4, 9빼고 돌리기</h2>
+        <button>for문옵션연습</button>
+        <br><br>
+        <div class="forCls"></div>
+    </div>
+
+    <hr>
+
+</body>
+
+</html>
