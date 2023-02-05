@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS2-2. 바(var), 렛(let), 콘스트(const)</title>
+    <script>
+        /******************************************************** 
+            [var] : 함수영역변수
+            1. 함수 영역에서 사용할때만 지역변수
+            2. 함수영역 바깥에서 사용하면 전역변수
+            3. 전역변수와 같은 이름의 변수를 함수내에서 값을 할당하면
+            덮어쓰기가 된다! (재사용이 된다!)
+            4. 함수영역에서 전역변수와 같은 이름의 변수를 선언하면
+            전역변수와 다른 별도의 지역변수로 관리된다!
+        ********************************************************/
+
+        ///////////////////////// var 테스트 //////////////////////////////
+
+        // 1.  함수 중괄호에서 var
+        function callMe(){
+            var usa = "미국";
+            console.log("지역변수 usa:", usa);
+
+            // 전역변수 korea를 지역에서 재할당 하기
+            korea = "코리아";
+            console.log("지역에서 전역변수 재할당 korea:", korea);
+
+            // 전역변수 uk 호출하기
+            console.log("지역에서 전역변수 호출 uk:", uk);
+            // 전역변수 uk 지역에서 재선언 하기
+            var uk = "유케이";
+            console.log("지역에서 전역변수 재선언 uk:", uk);
+
+            // 선언한 적 없는 변수 호출하기
+            rabbit = "토끼";
+            console.log("지역에서 선언없는 변수 호출 rabbit:", rabbit);
+            
+            
+            
+            
+        }; /////////// callMe 함수 //////////////
+        
+        // 전역변수
+        var korea = "한국";
+        var uk = "영국";
+        
+        console.log("전역변수 korea:", korea);
+        console.log("전역변수 uk:", uk);
+        
+        // callMe함수 호출하기
+        callMe();
+        // 재할당으로 덮어씌워버렸따!
+        console.log("[재할당했던] 전역변수 korea:", korea);
+        // 재선언으로 전역변수 유지되었다!
+        console.log("[재선언했던] 전역변수 uk:", uk);
+        // 전역에도 존재하게 되었다!
+        console.log("[호출 후] 지역에서 선언없는 변수 호출 rabbit:", rabbit);
+
+
+        ///////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////
+        
+        
+        if(true){
+            var who = "누구?";
+            console.log("if문안 who:", who);
+        } //// if문 /////
+        console.log("if문밖 who:", who);
+        // if문의 중괄호 안에서 변수를 선언하면 전역변수와 같다!
+        // if문 중괄호 안의 var는 쓸 경우 지역역할을 못한다!
+        
+        if(true){
+            let what = "무엇이?";
+            console.log("if문안 what:", what);
+        }
+        // console.log("if문밖 what:", what);
+        // if문 중괄호 안의 let은 지역변수이므로 바깥에서 못씀!
+        
+        
+        for (var i = 3; i > 0; i--){
+            console.log("for문안 i:", i);
+        } ///// for문 ///////
+        console.log("for문밖 i:", i);
+        // for문의 중괄호도 지역변수 역활을 못함!
+        // >>>>> var는 오직 함수의 중괄호에서만 선언시 지역변수가 된다!
+        
+        for (let j = 3; j > 0; j--) {
+            console.log("for문안 j:", j)
+        } ///// for문 ///////
+        // console.log("for문밖 j:", j)
+        // for문의 소괄호안의 셋팅은 중괄호 안으로 들어가므로
+        // let변수 선언시 for 중괄호 안에 선언으로 처리된다!
+        // >>>>>> 따라서 let은 지역변수로 처리된다는 말!
+        
+        
+        
+        ///////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////
+        
+
+        ///////////////////////// let 테스트 //////////////////////////////
+
+        var seoul = "서울";
+        var jeju = "제주";
+        var toktok = "카톡";
+        let sport = "축구";
+
+        // 블록 내부에서 전역변수 찎기! 앞
+        // JS에서 중괄호란? -> 코드를 묶어주는 영역이다!
+
+        {
+            console.log("블록내부에서 전역변수 찍기! 앞:");
+            console.log("seoul:", seoul);
+            var seoul = "강남구";
+            // 지역변수가 생성됨! (전역 jeju와 별개)
+            let jeju = "마라도";
+            console.log("jeju:", jeju);
+            
+            let toktok = "라인";
+            console.log("toktok:", toktok);
+
+            // 별개로 지역변수 생성됨
+            let sport = "오잉";
+            console.log("sport:", sport);
+
+            myitem = "곰인형";
+            console.log("myitem:",myitem);
+            // 기본적으로 선언없이 사용한 변수는
+            // var로 전역변수 선언된다!
+            // 함수안에서도 마찬가지임!
+            // 변수에 대한 관리가 어려워진다!!! 나쁜케이스!
+
+
+            // 블록 내부에서 전역변수 찍기! 뒤
+            console.log("블록내부에서 전역변수 찍기! 뒤");
+            console.log("seoul:",seoul);
+            console.log("jeju:",jeju);
+            console.log("toktok:",toktok);
+            console.log("sport:",sport);
+
+        } /////////////////////////////////////// 블록 끝
+        
+        // 블록 바깥에서 전역변수 찍기!
+        console.log("블록바깥에서 전역변수 찍기!");
+        console.log("seoul:",seoul);
+        console.log("jeju:",jeju);
+        console.log("toktok:",toktok);
+        console.log("sport:",sport);
+        console.log("myitem:",myitem);
+        ///////////////////////////////
+
+        
+
+        ///////////////////////// const 테스트 //////////////////////////////
+
+        // [ 1. 배열 ]
+        const arr = ["상추","고기","마늘"];
+        console.log("배열 arr값:", arr);
+
+        // 재할당 시도시 에러남! 재할당 불가!
+        // arr = "닭고기";
+
+        // 배열값 추가
+        arr.push("닭고기");
+        console.log("배열 arr값:", arr);
+        // 배열값은 변경가능! 그러나 새로운 데이터로 할당은 불가!
+
+
+        // [ 2. 객체 ]
+        const obj = {name:"김수현"};
+        console.log("객체 obj:", obj);
+
+        // 재할당불가!
+        // obj = "오잉";
+
+        // 객체에 속성 추가하기
+        Object.defineProperty(obj,"key이름",{value:"value값"});
+        console.log("객체 obj:",obj);
+        
+        // [ 3. 함수]
+        const fn = function(txt){
+            console.log("나야나", txt);
+        }; /////////// fn 함수 //////////
+
+        fn("파이팅!");
+
+        // 그밖에 배열, 객체, 함수 외에 요소를 담을 경우에도
+        // 많이 사용된다!!!
+        // 사용 이유는? 실수로 재할당될 위험에서 지키기 위함
+        // 또는 보안상 이유로 많이 사용된다!!!
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
