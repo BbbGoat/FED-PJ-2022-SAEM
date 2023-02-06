@@ -359,16 +359,32 @@
         // setTimeout(함수,시간)
         // 2초후 한번 실행
         setTimeout(function(){
-            myFn();
+            myFn("동해물과","백두산이","마르고 닳도록","하느님이 보우하사","우리나라 만세!!!");
         },2000); //// 타임아웃함수 //////
 
         /************************************************** 
             함수명: myFn
             기능: 파라미터 얼마든지 받아서 h2 만들어 넣기
         **************************************************/
-       function myFn(){ // 파라미터 전혀 없음!!!
-        console.log("내함수!");
-       } /////////// myFn 함수 ////////////
+        // 함수의 전달변수가 없어도 보내는 전달값이 있으면
+        // 함수의 arguments라는 전달변수 배열객체에 값을 담는다!
+
+        // arguments는 익명함수에서 사용될 수 없다!
+        // 선언적함수, 할당형 익명함수에서는 arguments 사용가능!
+        // const myFn = () => {
+        // const myFn = function(){
+        function myFn(){ // 파라미터 전혀 없음!!!
+            console.log("내함수!",arguments, typeof(arguments),
+            typeof(scene));
+            // 대상선정: body
+            const tg = document.body;
+            // 배열값 자동 돌리기
+            for (let i = 0; i < arguments.length; i++) {
+                tg.innerHTML += `<h2>${arguments[i]}</h2>`;
+                // += 대입연산자로 기존값에 더함!
+            } ///////// for문 //////////
+
+        } /////////// myFn 함수 ////////////
         
 
 
