@@ -87,7 +87,7 @@
         width: 100vw;
         height: 100vh;
         background-color: rgba(0, 0, 0, 0.7);
-        z-index: 999;
+        z-index: 9999;
     }
     /* 플렉스박스 방향을 세로로 변경! */
     nav.gnb ul {
@@ -111,7 +111,7 @@
     /* 로고 */
     h1.logo {
         position: relative;
-        z-index: 9999;
+        z-index: 99999;
     }
 
     /* 햄버거 버튼 보이기 */
