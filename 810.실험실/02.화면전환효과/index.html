@@ -10,9 +10,33 @@
             margin: 0;
             padding: 0;
         }
-        .pg{
+        /* 페이지 전환효과용 가림막 */
+        body::after {
+            content: '';
+            display: block;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
             width: 100vw;
+            height: 50vh;
+            background-color: lightseagreen;
+        }
+        .pg {
+            /* width: 100vw;
+            -> 100vw로 잡을 경우 DT에서 가로스크롤이 발생함.
+            이유는 스크롤바 트랙을 포함한 가로 기준이기 때문임
+            모바일에서는 스크롤바 트랙이 없기때문에 발생함!
+            >>> 따라서, 설정시 100%로 하거나 안주면 auto값 이므로
+            안줘도 되면 안주는게 좋다! */
             height: 100vh;
+        }
+        h1 {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            text-align: center;
+            font-size: 8vw;
         }
     </style>
 </head>
