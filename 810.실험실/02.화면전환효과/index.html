@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>02.화면전환효과</title>
     <style>
@@ -19,8 +18,19 @@
             top: 0;
             left: 0;
             width: 100vw;
-            height: 50vh;
+            height: 0; /* 변경요소 */
             background-color: lightseagreen;
+            /* 트랜지션 : 속property 시time 이ease 지delay */
+            transition: all .8s ease-in-out;
+        }
+        /* 1단계: body.on 일때 적용 */
+        body.on::after {
+            height: 100vh;
+        }
+        /* 2단계: body.on.go 일때 적용 */
+        body.on.go::after {
+            top: 100%;
+            height: 0;
         }
         .pg {
             /* width: 100vw;
@@ -39,6 +49,30 @@
             font-size: 8vw;
         }
     </style>
+    <!-- JS 코드구역 -->
+    <script>
+        /* 타임아웃으로 일정시간뒤 작동함수 셋팅 */
+        // setTimeout(함수,시간)
+        setTimeout(() => {
+            console.log("1단계 작동!!!");
+
+            // 대상:body
+            let tg = document.body;
+            tg.classList.add("on");
+
+            // 2단계 .go 넣기
+            setTimeout(() => {
+
+                // 자체글자변경
+                document.querySelector(".pg h1").innerText = "짜잔잔잔짠~~~~!"
+
+                // body에 .go 넣기
+                tg.classList.add("go");
+                
+            }, 1000);
+
+        }, 2000); ////// setTimeout ///////
+    </script>
 </head>
 <body>
     <div class="wrap">
