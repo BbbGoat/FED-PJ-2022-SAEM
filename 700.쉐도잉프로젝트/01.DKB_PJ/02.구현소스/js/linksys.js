@@ -28,6 +28,14 @@ window.addEventListener("DOMContentLoaded",() => {
             // 만약 요소가 없으면 null이 리턴된다!
             // undefined 는 변수나 함수가 생성되지 않은 경우
             // 리턴되는 기본할당값이다!
+            /* 
+                null
+                -> 아무것도 없는 상태로 채웠음을 의미
+                -> 변수안에 값이 없다는것을 확실히 알려줄 때 사용
+                undefined
+                -> 정의되지 않음
+                -> 메모리 안에는 존재하지만 비어있다!(할당값 없음)
+            */
 
             let chk = x.querySelector("img");
 
