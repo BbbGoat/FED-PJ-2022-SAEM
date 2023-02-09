@@ -53,7 +53,6 @@ body * {
     /* 부모박스 .pt1 높이값에 맞춤! */
     height: 100%;
 }
-
 /* 유형2 - 3개박스구성 : .pt2 */
 .pt2 {
     /* 플렉스박스 */
@@ -67,6 +66,12 @@ body * {
     flex: 1;
 }
 
+/* 2-3. 배경이미지 공통셋팅 클래스 */
+.bgi {
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 /* 글자 숨김 클래스(IR배경이미지 설명 등  숨기기) */
 .ir {
     display: block;
@@ -74,3 +79,4 @@ body * {
     height: 0;
     overflow: hidden;
 }
+
