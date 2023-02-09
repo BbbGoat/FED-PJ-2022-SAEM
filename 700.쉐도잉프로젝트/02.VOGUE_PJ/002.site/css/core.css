@@ -25,10 +25,9 @@ font-family: 'Roboto Condensed', sans-serif;
 /* 
   [ 공통 클래스 이름정의 ]
   1. ibx - inside box 속박스
-  4. fbx - flex box 플렉스 디스플레이 박스
-  5. pt1, pt2 - part1, part2 각 부분박스(비율적용)
-  6. cbx - content box 내용박스
-  7. bgi - background image 관련 속성
+  2. pt1, pt2 - part1, part2 각 부분박스(비율적용)
+  3. cbx - content box 내용박스
+  4. bgi - background image 관련 속성
 */
 
 /* 공사중 표시 */
@@ -42,6 +41,30 @@ body * {
 .ibx {
     max-width: 1300px;
     margin: 0 auto;
+}
+
+/* 2-2. 컨텐츠박스 유형별 클래스 */
+/* 유형1 - 1개박스구성 : .pt1 */
+.pt1 {
+    height: 724px;
+}
+/* 유형1 컨텐츠박스 */
+.pt1 .cbx {
+    /* 부모박스 .pt1 높이값에 맞춤! */
+    height: 100%;
+}
+
+/* 유형2 - 3개박스구성 : .pt2 */
+.pt2 {
+    /* 플렉스박스 */
+    display: flex;
+    height: 650px;
+}
+/* 유형2 컨텐츠박스 : 등분할 가로정렬박스 */
+.pt2 .cbx {
+    /* 플렉스 자식요소 동일분할 설정!
+    -> 높이값 100% 설정불필요! flex는 자동맞춤된다! */
+    flex: 1;
 }
 
 /* 글자 숨김 클래스(IR배경이미지 설명 등  숨기기) */
