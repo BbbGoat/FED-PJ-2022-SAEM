@@ -9,6 +9,12 @@
     font-family: 'Jua', sans-serif;
 */
 
+/* 변수셋팅 */
+:root {
+    /* 큐브 공통크기 */
+    --csz: 300px;
+}
+
 html,body{
     margin: 0;
     padding: 0;
