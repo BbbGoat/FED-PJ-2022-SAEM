@@ -23,6 +23,12 @@ function loadFn() {
     
     // 1-3. 변경대상2 : .cbx
     const cbx = document.querySelector(".cbx");
+    
+    // 1-4. 변경대상3 : .cname
+    const cname = document.querySelector(".cname");
+
+    // 1-5. 변경대상4 : .cinfo
+    const cinfo = document.querySelector(".cinfo");
 
     // console.log(menu);
     // console.log(cube);
@@ -33,9 +39,11 @@ function loadFn() {
     for (let x of menu){ // x는 각각의 a요소
         // 1. 클릭이벤트설정
         x.onclick = () => {
+
             // 1. 메뉴 텍스트 읽기
             let mtxt = x.innerText;
             console.log(mtxt);
+            
             // 2. 회전값 셋팅하기
             // 회전값변수
             let setval;
@@ -49,10 +57,33 @@ function loadFn() {
                 case "런던" : setval = "rotateX(450deg) rotateY(360deg)"; break;
                 default : setval = "rotateX(0deg) rotateY(0deg)";
             } ////// switch case //////
+            // console.log(mtxt+":"+setval);
+
+            // 3. 회전값 적용하기 (transform에 setval변수값 할당하기)
+            cube.style.transform = setval;
+            cube.style.transition = "1.5s ease-in-out";
+
+            // 만약 "출발"을 클릭한 경우 아래 코드 실행 안하기!!!
+            if(mtxt === "출발") return;
+            // 리턴키워드는 함수를 빠져나간다!
+            
+            // 4. 도시정보 셋팅하기
+            // data.js에 셋팅된 객체의 속성값이 메뉴의 도시명과 같다!
+            // 따라서 이 속성명으로 속성값을 가져와서 도시정보를
+            // 아래 요소에 셋팅한다!
+            // 변경대상1 : .cname - 도시명 -> mtxt 변수에 있음!
+            // 변경대상2 : .cinfo - 도시정보 -> city[mtxt]에 있음!
+            // innerText로 할당!!!
+
+            // 도시명 넣기
+            cname.innerText = mtxt;
+
+            // 도시정보 넣기
+            cinfo.innerText = city[mtxt];
+            
+            // console.log(city[mtxt]);
             
         }; /////// click 이벤트함수 ///////
-        
-        
     } /////// for of문 ////////
 
 } ///////////////// loadFn 함수 /////////////////

@@ -252,4 +252,7 @@ p.cinfo {
     font-size: min(16px, 1vw);
     line-height: min(28px,1.5vw);
     background-color: rgba(0, 0, 0, 0.404);
+
+    /* 내용 넘칠때만 세로스크롤바 자동생성 */
+    overflow: auto;
 }
