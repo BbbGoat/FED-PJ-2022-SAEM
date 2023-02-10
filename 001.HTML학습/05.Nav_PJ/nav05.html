@@ -60,6 +60,8 @@
 
     /* 상위li 리스트요소 */
     .gnb>ul>li {
+      position: relative;
+      /* 부모자격 - .smenu */
       width: 200px;
       /* height: 40px; */
       text-align: center;
@@ -144,7 +146,10 @@
       /* 앱솔루트 포지션
       -> 자리를 차지하고 아래 메뉴를 밀어내려면
       static 포지션이어야함! (기본값 static) */
-      /* position: absolute; */
+      position: absolute;
+      top: 0;
+      left: 100%;
+      /* 부모는? - 싸고있는 li */
       width: 200px;
 
       /* 메뉴 숨기기 
