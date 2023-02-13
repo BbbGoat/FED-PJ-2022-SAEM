@@ -266,6 +266,7 @@ body {
     display: flex;
     /* 진행방향정렬 : 양쪽끝 맞춘 후 사이간격일정 */
     justify-content: space-between;
+    perspective: 50vh;
 }
 /* 선택메뉴 상위 li */
 .mlist ul > li {
@@ -274,6 +275,13 @@ body {
     flex: 1;
     /* 등분할설정 */
     overflow: hidden;
+    transform: rotateX(30deg);
+    transform-origin: bottom;
+    transition: .4s;
+}
+.mlist ul>li:hover {
+    transform: translateX(0);
+    z-index: 1;
 }
 /* 상위 li 두번째 부터 끝까지 왼쪽마진 */
 .mlist ul > li + li {
