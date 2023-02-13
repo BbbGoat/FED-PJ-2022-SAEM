@@ -134,6 +134,7 @@
             let inum = 1;
             // -> 이미지이름의 번호를 증감하기 위한 저장공간!
             
+            
             // 2. 이미지설명 배열변수
             const itxt = [
                 "노랑잉꼬가 먹이를 꼭꼭 찍어먹어요~",
@@ -144,9 +145,11 @@
                 "이 양은 보통양이 아니고 복제양 돌리예요~",
                 "잉꼬 한쌍이 영화를 찍어요~"
             ];
-
-            // 3. 이미지 설명 글자색 배열변수
             
+            // 3. 이미지 설명 순번 배열변수
+            let tnum = 0;
+            
+            // 3. 이미지 설명 글자색 배열변수
 
 
             // 변경대상1: 메인이미지 - #mbox img
@@ -155,7 +158,7 @@
             // 변경대상2: 글자박스 - .imgtxt
             const imgtxt = document.querySelector(".imgtxt");
 
-            // 첫번째 이미지메시지 출력학 
+            // 첫번째 이미지메시지 출력하기
             imgtxt.innerText = itxt[0];
             
             // 이벤트 대상 : .btn
@@ -183,7 +186,7 @@
             ****************************************/
            const goSlide = (seq) => { // seq - 버튼순번
                 // 1. 함수호출 및 전달값 확인
-                console.log("왕빛나!", seq);
+                console.log("버튼방향", seq);
 
                 // 현재전역 inum변수
                 console.log("현재전역inum: ",inum);
@@ -192,16 +195,24 @@
                 if (seq) {
                     // 1씩 증가
                     inum++;
+                    tnum++;
                     // 한계값 체크 (처음값으로 변경)
-                    if(inum === 8) inum = 1;
+                    if(inum === 8 && tnum === 7) {
+                        inum = 1;
+                        tnum = 0;
+                    }
 
                 } ///// if문 /////
                 // 2-2. 왼쪽 버튼 분기(이미지번호 감소)
                 else {
                     // 1씩 감소
                     inum--;
+                    tnum--;
                     // 한계값 체크 (마지막값으로 변경)
-                    if(inum === 0) inum = 7;
+                    if(inum === 0) {
+                        inum = 7;
+                        tnum = 6;
+                    }
                 } ///// else문 /////
                 
                 // 증감후 inum변수
@@ -210,12 +221,12 @@
                 // 3. 변경대상에 변경코드 적용하기
                 // 변경대상: #mbox img -> mimg변수
                 mimg.src = `./images/img${inum}.jpg`;
-
+                
                 // 4. 이미지와 순서대로 매칭한 메시지배열의 글자를
                 // 글자출력박스에 찍어주기
                 // 메시지배열 : itxt
                 // 글자출력박스 : .imgtxt -> imgtxt 변수 
-
+                imgtxt.innerText = itxt[tnum];
                 
            }; /////// goSlide 함수 ////////
             
