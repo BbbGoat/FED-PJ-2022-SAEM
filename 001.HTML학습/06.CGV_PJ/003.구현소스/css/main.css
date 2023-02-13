@@ -229,19 +229,22 @@ body {
     /* 부모는? .top */
     width: 144px;
     height: 80px;
-    /* span 나간글자 숨기기 */
-    overflow: hidden;
     /* 원근설정 : 직계하위 span적용 */
     perspective: 50vh;
+    cursor: pointer;
 }
 /* 극장가는 길 타이틀박스 */
 .anibx > span {
-    position: absolute;
-    z-index: 1;
     /* 커튼 대문 역할 */
+    position: absolute;
+    /* 변경속성 top 초기값 셋팅!(애니위해) */
+    top: 0;
+    z-index: 1;
     display: block;
     width: 144px;
     height: 80px;
+    /* span 나간글자 숨기기 */
+    overflow: hidden;
     text-align: center;
     line-height: 80px;
     font-family: 'Cute Font', cursive;
@@ -254,13 +257,14 @@ body {
     /* 애니메이션: 이시이지반방마 */
     animation: anibxAni 2.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
     /* 트랜지션: 속시이지 */
-    transition: transform .3s;
-    /* 트랜스폼 */
-    transform-origin: top;
+    transition: top .4s ease-in-out .2s;
 }
 /* 오버시 타이틀애니박스 들춰지기 */
 .anibx:hover > span {
-    transform: rotateX(90deg);
+    top: -100%;
+    /* top은 기본값이 auto이므로
+    애니메이션 하려면 top:0 으로 초기값 필요! */
+    outline: 1px solid aqua;
 }
 /* 타이틀 애니 키프레임 */
 @keyframes anibxAni {
@@ -593,3 +597,28 @@ margin-right: 20px;
     (띄어쓰기, 특수문자 등 있다면 따옴표사용 )
     
 *****************************************/
+
+/* 구글맵 지도박스 */
+.gmap {
+    position: fixed;
+    top: -50%;
+    /* 처음에 top값으로 위쪽에 숨김! */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 정중앙이동 */
+
+    
+    width: 600px;
+    height: 450px;
+    background-color: #fff;
+    border: 20px solid hotpink;
+    border-radius: 10px;
+
+    z-index: 999;
+    /* 트랜지션: 속시이지 */
+    transition: top .8s ease-in-out;
+}
+/* 구글맵에 클래스 "on"적용시 등장하기 */
+.gmap.on {
+    top: 50%;
+}
