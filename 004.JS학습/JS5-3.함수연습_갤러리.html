@@ -199,7 +199,7 @@
                     inum--;
                     // 한계값 체크 (마지막값으로 변경)
                     if(inum === 0) inum = 7;
-                }
+                } ///// else문 /////
                 
                 // 증감후 inum변수
                 console.log("증감후inum: ",inum);
@@ -207,6 +207,11 @@
                 // 3. 변경대상에 변경코드 적용하기
                 // 변경대상: #mbox img -> mimg변수
                 mimg.src = `./images/img${inum}.jpg`;
+
+                // 4. 이미지와 순서대로 매칭한 메시지배열의 글자를
+                // 글자출력박스에 찍어주기
+                // 메시지배열 : itxt
+                // 글자출력박스 : .imgtxt -> imgtxt 변수 
 
                 
            }; /////// goSlide 함수 ////////
