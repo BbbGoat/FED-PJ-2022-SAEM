@@ -67,4 +67,35 @@ window.addEventListener("DOMContentLoaded", () => {
     };
     ///////////// click 함수 ///////////
 
+    /***************************************** 
+        [ SNS 버튼 링크 이동하기 ]
+    *****************************************/
+    // 1. 대상선정 : .sns a
+    const sns = qsa(".sns a");
+    // 2. 클릭 이벤트 설정
+    // forEach((요소자신,순번,객체) => {코드});
+    sns.forEach((ele)=>{
+        ele.onclick = () => {
+            // 1) 내부텍스트
+            let btxt = ele.innerText;
+            console.log(btxt);
+
+            // 이동주소 변수
+            let url = "";
+
+            // 2) 분기문 url할당하기
+            switch(btxt) {
+                case "페이스북 바로가기" : url = "https://www.facebook.com/CJCGV"; break;
+                case "트위터 바로가기" : url = "https://twitter.com/CGV_ID"; break;
+                case "인스타그램 바로가기" : url = "https://www.instagram.com/cgv_korea/"; break;
+            } /////// switch case문 //////
+
+            // 3. 페이지 이동하기 : 새창으로!
+            // 새창 -> window.open()
+            // 페이지이동 -> location.href = url값
+            window.open().location.href = url;
+
+        }; ////// click 이벤트함수 ///////
+    }); ///////// forEach 메서드 /////////
+
 }); ////////////// 로드구역 //////////////////
