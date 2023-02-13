@@ -52,14 +52,19 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // 2. 버튼에 클릭 이벤트 설정하기
     // -> 클릭시 구글맵박스에 클래스 넣기
-    anibx.onclick = () => gmap.classList.add("on");
+    // -> 추가: 애니박스에 클래스 넣기(열린상태유지)
+    anibx.onclick = () => {
+        gmap.classList.add("on")
+        anibx.classList.toggle("on")
+    };
     ///////////// click 함수 ///////////
     
     // 3. 닫기버튼에 클릭 이벤트 설정하기
-    // -> 클릭시 구글맵박스에 클래스 빼기
-    cbtn.onclick = () => gmap.classList.remove("on");
+    // -> 클릭시 구글맵박스에 클래스 빼기(닫힌상태)
+    cbtn.onclick = () => {
+        gmap.classList.remove("on")
+        anibx.classList.remove("on")
+    };
     ///////////// click 함수 ///////////
-   
-
 
 }); ////////////// 로드구역 //////////////////
