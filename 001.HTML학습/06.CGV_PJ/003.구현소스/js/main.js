@@ -41,5 +41,25 @@ window.addEventListener("DOMContentLoaded", () => {
         - 구글맵박스의 닫기버튼 클릭시 구글맵 퇴장
         -> 방법: CSS세팅된 클래스 "on" 넣기/빼기
     *******************************************/
+    // 1. 대상선정
+    // 1-1. 이벤트 대상 : .anibx -> 애니메이션 버튼박스
+    const anibx = qs(".anibx");
+    // 1-2. 이벤트 대상 : .cbtn -> 닫기버튼
+    const cbtn = qs(".cbtn");
+    // 1-3. 변경 대상 : .gmap -> 구글맵박스
+    const gmap = qs(".gmap");
+    // console.log(anibx,gmap);
+
+    // 2. 버튼에 클릭 이벤트 설정하기
+    // -> 클릭시 구글맵박스에 클래스 넣기
+    anibx.onclick = () => gmap.classList.add("on");
+    ///////////// click 함수 ///////////
+    
+    // 3. 닫기버튼에 클릭 이벤트 설정하기
+    // -> 클릭시 구글맵박스에 클래스 빼기
+    cbtn.onclick = () => gmap.classList.remove("on");
+    ///////////// click 함수 ///////////
+   
+
 
 }); ////////////// 로드구역 //////////////////
