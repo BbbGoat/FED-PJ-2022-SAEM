@@ -146,11 +146,8 @@
                 "잉꼬 한쌍이 영화를 찍어요~"
             ];
             
-            // 3. 이미지 설명 순번 배열변수
-            let tnum = 0;
-            
             // 3. 이미지 설명 글자색 배열변수
-
+            const tcolor = ["red","orange","yellow","green","blue","navy","purple"];
 
             // 변경대상1: 메인이미지 - #mbox img
             const mimg = document.querySelector("#mbox img");
@@ -184,7 +181,7 @@
                 함수명: goSlide
                 기능: 갤러리 이미지,글자 변경하기
             ****************************************/
-           const goSlide = (seq) => { // seq - 버튼순번
+           const goSlide = (seq) => { // seq - 버튼순번 >> 0,1 들어감
                 // 1. 함수호출 및 전달값 확인
                 console.log("버튼방향", seq);
 
@@ -192,26 +189,24 @@
                 console.log("현재전역inum: ",inum);
                 
                 // 2. 버튼별 분기하기
+                // 2-1. 오른쪽 버튼 분기(이미지번호 증가)
+                // seq 값이 1이면 true임! 0은 false 1은 true이므로
+                // 버튼순번값 0,1 받아서 if문으로 활용!
                 if (seq) {
                     // 1씩 증가
                     inum++;
-                    tnum++;
                     // 한계값 체크 (처음값으로 변경)
-                    if(inum === 8 && tnum === 7) {
+                    if(inum === 8) {
                         inum = 1;
-                        tnum = 0;
                     }
-
                 } ///// if문 /////
                 // 2-2. 왼쪽 버튼 분기(이미지번호 감소)
                 else {
                     // 1씩 감소
                     inum--;
-                    tnum--;
                     // 한계값 체크 (마지막값으로 변경)
                     if(inum === 0) {
                         inum = 7;
-                        tnum = 6;
                     }
                 } ///// else문 /////
                 
@@ -226,13 +221,67 @@
                 // 글자출력박스에 찍어주기
                 // 메시지배열 : itxt
                 // 글자출력박스 : .imgtxt -> imgtxt 변수 
-                imgtxt.innerText = itxt[tnum];
+                imgtxt.innerText = itxt[inum-1];
                 
+                // 5. 출력된 글자색 순서대로 변경하기
+                // 색상배열 -> tcolor[]
+                imgtxt.style.color = tcolor[inum-1];
+
            }; /////// goSlide 함수 ////////
+
+           /************************************************** 
+        
+            [ 자동넘김 기능 구현하기 ]
+            - "자동넘김" 버튼 클릭시 일정시간 간격으로
+            롤링 갤러리가 넘어감
+            - "멈춤" 버튼 클릭시 정지됨
+        
+           **************************************************/
+           // 이벤트 대상 : .abtn button
+            const abtn = document.querySelectorAll(".abtn button");
+            // console.log(abtn);
+
+            // 인터발용변수
+            let autoItv;
             
+            // 버튼에 클릭이벤트 설정하기 /////////////
+            for (let x of abtn) {
+                // console.log(x);
+                x.onclick = () => {
+                    // 1. 클릭된 요소의 클래스가 "start"인지 여부
+                    let isB = x.classList.contains("start");
+                    // contains() 클래스가 해당요소에 있으면 true 없으면 false
+                    console.log(".start인가?", isB);
 
+                    // 2. 조건분기
+                    // 2-1. true이면 자동넘김
+                    if (isB) {
+                        // setInterval(함수,시간)
+                        autoItv = setInterval(()=>goSlide(1),1000);
+                    }
+                    
+                    // 2-2. false이면 멈춤
+                    else {
+                        // clearInterval(인터발변수)
+                        clearInterval(autoItv);
+                    } ////////// if else /////////
 
+                    // 3. 버튼 보이기/숨기기
+                    // 항상 클릭된 버튼은 숨긴다!
+                    x.style.display = "none";
+                    // "멈춤"/"자동넘김"버튼 전환하며 보이기
+                    abtn[isB?1:0].style.display = "inline-block";
+                    // isB? "자동넘김"버튼인가?
+                    // true이면 1 즉, 두번재 버튼이 보이고
+                    // false이면 0 즉, 첫번째 버튼이 보인다!
 
+                    // console.log("autoItv변수: ", autoItv);
+                    // 숫자가 찍힘 -> Number형으로 체크됨
+                    // 인터발함수의 특징임
+                    
+                }; //////////// click 이벤트함수 ///////////
+
+            } ////////// for of /////////////
 
             /******************************************* 
                 [ JS 타이밍 함수 : Timing Function ]
@@ -279,6 +328,28 @@
             // 원리: 미리셋팅된 클래스를 미니언즈요소에
             // 일정시간 후 넣고/빼고/넣기를 해준다!
             // 변경대상: #mini
+
+            const mini = document.querySelector("#mini");
+            // console.log(mini);
+
+            // 2초후 미니언즈 class "on1" 넣기
+            setTimeout(() => {
+                mini.classList.add("on1");
+                // mini.classList.add("on1","바보야","멍멍아");
+            }, 2000);
+            // 4초후 미니언즈 class "on1" 빼기
+            setTimeout(() => {
+                mini.classList.remove("on1");
+                // mini.classList.remove("on1","멍멍아");
+            }, 4000);
+            // 6초후 미니언즈 class "on2" 넣기
+            setTimeout(() => {
+                mini.classList.toggle("on2");
+            }, 6000);
+            // 8초후 미니언즈 class "on2"를 "on1"으로 바꾸기
+            setTimeout(() => {
+                mini.classList.replace("on2", "on1");
+            }, 8000);
             
 
         }); /////////// 로드구역 ///////////////////
