@@ -115,6 +115,9 @@
 .smbx > li:first-child > a {
     cursor: text;
 }
+/* 커서모양 참고:
+https://www.w3schools.com/cssref/tryit.php?filename=trycss_cursor
+*/
 
 /* 1-2. 로고박스 */
 .logo {
