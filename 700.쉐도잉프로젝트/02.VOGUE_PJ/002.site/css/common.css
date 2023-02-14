@@ -31,9 +31,19 @@
     font-size: 16px;
     text-align: center;
     line-height: 16px;
+    /* 아이콘들 일렬로 정렬 */
+    vertical-align: top;
+
     /* 마진으로 사이간격 주기 */
     margin-top: 14px;
     margin-right: 17px;
+
+    /* 트랜지션: 속시이지 */
+    transition: opacity .2s;
+}
+/* a요소 마우스 오버시 */
+.sns a:hover {
+    opacity: 0.7;
 }
 /* 트위터 크기조정 */
 .sns a.fi-twitter {
@@ -43,6 +53,11 @@
 .sns a.fi-youtube-play {
     font-size: 11px;
 }
+/* 카카오스토리 배경이미지 넣기 */
+.sns a.cas {
+    background: url(../images/sns_kakao.png) no-repeat center/auto 100%;
+}
+
 /* 1-2. 로고박스 */
 .logo {
     height: 104px;
