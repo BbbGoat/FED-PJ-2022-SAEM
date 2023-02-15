@@ -66,7 +66,7 @@
                     qs("a").onclick = (e) => {
                         // currentTarget 이벤트를 받고 있는 요소자신
                         event.currentTarget.style.backgroundColor = "red";
-
+                        
                         // event.target.style.backgroundColor = "red";
                         // [ target으로 배경색 변경할 경우 결과는? ]
                         // -> 부모요소중 버블링막기가 된 요소에
@@ -74,8 +74,12 @@
                         // 그것이 최종 변경색으로 반영된다!
                         // 왜? target은 이벤트가 발생한 요소이므로!!!
                         
+                        // a요소 기본 이동기능 막기!
+                        event.preventDefault();
+                        
                         // 이벤트속성값 찍기
                         showLog("아들방");
+
                         
                     } ///////////// click ////////////
 
@@ -221,6 +225,9 @@
                 <a href="#">내방</a>
             </p>
         </div>
+
+        <!-- 아들방 클릭이벤트 지우기버튼 -->
+        <button class="clear">아들방 이벤트 지워!</button>
 
     </body>
 </html>
