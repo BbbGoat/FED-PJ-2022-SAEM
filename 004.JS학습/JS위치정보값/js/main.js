@@ -148,7 +148,7 @@ window.addEventListener("DOMContentLoaded", () => {
         qs(".i3").innerText = bird.getBoundingClientRect().top.toFixed(0);
         qs(".i4").innerText = bird.getBoundingClientRect().left.toFixed(0);
         qs(".i31").innerText = (bird.getBoundingClientRect().top + window.scrollY).toFixed(0);
-        qs(".i42").innerText = window.scrollY.toFixed(0);
+        qs(".i42").innerText = window.scrollY;
     }, 100); ///// setInterval //////
 
     // [ 2. 마우스커서 이벤트 발생시 위치값 찍기 ]
