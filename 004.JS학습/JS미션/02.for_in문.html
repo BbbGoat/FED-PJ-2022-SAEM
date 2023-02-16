@@ -21,6 +21,18 @@
             margin: 0 auto;
         }
 
+        .wrap {
+            /* 플렉스박스 */
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        .cbx {
+            margin: 10px;
+            padding: 10px;
+            border: 4px double gray;
+        }
+
         .photo img {
             height: 200px;
             margin-right: 20px;
@@ -51,6 +63,15 @@
         }
     </style>
     <script>
+
+        /************************************************ 
+            [미션:]
+            영화정보를 모두 html형식에 맞도록 .wrap 요소에
+            모두 출력하시오!(for in문을 사용하여 출력)
+        ************************************************/
+
+
+
         /// 영화정보 객체 ////
         const mvi = {
             "조제": {
@@ -99,97 +120,111 @@
 
             /******************************************************** 
                 [ 구현내용 ]
-                - 버튼을 클릭하면 해당 영화의 정보를 화면에 보여준다!
-                - 이벤트 대상: button
-                - 이벤트 종류: click
-                - 이벤트 대상 구분: 클릭된 버튼의 글자데이터
+                - 해당 영화의 정보를 화면에 보여준다!
                 - 변경대상: .tit, .sum, .dir, .act
                 - 변경내용: 
+                    for in 문으로 해당 클래스에 대응하는 데이터를 넣는다
                     대상의 각 내용에 맞게 객체로부터 정보를 셋팅함!
             ********************************************************/
 
             // 1. 대상변수 할당하기
+            const wrap = qs(".wrap");
 
-            // 이벤트대상 : .btns button
-            const btns = qsa(".btns button");
-            // console.log(btns);
+            // 2. for in문으로 객체만큼 돌아서 데이터 셋팅하기
 
-            // 2. 이벤트 대상에 click 이벤트 설정하기
-            // for of문 사용!
-            for (let x of btns) { // x는 각각의 버튼
-                x.onclick = () => {
+            // 최종 태그 담는 변수
+            let hcode = "";
+            
+            for (let x in mvi) { // x는 각 mvi객체의 속성
 
-                    // 1. 클릭된 버튼의 글자읽기
-                    let btxt = x.innerText;
-                    console.log(btxt);
+                console.log("속성명: ", x, "/값: ", mvi[x]);
 
-                    // 2. 버튼 텍스트와 같은 객체속성명의 값을
-                    // 변수에 할당
-                    let data = mvi[btxt];
-                    // console.log("할당객체:",data);
-
-                    // 3. 해당요소에 데이터 넣기
-                    // for in문 사용!!!
-                    // for(변수 in 객체){코드}
-                    // -> 변수는 속성명!
-                    for (let z in data) {
-                        // z는? 속성명
-                        // 속성값은 어떻게 가져와? 객체명[z]
-                        console.log(z, data[z]);
-
-                        // 각 속성명에 해당하는 데이터 셋팅하기!
-                        // switch case문으로 분기!
-                        switch(z){
-                            // 1. 포스터넣기 -> .photo
-                            case "포스터" : qs(".photo").innerHTML = `<img src="${data[z]}" alt="${btxt}의 포스터">`; break;
-                            // 2. 제목넣기 -> .tit
-                            case "제목" : qs(".tit").innerText = '★영화명: '+ data[z]; break;
-                            // 3. 장르넣기 -> .sum
-                            case "개요" : qs(".sum").innerText = '★장르: '+ data[z]; break;
-                            // 4. 감독넣기 -> .dir
-                            case "감독" : qs(".dir").innerText = '★감독: '+ data[z]; break;
-                            // 5. 배우넣기 -> .act
-                            case "출연" : qs(".act").innerText = '★배우: '+ data[z]; break;
-
-                        } ////////// swtich case //////
-
-                        // 영화 한마디 넣기
-                        // for of문으로 문자데이터 잘라넣기!
-                        // 한글자씩 span태그로 싸서 해당요소에 넣음!
-                        if(z === "문구"){
-                            // 1. 데이터 담기
-                            let txt = data[z];
-                            console.log("문구데이터", txt);
-
-                            // 2. 문구 데이터를 for of문으로 하나씩 넣기
-                            // 태그로 싼 새로운 데이터 넣을 변수
-                            let newtxt = "";
-                            for(let m of txt) { // m은 한글자씩!
-                                console.log("한글자씩:", m);
-                                // 스페이스 문자일 경우 띄어쓰기 기호로!
-                                if(m === " ") {
-                                    newtxt += "&nbsp;&nbsp;&nbsp;";
-                                } /// if ///
-                                else { // 그밖의 문자일 경우
-                                    newtxt += `<span>${m}</span>`;
-                                } /// else ///    
-                            } //// for of문 ////
-
-                            // 문구 데이터를 대상에 출력!
-                            // 대상: .show
-                            qs(".show").innerHTML = newtxt;
-
-                            // 영화한마디 박스 보이게 하기
-                            // 대상: .showtit
-                            qs(".showtit").style.display = "block";
-
-                        } ///// if문 //////
+                // 해당 데이터 값 변수에 할당하기
+                let data = mvi[x];
+                
+                // 출력할 태그변수에 대입연산자로 계속넣기
+                hcode += `
+                    <section class="cbx">
+                        <div class="minfo">
+                            <!-- 1. 포스터 -->
+                            <div class="photo">
+                                <img src="${data["포스터"]}" alt="${x}의 포스터">
+                            </div>
+                            <div class="cont">
+                                <!-- 2. 제목 -->
+                                <h2 class="tit"></h2>
+                                <!-- 3. 개요 -->
+                                <h3 class="sum"></h3>
+                                <!-- 4. 감독 -->
+                                <h3 class="dir"></h3>
+                                <!-- 5. 출연 -->
+                                <h3 class="act"></h3>
+                            </div>
+                        </div>
                         
-                    } //////// forin문 ////////
-                        
+            
+                        <!-- 영화 한마디 -->
+                        <h2 class="showtit">♥ 영화한마디!</h2>
+                        <!-- 6. 문구 -->
+                        <div class="show"></div>
+                    </section>
+                    `;
 
-                }; ///// click 이벤트함수 ///////
-            } /////// for of문 ////////
+                
+                // 각 속성명에 해당하는 데이터 셋팅하기!
+                // switch case문으로 분기!
+                // switch(z){
+                //     // 1. 포스터넣기 -> .photo
+                //     case "포스터" : qs(".photo").innerHTML = `<img src="${data[z]}" alt="${btxt}의 포스터">`; break;
+                //     // 2. 제목넣기 -> .tit
+                //     case "제목" : qs(".tit").innerText = '★영화명: '+ data[z]; break;
+                //     // 3. 장르넣기 -> .sum
+                //     case "개요" : qs(".sum").innerText = '★장르: '+ data[z]; break;
+                //     // 4. 감독넣기 -> .dir
+                //     case "감독" : qs(".dir").innerText = '★감독: '+ data[z]; break;
+                //     // 5. 배우넣기 -> .act
+                //     case "출연" : qs(".act").innerText = '★배우: '+ data[z]; break;
+
+                // } ////////// swtich case //////
+
+                // // 영화 한마디 넣기
+                // // for of문으로 문자데이터 잘라넣기!
+                // // 한글자씩 span태그로 싸서 해당요소에 넣음!
+                // if(z === "문구"){
+                //     // 1. 데이터 담기
+                //     let txt = data[z];
+                //     console.log("문구데이터", txt);
+
+                //     // 2. 문구 데이터를 for of문으로 하나씩 넣기
+                //     // 태그로 싼 새로운 데이터 넣을 변수
+                //     let newtxt = "";
+                //     for(let m of txt) { // m은 한글자씩!
+                //         console.log("한글자씩:", m);
+                //         // 스페이스 문자일 경우 띄어쓰기 기호로!
+                //         if(m === " ") {
+                //             newtxt += "&nbsp;&nbsp;&nbsp;";
+                //         } /// if ///
+                //         else { // 그밖의 문자일 경우
+                //             newtxt += `<span>${m}</span>`;
+                //         } /// else ///    
+                //     } //// for of문 ////
+
+                //     // 문구 데이터를 대상에 출력!
+                //     // 대상: .show
+                //     qs(".show").innerHTML = newtxt;
+
+                //     // 영화한마디 박스 보이게 하기
+                //     // 대상: .showtit
+                //     qs(".showtit").style.display = "block";
+
+                // } ///// if문 //////
+
+
+            } /////// for in문 ////////
+
+            // 출력
+        
+            wrap.innerHTML = hcode;
 
 
             /************************************************* 
