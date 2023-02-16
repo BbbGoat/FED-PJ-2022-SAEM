@@ -47,20 +47,20 @@
         }
 
         .show span {
-            /* display: inline-block; */
+            display: inline-block;
             /* 가로,세로 등 디자인 적용+한줄에 나옴 */
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             /* 원 */
-            border: 5px solid #d30000;
+            border: 2px solid #d30000;
             background-color: #00f;
-            font-size: 30px;
+            font-size: 20px;
             color: #fff;
 
             /* 동그라미 박스 정중앙 */
             text-align: center;
-            line-height: 50px;
+            line-height: 30px;
         }
     </style>
     <script>
@@ -140,10 +140,27 @@
 
                 console.log("속성명: ", x, "/값: ", mvi[x]);
 
-                // 해당 데이터 값 변수에 할당하기
+                // 1-1. 해당 데이터 값 변수에 할당하기
                 let data = mvi[x];
                 
-                // 출력할 태그변수에 대입연산자로 계속넣기
+                // 1-2. 문구 데이터 따로 담기
+                let txt = data["문구"];
+                let newtxt = ""; // 문구 출력에 사용할 변수 선언!
+
+                // 2. 문구 데이터 for of 돌리기
+                for(let m of txt) { // m은 한글자씩 출력된 값
+                    console.log("한글자씩:", m);
+                    // 스페이스 문자일 경우 띄어쓰기 기호로!
+                    if(m === " ") {
+                        newtxt += "&nbsp;&nbsp;&nbsp;";
+                    } /// if ///
+                    else { // 그밖의 문자일 경우
+                        newtxt += `<span>${m}</span>`;
+                    } /// else ///    
+                } //// for of문 //////////////////////////
+            
+
+                // 3. 출력할 태그변수에 대입연산자로 계속넣기
                 hcode += `
                     <section class="cbx">
                         <div class="minfo">
@@ -176,67 +193,14 @@
                         <h2 class="showtit">♥ 영화한마디!</h2>
                         <!-- 6. 문구 -->
                         <div class="show">
-                            <span>
-                            ${data["문구"]}
-                            </span>
+                            ${newtxt}
                         </div>
                     </section>
-                    `;
-
-                
-                // 각 속성명에 해당하는 데이터 셋팅하기!
-                // switch case문으로 분기!
-                // switch(z){
-                //     // 1. 포스터넣기 -> .photo
-                //     case "포스터" : qs(".photo").innerHTML = `<img src="${data[z]}" alt="${btxt}의 포스터">`; break;
-                //     // 2. 제목넣기 -> .tit
-                //     case "제목" : qs(".tit").innerText = '★영화명: '+ data[z]; break;
-                //     // 3. 장르넣기 -> .sum
-                //     case "개요" : qs(".sum").innerText = '★장르: '+ data[z]; break;
-                //     // 4. 감독넣기 -> .dir
-                //     case "감독" : qs(".dir").innerText = '★감독: '+ data[z]; break;
-                //     // 5. 배우넣기 -> .act
-                //     case "출연" : qs(".act").innerText = '★배우: '+ data[z]; break;
-
-                // } ////////// swtich case //////
-
-                // // 영화 한마디 넣기
-                // // for of문으로 문자데이터 잘라넣기!
-                // // 한글자씩 span태그로 싸서 해당요소에 넣음!
-                // if(z === "문구"){
-                //     // 1. 데이터 담기
-                //     let txt = data[z];
-                //     console.log("문구데이터", txt);
-
-                //     // 2. 문구 데이터를 for of문으로 하나씩 넣기
-                //     // 태그로 싼 새로운 데이터 넣을 변수
-                //     let newtxt = "";
-                //     for(let m of txt) { // m은 한글자씩!
-                //         console.log("한글자씩:", m);
-                //         // 스페이스 문자일 경우 띄어쓰기 기호로!
-                //         if(m === " ") {
-                //             newtxt += "&nbsp;&nbsp;&nbsp;";
-                //         } /// if ///
-                //         else { // 그밖의 문자일 경우
-                //             newtxt += `<span>${m}</span>`;
-                //         } /// else ///    
-                //     } //// for of문 ////
-
-                //     // 문구 데이터를 대상에 출력!
-                //     // 대상: .show
-                //     qs(".show").innerHTML = newtxt;
-
-                //     // 영화한마디 박스 보이게 하기
-                //     // 대상: .showtit
-                //     qs(".showtit").style.display = "block";
-
-                // } ///// if문 //////
-
+                    `; /////////// hcode변수 ///////////
 
             } /////// for in문 ////////
 
-            // 출력
-        
+            // for in문 돌린값 최종 박스에 출력
             wrap.innerHTML = hcode;
 
 
