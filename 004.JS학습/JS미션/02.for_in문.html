@@ -25,12 +25,14 @@
             /* 플렉스박스 */
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
             padding: 20px;
         }
         .cbx {
             margin: 10px;
             padding: 10px;
             border: 4px double gray;
+            border-radius: 10px;
         }
 
         .photo img {
@@ -40,12 +42,12 @@
 
         /* 영화한마디 글자박스 */
         .showtit {
-            display: none;
+            /* display: none; */
             text-align: center;
         }
 
         .show span {
-            display: inline-block;
+            /* display: inline-block; */
             /* 가로,세로 등 디자인 적용+한줄에 나옴 */
             width: 50px;
             height: 50px;
@@ -59,7 +61,6 @@
             /* 동그라미 박스 정중앙 */
             text-align: center;
             line-height: 50px;
-            text-align: center;
         }
     </style>
     <script>
@@ -152,13 +153,21 @@
                             </div>
                             <div class="cont">
                                 <!-- 2. 제목 -->
-                                <h2 class="tit"></h2>
+                                <h2 class="tit">
+                                    ★영화명: ${x}
+                                </h2>
                                 <!-- 3. 개요 -->
-                                <h3 class="sum"></h3>
+                                <h3 class="sum">
+                                    ★장르: ${data["개요"]}
+                                </h3>
                                 <!-- 4. 감독 -->
-                                <h3 class="dir"></h3>
+                                <h3 class="dir">
+                                    ★감독: ${data["감독"]}
+                                </h3>
                                 <!-- 5. 출연 -->
-                                <h3 class="act"></h3>
+                                <h3 class="act">
+                                    ★배우: ${data["출연"]}
+                                </h3>
                             </div>
                         </div>
                         
@@ -166,7 +175,11 @@
                         <!-- 영화 한마디 -->
                         <h2 class="showtit">♥ 영화한마디!</h2>
                         <!-- 6. 문구 -->
-                        <div class="show"></div>
+                        <div class="show">
+                            <span>
+                            ${data["문구"]}
+                            </span>
+                        </div>
                     </section>
                     `;
 
