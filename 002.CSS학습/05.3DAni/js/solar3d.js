@@ -22,9 +22,20 @@ window.addEventListener("DOMContentLoaded", () => {
     // 2. 이벤트함수 셋팅하기
     for (let x of menu) { // x는 각각의 a
         x.onclick = () => {
+            // 1. 버튼텍스트 읽기
             let btxt = x.innerText;
             console.log(btxt);
             
+            // 2. 문자데이터 가공
+            // 내용: "X 배율" -> "X " 부분을 없앤다!
+            // 문자대체 내장함수 -> replace(바꿀문자, 바뀔문자)
+            btxt = btxt.replace("X ","");
+            console.log(btxt);
+
+            // 3. 배율 적용하기
+            // 변경대상 : scbx변수
+            scbx.style.transform = `scale(${btxt})`;
+
         }; /////// click 이벤트 ///////
     } //////// for of문 /////////
     
