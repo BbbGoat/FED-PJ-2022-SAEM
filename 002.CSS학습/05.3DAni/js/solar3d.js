@@ -36,6 +36,12 @@ window.addEventListener("DOMContentLoaded", () => {
             // 변경대상 : scbx변수
             scbx.style.transform = `scale(${btxt})`;
 
+            // 4. 클릭된 메뉴에 클래스 "on" 넣기
+            // 4-1. 모두초기화
+            menu.forEach(ele => ele.classList.remove("on"));
+            // 4-2. 해당메뉴 클래스넣기
+            x.classList.add("on");
+
         }; /////// click 이벤트 ///////
     } //////// for of문 /////////
     
