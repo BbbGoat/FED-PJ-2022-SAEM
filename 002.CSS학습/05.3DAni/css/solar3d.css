@@ -76,7 +76,7 @@ body{
     /* 기본값은 flat(2D) */
 
     /* x축 기준으로 기울임 */
-    transform: rotateX(75deg);
+    transform: rotateX(65deg);
     /* 전체 화면 뒤쪽으로 기울어짐
     x축 중앙선 기준으로 상단은 화면뒤
     하단은 화면앞으로 나옴! */
@@ -151,7 +151,7 @@ body{
     background-size: 100% 100%;
 
     /* 행성의 부모가 기울었으므로 반대로 세워줌! */
-    transform: rotateY(-75deg) scale(3);
+    transform: rotateY(-65deg) scale(2);
     /* 이미 행성이 회전하고 있는데 2가지 회전으로
     축반전(x/y축이 뒤바뀐효과)이 생겨서 x축이 아니라
     y축을 세워야함! */
@@ -188,7 +188,31 @@ body{
 /* 지구행성 셋팅 */
 #earth .planet {
     background-image: url(../images/earth.png);
+    box-shadow: inset 24px 1px 5px rgba(0, 0, 0, 0.7);
+
+    /* 애니메이션: 이시이지반방마 */
+    animation: shadowAni 20s linear infinite;
+
 }
+
+/* 그림자애니 키프레임 */
+@keyframes shadowAni {
+    0%{
+        box-shadow: inset 24px 1px 5px rgba(0, 0, 0, 0.7);
+    }
+    25%{
+        box-shadow: inset -1px 14px 5px rgba(0, 0, 0, 0.7);
+    }
+    50%{
+        box-shadow: inset -24px 1px 5px rgba(0, 0, 0, 0.7);
+    }
+    75%{
+        box-shadow: inset -7px -65px 20px rgba(0, 0, 0, 0.7);
+    }
+    100%{
+        box-shadow: inset 24px 1px 5px rgba(0, 0, 0, 0.7);
+    }
+} /* 키프레임 */
 
 /************ 목성행성 셋팅 *************/
 
@@ -212,16 +236,19 @@ body{
 /* 목성회전 키프레임 */
 @keyframes jupiter {
     from {
-        transform: rotate(0deg) translateY(-500px) rotate(0deg);
+        transform: rotate(0deg) translateX(-500px) rotate(0deg);
     }
     to {
-        transform: rotate(360deg) translateY(-500px) rotate(-360deg);
+        transform: rotate(360deg) translateX(-500px) rotate(-360deg);
     }
 } /* 목성회전 키프레임 */
 
 /* 목성행성 셋팅 */
 #jupiter .planet {
     background-image: url(../images/jupiter.png);
+
+    /* 애니메이션: 이시이지반방마 */
+    animation: shadowAni 30s linear infinite;
 }
 
 /************ 토성행성 셋팅 *************/
@@ -264,6 +291,19 @@ body{
     height: 100%;
     background: url(../images/saturn.png) no-repeat 0/100% 100%;
 }
+/* 토성 그림자애니는 가상요소 after에 줌! */
+#saturn .planet::after{
+    content: '';
+    position: absolute;
+    padding: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    transform: scale(0.68);
+    /* 애니메이션: 이시이지반방마 */
+    animation: shadowAni 40s linear infinite;
+}
 
 /************ 명왕성행성 셋팅 *************/
 
@@ -288,14 +328,16 @@ body{
 /* 명왕성회전 키프레임 */
 @keyframes pluto {
     from {
-        transform: rotate(0deg) translateY(800px) rotate(0deg);
+        transform: rotate(0deg) translateX(800px) rotate(0deg);
     }
     to {
-        transform: rotate(360deg) translateY(800px) rotate(-360deg);
+        transform: rotate(360deg) translateX(800px) rotate(-360deg);
     }
 } /* 명왕성회전 키프레임 */
 
 /* 명왕성행성 셋팅 */
 #pluto .planet {
     background-image: url(../images/pluto.png);
+    /* 애니메이션: 이시이지반방마 */
+    animation: shadowAni 50s linear infinite;
 }
