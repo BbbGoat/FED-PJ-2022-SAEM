@@ -2,6 +2,8 @@
 
 /* 태양계 3D 애니 - solar3d.css */
 
+/* 웹폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Text:wght@900&display=swap');
 
 /*************************************************
 
@@ -61,6 +63,48 @@ body{
 /* body * {
     outline: 1px dashed lightblue;
 } */
+
+/* 타이틀 */
+.tit {
+    position: relative;
+    z-index: 1;
+    /* 행성들보다 위 */
+
+    margin: 0;
+    padding: 0;
+    /* h1의 기본마진,패딩 없앰 */
+    font-family: 'Big Shoulders Stencil Text', cursive;
+    color: #fff;
+    font-size: 80px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+/* 축소확대 버튼 */
+.tit2 {
+    font-size: 20px;
+}
+
+.tit2 a {
+    text-decoration: none;
+    color: #fff;
+    margin: 0 20px;
+}
+
+/* 마우스 오버시 또는 class="on"인 경우 */
+.tit2 a:hover,
+.tit2 a.on {
+    color: aqua;
+}
+
+/* 태양계박스 축소확대용 부모박스 */
+.ssbx{
+    position: relative;
+    top: 34%;
+    /* 트랜지션: 속시이지 */
+    transition: transform 2s ease-in-out;
+
+}
 
 /* 태양계박스(전체부모) */
 /* 태양계 전체박스를 3D변형으로 기울임! */
@@ -328,10 +372,10 @@ body{
 /* 명왕성회전 키프레임 */
 @keyframes pluto {
     from {
-        transform: rotate(0deg) translateX(800px) rotate(0deg);
+        transform: rotate(0deg) translateX(-800px) rotate(0deg);
     }
     to {
-        transform: rotate(360deg) translateX(800px) rotate(-360deg);
+        transform: rotate(360deg) translateX(-800px) rotate(-360deg);
     }
 } /* 명왕성회전 키프레임 */
 
