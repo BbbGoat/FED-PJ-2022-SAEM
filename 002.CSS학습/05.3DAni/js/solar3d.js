@@ -17,7 +17,7 @@ window.addEventListener("DOMContentLoaded", () => {
     // 변경 대상 : 태양계 전체를 싸고 있는 부모요소 -> .scbx
     const scbx = document.querySelector(".scbx");
 
-    // console.log(menu, scbx);
+    console.log(menu, scbx);
 
     // 2. 이벤트함수 셋팅하기
     for (let x of menu) { // x는 각각의 a

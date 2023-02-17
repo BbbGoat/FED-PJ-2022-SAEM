@@ -98,7 +98,7 @@ body{
 }
 
 /* 태양계박스 축소확대용 부모박스 */
-.ssbx{
+.scbx{
     position: relative;
     top: 34%;
     /* 트랜지션: 속시이지 */
@@ -239,25 +239,6 @@ body{
 
 }
 
-/* 그림자애니 키프레임 */
-@keyframes shadowAni {
-    0%{
-        box-shadow: inset 24px 1px 5px rgba(0, 0, 0, 0.7);
-    }
-    25%{
-        box-shadow: inset -1px 14px 5px rgba(0, 0, 0, 0.7);
-    }
-    50%{
-        box-shadow: inset -24px 1px 5px rgba(0, 0, 0, 0.7);
-    }
-    75%{
-        box-shadow: inset -7px -65px 20px rgba(0, 0, 0, 0.7);
-    }
-    100%{
-        box-shadow: inset 24px 1px 5px rgba(0, 0, 0, 0.7);
-    }
-} /* 키프레임 */
-
 /************ 목성행성 셋팅 *************/
 
 #jupiter.orbit {
@@ -385,3 +366,22 @@ body{
     /* 애니메이션: 이시이지반방마 */
     animation: shadowAni 50s linear infinite;
 }
+
+/* 그림자애니 키프레임 */
+@keyframes shadowAni {
+    0%{
+        box-shadow: inset 24px 1px 5px rgba(0, 0, 0, 0.7);
+    }
+    25%{
+        box-shadow: inset -1px 14px 5px rgba(0, 0, 0, 0.7);
+    }
+    50%{
+        box-shadow: inset -24px 1px 5px rgba(0, 0, 0, 0.7);
+    }
+    75%{
+        box-shadow: inset -7px -65px 20px rgba(0, 0, 0, 0.7);
+    }
+    100%{
+        box-shadow: inset 24px 1px 5px rgba(0, 0, 0, 0.7);
+    }
+} /* 키프레임 */
