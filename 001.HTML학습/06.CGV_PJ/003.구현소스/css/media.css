@@ -16,7 +16,6 @@
     .gnb {
         bottom: -123px;
         right: 23px;
-        outline: 1px solid red;
         padding-top: 16px;
     }
     /* ul박스 */
@@ -33,7 +32,8 @@
     #cam {
         bottom: 131px;
         right: -7px;
-        z-index: 0;
+        z-index: 0; /* -1을 복귀함! */
+        cursor: pointer;
     }
     /* 서브메뉴 오버시 안나오게함!
     -> 방법2가지
