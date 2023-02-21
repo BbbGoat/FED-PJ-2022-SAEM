@@ -13,6 +13,39 @@
                 //// #div01의 각 메뉴에 마우스 오버시 하위메뉴 보이기 ////
                 ////////////////////////////////////////////////////////
 
+                // 1. 대상선정 : .smenu
+                const smenu = document.querySelectorAll(".smenu");
+                console.log(smenu);
+
+                // 2. 이벤트 설정하기 : mouseover / mouseout
+                // for of문
+                for (let x of smenu) { // x는 각 요소
+
+                    // 마우스오버시
+                    x.onmouseover = () => {
+                        console.log(x);
+                        // 1. 대상: 하위 직계 div요소
+                        let tg = x.querySelector("div");
+
+                        // 2. 대상의 높이값 알아오기
+                        let hv = tg.querySelector("ol").offsetHeight;
+                        // console.log("ol높이값:", hv);
+
+                        // 3. 서브메뉴 열리기 : 높이값 + 보정값
+                        tg.style.height = (hv+10)+"px";
+                        tg.style.transition = "height .4s ease-out";    
+                    };
+                    // 마우스아웃시
+                    x.onmouseout = () => {
+                        // 대상: 하위 직계 div요소
+                        let tg = x.querySelector("div");
+
+                        // 2. 서브메뉴 닫기
+                        tg.style.height = "0px";
+                    };
+                    
+                } //////// for of문 ////////
+                
                 /******************************************************** 
                     [ 선택요소의 현재 크기, 위치값 알아오는 JS속성 ]
                     1. 선택요소.offsetWidth : 가로값
@@ -107,7 +140,7 @@
             .wrap{
                 display: flex;
                 width: 600px;
-                height: 600px;
+                min-height: 600px;
                 margin: 0 auto;
                 padding: 15px;
                 border: 4px dotted lightseagreen;
@@ -115,9 +148,6 @@
             .wrap > div {
                 outline: 1px solid red;
                 width: 300px;
-                vertical-align: top;
-                /*인라인블록은 인라인성격이 있어서 기본 옆으로 세로정렬은
-            baseline이므로 아래쪽선을 기준한다. 이것을 위줄 기준변경함*/
             }
 
 
