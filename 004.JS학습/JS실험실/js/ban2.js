@@ -94,7 +94,7 @@ function loadFn() {
             //     나타나도록 슬라이드 박스의 left값을
             //     -330%로 변경시킨다.
             slide.style.left = "-330%";
-            slide.style.transition = "left .4s ease-in-out";
+            slide.style.transition = "left .8s ease-in-out";
     
             // (2) 슬라이드 이동후!!! (0.4초후)
             setTimeout(()=>{
@@ -105,7 +105,7 @@ function loadFn() {
                 slide.style.left = "-220%";
                 // (2-3) 트랜지션 없애기!
                 slide.style.transition = "none";
-            },400); //// 타임아웃 //////
+            },800); //// 타임아웃 //////
 
         }
         // 1-2. 왼쪽버튼 클릭시 ////////
