@@ -180,7 +180,7 @@ function loadFn() {
     // 인터발함수 지우기위한 변수
     let autoI;
     // 타임아웃함수 지우기위한 변수
-    let autuT;
+    let autoT;
     
     /******************************************* 
         함수명: autoSlide
@@ -193,7 +193,7 @@ function loadFn() {
     } ///////////// autoSlide 함수 /////////////
     
     // 자동넘김 최초호출
-    autoSlide()
+    autoSlide();
 
     /******************************************* 
         함수명: clearAuto
@@ -211,7 +211,7 @@ function loadFn() {
         // 3. 잠시후 다시 작동하도록 타임아웃으로
         // 인터발함수를 호출한다!
         // 5초후 (인터발은 3초후, 토탈 8초후 작동시작)
-        setTimeout(autoSlide,5000);
+        autoT = setTimeout(autoSlide,5000);
 
         
     } ////////////// clearAuto 함수 ////////////
