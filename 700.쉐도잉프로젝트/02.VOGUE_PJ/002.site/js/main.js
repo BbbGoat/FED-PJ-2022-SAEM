@@ -32,8 +32,12 @@ window.addEventListener("DOMContentLoaded", () => {
     /************************************* 
         스크롤 등장액션 기능구현하기
     *************************************/
-    // 대상: .scAct
+    // 스크롤 등장 대상: .scAct
     const scAct = q(".scAct");
+
+    // 스크롤 상단 슬림메뉴 대상: #top
+    const topA = q("#top");
+    cg(topA);
 
     ////////////////////////////////
     // 클래스 넣기 함수 만들기 ///////
@@ -63,6 +67,15 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // 스크롤이벤트 셋팅하기 /////////
     window.addEventListener("scroll", () => {
+
+        // 현재스크롤 위치변수
+        let scTop = window.scrollY;
+        cg(scTop);
+
+        // 상단영역 슬림메뉴 적용하기
+        if (scTop >= 100) topA.classList.add("on");
+        else topA.classList.remove("on");
+        
         // 값 확인하기
         // cg("박스1:" + retVal(scAct[0]));
 
