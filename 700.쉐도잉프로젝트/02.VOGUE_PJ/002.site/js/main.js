@@ -37,7 +37,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // 스크롤 상단 슬림메뉴 대상: #top
     const topA = q("#top");
-    cg(topA);
+    
+    // 상단이동버튼 대상: .tbtn
+    const tbtn = q(".tbtn");
+    // cg(tbtn);
+    
 
     ////////////////////////////////
     // 클래스 넣기 함수 만들기 ///////
@@ -72,9 +76,13 @@ window.addEventListener("DOMContentLoaded", () => {
         let scTop = window.scrollY;
         cg(scTop);
 
-        // 상단영역 슬림메뉴 적용하기
+        // 상단영역 슬림메뉴 적용하기 //
         if (scTop >= 100) topA.classList.add("on");
         else topA.classList.remove("on");
+
+        // 위로이동버튼 보이기/숨기기 //
+        if (scTop >= 300) tbtn.classList.add("on");
+        else tbtn.classList.remove("on");
         
         // 값 확인하기
         // cg("박스1:" + retVal(scAct[0]));
