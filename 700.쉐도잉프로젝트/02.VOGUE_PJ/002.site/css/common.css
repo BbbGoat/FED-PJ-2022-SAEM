@@ -303,7 +303,7 @@ https://www.w3schools.com/cssref/tryit.php?filename=trycss_cursor
     font-size: 12px;
     opacity: 0; /* 처음에 투명 */
     /* 트랜지션 - bottom엔 적용되면 안되므로 별도지정함 */
-    transition: background-color 0.3s, opacity 0.3s;
+    transition: background-color 0.5s, opacity 0.5s;
 }
 
 /* 위로가기 버튼 보이기상태 */
