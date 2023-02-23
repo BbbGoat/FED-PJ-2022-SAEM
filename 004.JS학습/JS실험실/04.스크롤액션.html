@@ -8,27 +8,29 @@
         <script>
             ////// 로드구역 //////////
             window.addEventListener("DOMContentLoaded", () => {
-
                 // [ 새로고침시 맨위로 보내기 ]
                 // scrollTo(가로,세로) -> 스크롤위치이동 내장함수
                 // 브라우저가 스크롤 위치 캐싱을 적용한 후 위로 이동
                 setTimeout(() => {
-                    window.scrollTo(0,0);
-                },100); // 0.1초 정도는 줘야 효과있음!
-                
+                    window.scrollTo(0, 0);
+                }, 100); // 0.1초 정도는 줘야 효과있음!
+
                 // 등장액션 대상: .setit
                 const setit = document.querySelectorAll(".setit");
                 // console.log(setit);
 
                 // 화면높이값의 절반구하기
-                const hv = window.innerHeight/3*2;
+                const hv = (window.innerHeight / 3) * 2;
                 // console.log("2/3높이:",hv);
 
+                // 윈도우 높이값
+                const winH = window.innerHeight;
+
                 // 등장액션 대상 위치값 리턴함수/////
-                const retVal = ele => ele.getBoundingClientRect().top;
+                const retVal = (ele) => ele.getBoundingClientRect().top;
                 // const retVal = ele => {return ele.getBoundingClientRect().top;}
-                
-                // [ 보이는화면을 기준한 위치값리턴 : 
+
+                // [ 보이는화면을 기준한 위치값리턴 :
                 // getBoundingClientRect() ]
                 // top속성값은 Y축위치값을 나타냄
                 // 보이는 화면 상단에 닿을 경우 0
@@ -40,27 +42,34 @@
                 ////////////////////////////////
                 // 클래스 넣기 함수 만들기 ///////
                 ////////////////////////////////
-                const showIt = x => { // x - 등장요소
+                const showIt = (x) => {
+                    // x - 등장요소
                     // 대상요소의 현재스크롤 위치
                     let xval = retVal(x);
 
                     // 구간적용여부 검사하기
                     // 0보다 크고 화면의 2/3보다 작은 구간!
-                    if(xval < hv && xval > 0){ // 범위지정
+                    if (xval < hv && xval > 0) {
+                        // 범위지정
                         console.log("작동!~~~~");
                         // 해당요소에 클래스 넣기
                         x.classList.add("on");
                     }
                 }; //////////// showIt //////////
 
+                // 스크롤시 이동할 타이틀 대상
+                // .tit
+                const tit = document.querySelector(".tit");
+                // 트랜지션설정
+                tit.style.transition = ".8s ease-in-out";
 
+                ///////////////////////////////////////////////
                 // 스크롤 이동시 윈도우에 세로스크롤 위치값 찍기
                 // 대상: window
                 // 이벤트: scroll
-                window.addEventListener("scroll",()=>{
-
+                window.addEventListener("scroll", () => {
                     // 스크롤등장 요소 개수만큼 for문으로 돌리기
-                    for(let x of setit) showIt(x);
+                    for (let x of setit) showIt(x);
                     // 순서:
                     // 1. 스크롤 이벤트시 setit에 담긴 요소를 수집
                     // 2. 요소만큼 x에 하나씩 순서대로 담는다
@@ -69,21 +78,61 @@
                     // if문 구간에 해당하는지 검사후 해당요소에
                     // 클래스 "on"을 넣어준다!
 
-
-
-
                     // 스크롤시 스크롤 위치값  찍기
                     // => window.scrollY
-                    // let scTop = window.scrollY;
+                    let scTop = window.scrollY;
+
+                    // 다른 방법으로 스크롤위치값 구하기
+                    // scTop = document.scrollingElement.scrollTop
+                    // scTop = document.documentElement.scrollTop
+                    // scTop = document.querySelector('html').scrollTop
+
                     // console.log(scTop);
+
+                    // ★[[ 현재 스크롤바 위치값 가져오기 ]]★
+                    // 1. window.scrollY (IE6~11지원안함)
+                    // 2. document.scrollingElement.scrollTop
+                    // 3. document.documentElement.scrollTop
+                    // 4. document.querySelector('html').scrollTop
+
+                    /***********************************************
+                        스크롤 위치에 따른 타이틀 위치이동 애니!
+                    ***********************************************/
+
+                    // 1. 스크롤바 위치 0이상 300미만 일때 원위치
+                    if (scTop < 300) tit.style.top = "0";
+                    // 2. 스크롤바 위치 300이상 500미만 일때 첫번째 위치변경
+                    if (scTop >= 300 && scTop < 500) tit.style.top = "45vh";
+
+                    // retVal() 함수를 이용하여 해당요소의 위치를 구함!
+                    // 첫번째 포스터요소 위치
+                    let obj1 = retVal(setit[0]);
+                    // 두번째 포스터요소 위치
+                    let obj2 = retVal(setit[1]);
+                    // 세번째 포스터요소 위치
+                    let obj3 = retVal(setit[2]);
+                    console.log(obj1, "/", winH / 2);
+
+                    // 1. 첫번째/세번째 포스터 구간일때
+                    if ((obj1 < winH / 2 && obj1 > 0) || (obj3 < winH / 2 && obj3 > 0)) {
+                        tit.style.left = "5%";
+                        tit.style.transform = "translateX(0)";
+                    }
+                    // 2. 두번째 포스터 구간일때
+                    else if (obj2 < winH / 2 && obj2 > 0) {
+                        tit.style.left = "45%";
+                        tit.style.transform = "translateX(0)";
+                    } else {
+                        // 원래대로 돌아감!
+                        tit.style.left = "50%";
+                        tit.style.transform = "translateX(-50%)";
+                    }
 
                     // 현재 첫번째 박스 위치값
                     // let bxpos = retVal(setit[0]);
                     // let bxpos2 = retVal(setit[1]);
                     // let bxpos3 = retVal(setit[2]);
                     // console.log(bxpos);
-
-                   
 
                     // if(bxpos < hv && bxpos > hv-10){
                     //     // aaa=0;
@@ -100,12 +149,7 @@
                     //     console.log("작동!~~~~");
                     //     setit[2].classList.add("on");
                     // }
-
-                    
                 }); /////////// scroll ////////////////
-
-
-
 
                 // 구현내용: 글자를 박스에 넣고 하나씩 날아오면서 등장
                 // 1.대상선정: .stage
@@ -139,10 +183,8 @@
 
                 // 5. 일정시간후 스테이지박스에 클래스 "on"주고 애니작동!
                 setTimeout(() => {
-                    stage.classList.add("on");                    
+                    stage.classList.add("on");
                 }, 2000);
-
-
             }); ////////////// 로드구역 /////////////////////
         </script>
         <style>
@@ -155,7 +197,10 @@
             .tit {
                 position: fixed;
                 top: 0;
-                width: 100%;
+                /* width: 100%; */
+                left: 50%;
+                transform: translateX(-50%);
+                /* 중앙이동하기 */
                 font-family: "Nanum Brush Script", cursive;
                 margin: 0;
                 padding: 3vh;
@@ -209,7 +254,6 @@
                 opacity: 1;
             }
 
-
             /* 글자개별박스 셋팅 */
             .stage span {
                 /* 트랜스폼 적용위해 */
@@ -234,9 +278,13 @@
         </style>
     </head>
     <body>
+        <!-- 타이틀 -->
         <h1 class="tit stage"></h1>
+        <!-- 포스터박스들 -->
         <div class="scact sa1 setit"></div>
         <div class="scact sa2 setit"></div>
         <div class="scact sa3 setit"></div>
+        <!-- 떨어지는여자 -->
+        
     </body>
 </html>
