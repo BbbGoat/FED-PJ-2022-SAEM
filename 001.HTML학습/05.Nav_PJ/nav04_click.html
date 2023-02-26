@@ -364,14 +364,24 @@
       // gnb 요소
       const gnbBx = document.querySelector(".gnb");
 
+      // 타임아웃변수
+      let autoTgnb;
+      
       /// gnb 마우스 아웃시 자동초기화 ////
       gnbBx.addEventListener("mouseleave", () => {
         console.log("아웃~!!!");
-        setTimeout(()=>{
+        autoTgnb = setTimeout(()=>{
           initMenu();
           // 보내는값 없이 호출시 전체 초기화!
-        }, 2000);
+        }, 500);
       }); /////////// mouseout ///////////////
+
+      /// gnb 마우스 오버시 타임아웃 지우기! (타임아웃 실행쓰나미 방지!) ////
+      gnbBx.addEventListener("mouseenter", () => {
+        console.log("오버~!!!");
+        // 타임아웃 지우기
+        clearTimeout(autoTgnb);
+      }); /////////// mouseenter ///////////////
 
       /****************************************************** 
         [ mouseover / mouseout VS mouseenter / mouseleave ]
