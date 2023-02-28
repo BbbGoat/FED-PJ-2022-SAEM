@@ -75,7 +75,11 @@ window.addEventListener("DOMContentLoaded",() => {
             } //// else if ////
             // 기타 내부시스템 페이지 이동하기
             else{
-                location.href = url+".html";
+
+                // 메인페이지 이동일 경우
+                // html?code=m 을 보내주자!
+
+                location.href = url+".html"+(atxt==="tvN로고"?"?code=m":"");
                 /*
                 [ 페이지 이동하기 ]
                 ((현재창열기))
