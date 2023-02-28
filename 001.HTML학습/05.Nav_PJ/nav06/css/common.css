@@ -38,11 +38,48 @@ body * {
 }
 .gnb > ul {
     display: flex;
+    gap: 0 40px;
 }
 .gnb > ul > li > a {
     color: #ccc;
 }
 
+/* 하위메뉴 */
 .smenu {
+    display: flex;
     position: absolute;
+    background-color: #fff;
+    width: 1300px;
+    display: none;
+}
+/* 임시 첫번째메뉴만 보임 */
+.gnb > ul > li:first-child .smenu {
+    display: flex;
+}
+
+/* 서브메뉴 타이틀 */
+.smenu h2 {
+    width: 166px;
+    padding: 20px;
+    font-weight: normal;
+}
+/* 타이틀 */
+.smenu h2 div {
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+/* 전체보기 */
+.smenu h2 a {
+    font-size: 14px;
+}
+
+/* 서브메뉴(최하위) */
+.swrap {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+}
+/* 서브 각 박스 (dl) */
+.swrap dl {
+    width: 200px;
 }
