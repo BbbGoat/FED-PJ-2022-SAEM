@@ -86,45 +86,45 @@
 }
 
 
-/************************ Living ************************/
-.Living .bg1-1 {
-    background-image: url(../images/Living/cont1-1a.jpg);
+/************************ living ************************/
+.living .bg1-1 {
+    background-image: url(../images/living/cont1-1a.jpg);
 }
-.Living .bg1-2 {
-    background-image: url(../images/Living/cont1-2a.jpg);
+.living .bg1-2 {
+    background-image: url(../images/living/cont1-2a.jpg);
 }
-.Living .bg1-3 {
-    background-image: url(../images/Living/cont1-3a.jpg);
+.living .bg1-3 {
+    background-image: url(../images/living/cont1-3a.jpg);
 }
-.Living .bg2-1 {
-    background-image: url(../images/Living/cont2-1a.jpg);
+.living .bg2-1 {
+    background-image: url(../images/living/cont2-1a.jpg);
 }
-.Living .bg2-2 {
-    background-image: url(../images/Living/cont2-2a.jpg);
+.living .bg2-2 {
+    background-image: url(../images/living/cont2-2a.jpg);
 }
-.Living .bg2-3 {
-    background-image: url(../images/Living/cont2-3a.jpg);
+.living .bg2-3 {
+    background-image: url(../images/living/cont2-3a.jpg);
 }
 
 
-/************************ People ************************/
-.People .bg1-1 {
-    background-image: url(../images/People/cont1-1a.jpg);
+/************************ people ************************/
+.people .bg1-1 {
+    background-image: url(../images/people/cont1-1a.jpg);
 }
-.People .bg1-2 {
-    background-image: url(../images/People/cont1-2a.jpg);
+.people .bg1-2 {
+    background-image: url(../images/people/cont1-2a.jpg);
 }
-.People .bg1-3 {
-    background-image: url(../images/People/cont1-3a.jpg);
+.people .bg1-3 {
+    background-image: url(../images/people/cont1-3a.jpg);
 }
-.People .bg2-1 {
-    background-image: url(../images/People/cont2-1a.jpg);
+.people .bg2-1 {
+    background-image: url(../images/people/cont2-1a.jpg);
 }
-.People .bg2-2 {
-    background-image: url(../images/People/cont2-2a.jpg);
+.people .bg2-2 {
+    background-image: url(../images/people/cont2-2a.jpg);
 }
-.People .bg2-3 {
-    background-image: url(../images/People/cont2-3a.jpg);
+.people .bg2-3 {
+    background-image: url(../images/people/cont2-3a.jpg);
 }
 
 
