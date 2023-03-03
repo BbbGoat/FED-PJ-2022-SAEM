@@ -39,8 +39,40 @@ window.addEventListener("DOMContentLoaded", ()=>{
     // (4) 레벨 : #level
     const level = qs("#level");
     // (5) 메시지박스 : #msg
-    const msg = qs("#msg");    
+    const msg = qs("#msg");
+    // (6) 토끼, 거북 위치값 변수
+    let r1pos = 0, t1pos = 0;
+    // 토끼위치 : r1pos / 거북위치 : t1pos
     
     // cg(t1);
+
+    // 2. 이벤트 설정하기 ///////////////
+    // 대상: 버튼들 - btns변수
+    btns.forEach((ele) => {
+        // 1. 이벤트설정
+        ele.onclick = (e) => {
+            // (0) 기본기능막기
+            e.preventDefault()
+            // (1) 버튼종류확인 : 버튼텍스트
+            let btxt = ele.innerText;
+            cg(btxt);
+
+            // (2) 버튼별 기능분기
+            // (2-1) 토끼이동
+            if (btxt === "토끼출발"){
+                // 위치이동하기
+                r1.style.left = (++r1pos) + "px";
+            } /////// if문 : 토끼출발 ////////
+            // (2-2) 거북이동
+            else if (btxt === "거북출발"){
+                // 위치이동값 셋팅
+                t1pos += 16;
+                // 위치이동하기
+                t1.style.left = (++t1pos) + "px";
+            } /////// if문 : 거북출발 ////////
+            
+            
+        }; ////////// click //////////
+    }); ////////////// forEach /////////////
     
 }); /////////// 로드구역 ///////////////////////////
