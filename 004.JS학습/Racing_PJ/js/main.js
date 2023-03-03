@@ -87,11 +87,12 @@ window.addEventListener("DOMContentLoaded", ()=>{
         // if문에서 false처리되므로
         // 할당전 상태일때만 if문에 들어가게
         // 하기위해 !(NOT연산자)를 사용하면 된다!
+        // -> !autoI 불린이 false에서 ture로 변환됨
 
         console.log(autoI);
         console.log(level.value);
         
-        if(!autoI) // if문 사용이유 -> 할당전에 1번만 허용! 인터벌 중복을 방지해준다!
+        if(!autoI) // if문 사용이유 -> 할당전에 1번만 허용! 인터벌 중복을 방지!
         autoI = setInterval(() => {
             r1.style.left = (++r1pos) + "px";
         }, level.value);
