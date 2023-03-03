@@ -70,7 +70,19 @@ window.addEventListener("DOMContentLoaded", ()=>{
                 t1pos += 16;
                 // 위치이동하기
                 t1.style.left = (++t1pos) + "px";
-            } /////// if문 : 거북출발 ////////
+
+                goR1();
+
+            } /////// else if문 : 거북출발 ////////
+
+            // (2-3) 처음으로 버튼 클릭시
+            else if (btxt === "처음으로") {
+                // 브라우저 캐싱을 지우고 다시 부르기
+                // location.replace("index.html");
+
+                // 현재페이지 리로딩
+                location.reload();
+            } /////// else if문 : 처음으로 ///////
             
             
         }; ////////// click //////////
@@ -87,18 +99,51 @@ window.addEventListener("DOMContentLoaded", ()=>{
         // if문에서 false처리되므로
         // 할당전 상태일때만 if문에 들어가게
         // 하기위해 !(NOT연산자)를 사용하면 된다!
-        // -> !autoI 불린이 false에서 ture로 변환됨
+        // -> !autoI로 불린이 false에서 ture로 변환됨
 
         console.log(autoI);
         console.log(level.value);
         
         if(!autoI) // if문 사용이유 -> 할당전에 1번만 허용! 인터벌 중복을 방지!
         autoI = setInterval(() => {
+
+            // 토끼 위치이동
             r1.style.left = (++r1pos) + "px";
+            
+            // 토끼&거북 위치값 체크 후 승자판별 함수 호출
+            whoWinner();
+            
         }, level.value);
         // 인터발 시간은 선택박스의
         // 옵션값 value을 읽어서 사용한다! -> level.value
         // 옵션값들 : 10,9,8,7,6,5,4
     } /////////////// goR1 함수 ////////////////
+
+    /******************************************** 
+        함수명: whoWinner
+        기능: 기준값 보다 레이서 위치값이 큰 경우
+            승자를 판별하여 메시지를 보여준다!
+    ********************************************/
+    let t1Stop = 0; // 거북멈춤값(1멈춤,0허용)
+    function whoWinner() {
+        // cg("토끼!"+r1pos);
+        // cg("거북!"+t1pos);
+
+        // 1. 토끼 / 거북이 위치값이 기준값 이상일때
+        // 기준값: 650px
+        if (r1pos >= 650 || t1pos >= 650) {
+            // (1) 토끼야 멈춰라! -> 인터발 지우기
+            clearInterval(autoI)
+            // (2) 거북아 멈춰라! -> 거북멈춤상태값 1로 변경! 
+            t1Stop = 1;
+
+            // (3) 승자판별 후 메시지 보여주기!
+            if (r1pos > t1pos) msg.innerText = "토끼승!"
+            if (r1pos < t1pos) msg.innerText = "거북승!"
+            else msg.innerText = "비김! 재승부!"
+
+        } ///////// if ////////////////
+        
+    } ////////////// whoWinner함수 ///////////////
     
 }); /////////// 로드구역 ///////////////////////////
