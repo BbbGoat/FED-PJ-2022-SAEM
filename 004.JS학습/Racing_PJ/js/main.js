@@ -107,8 +107,8 @@ window.addEventListener("DOMContentLoaded", ()=>{
         // 하기위해 !(NOT연산자)를 사용하면 된다!
         // -> !autoI로 불린이 false에서 ture로 변환됨
 
-        console.log(autoI);
-        console.log(level.value);
+        // console.log(autoI);
+        // console.log(level.value);
         
         if(!autoI) // if문 사용이유 -> 할당전에 1번만 허용! 인터벌 중복을 방지!
         autoI = setInterval(() => {
@@ -143,18 +143,44 @@ window.addEventListener("DOMContentLoaded", ()=>{
             // (2) 거북아 멈춰라! -> 거북멈춤상태값 1로 변경! 
             t1Stop = 1;
 
-            // (3) 승자판별 후 메시지 보여주기!
-            if (r1pos > t1pos) msg.innerText = "토끼승!"
-            else if (r1pos < t1pos) msg.innerText = "거북승!"
-            else msg.innerText = "비김! 재승부!"
+            // 메시지 랜덤을 위한 랜덤수 만들기
+            // 0~2 사이의 랜덤수
+            // 1~3 를 먼저 만든후 -> Math.random() * 3
+            // 내림을 하면 0~2됨!
+            let rnum = Math.floor(Math.random() * 3)
 
+            console.log("랜덤수:", rnum);
+
+            // (3) 승자판별 후 메시지 보여주기!
+            if (r1pos > t1pos) 
+            msg.innerText = msgtxt["토끼"][rnum]
+            else if (r1pos < t1pos) 
+            msg.innerText = msgtxt["거북"][rnum]
+            else 
+            msg.innerText = "비김! 재승부!"
+            
             // (4) 메시지 박스 보이기
             msg.style.display = "block";
+            msg.style.zIndex = "101";
 
+            // (5) 전체 반투명 암전주기
+            const cover = qs(".cover");
+            cover.innerHTML += "<div style='position:fixed;top:0;left:0;width:100vw;height:100vh;background-color:#000;opacity:0.5;z-index:100;'></div>";
+            // document.body.innerHTML += .... 로 선택할 경우!!
+            // 주의사항: body 하위에 새로운 요소를 추가하면
+            // 전체 body 직계하위에 있는 요소들에 셋팅된 이벤트가 소실된다!
+            // 왜? DOM이 재구조화 되기 때문이다!
+            // 처음부터 편성된 박스에 넣어주면 이런 문제는 해결된다!
+            // 여기서도 .cover요소 안에 새로운 요소를 넣어준 이유가 그렇다!
+            // (처음으로 버튼 기능 소실때문)
+
+            // (6) 버튼 위로 올리기
+            qs("#btns").style.zIndex = "200";
+            
         } ///////// if ////////////////
-
+        
     } ////////////// whoWinner함수 ///////////////
-
+    
     // 메시지 변수 ///////////
     const msgtxt = {
         "토끼":[
@@ -165,7 +191,7 @@ window.addEventListener("DOMContentLoaded", ()=>{
         "거북":[
             "꼬북",
             "꼬북꼬북",
-            "꼬부기",
+            "토끼 간 다털렸죠?",
         ]
     }; /////////// 메시지 객체 ///////////
     
