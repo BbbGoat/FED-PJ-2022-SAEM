@@ -56,21 +56,27 @@ window.addEventListener("DOMContentLoaded", ()=>{
             e.preventDefault()
             // (1) 버튼종류확인 : 버튼텍스트
             let btxt = ele.innerText;
-            cg(btxt);
+            // cg(btxt);
 
-            // (2) 버튼별 기능분기
+            // (2) 버튼별 기능분기 ////
+            
             // (2-1) 토끼이동
             if (btxt === "토끼출발"){
                 // 토끼 자동이동함수 호출!
                 goR1();
             } /////// if문 : 토끼출발 ////////
+            
             // (2-2) 거북이동
             else if (btxt === "거북출발"){
+                // 거북멈춤 상태값(t1Stop)이 1이면 돌아가!
+                if (t1Stop) return;
+                
                 // 위치이동값 셋팅
                 t1pos += 16;
                 // 위치이동하기
-                t1.style.left = (++t1pos) + "px";
+                t1.style.left = t1pos + "px";
 
+                // 토끼 자동이동함수 호출!
                 goR1();
 
             } /////// else if문 : 거북출발 ////////
@@ -139,11 +145,28 @@ window.addEventListener("DOMContentLoaded", ()=>{
 
             // (3) 승자판별 후 메시지 보여주기!
             if (r1pos > t1pos) msg.innerText = "토끼승!"
-            if (r1pos < t1pos) msg.innerText = "거북승!"
+            else if (r1pos < t1pos) msg.innerText = "거북승!"
             else msg.innerText = "비김! 재승부!"
 
+            // (4) 메시지 박스 보이기
+            msg.style.display = "block";
+
         } ///////// if ////////////////
-        
+
     } ////////////// whoWinner함수 ///////////////
+
+    // 메시지 변수 ///////////
+    const msgtxt = {
+        "토끼":[
+            "산 토끼토끼야",
+            "어디를 가느냐",
+            "깡충깡충 뛰어서 어디를 가느냐",
+        ],
+        "거북":[
+            "꼬북",
+            "꼬북꼬북",
+            "꼬부기",
+        ]
+    }; /////////// 메시지 객체 ///////////
     
 }); /////////// 로드구역 ///////////////////////////
