@@ -10,7 +10,7 @@
 
 /* 공사중 */
 body * {
-    outline: 1px dashed red;
+    /* outline: 1px dashed red; */
 }
 
 /* 중앙속박스 */
@@ -33,8 +33,13 @@ body * {
 }
 /* 1-2. GNB 영역 */
 .gnb {
+    position: relative;
+    /* 부모자격 - .smenu */
     max-width: 1300px;
     margin: 0 auto;
+
+    /* 줄바꿈방지 - 자식요소에 상속되는 속성! */
+    white-space: nowrap;
 }
 .gnb > ul {
     display: flex;
@@ -46,14 +51,17 @@ body * {
 
 /* 하위메뉴 */
 .smenu {
-    display: flex;
+    /* display: flex; */
     position: absolute;
+    left: 0;
     background-color: #fff;
     width: 1300px;
     display: none;
+    /* 넘치는 자식요소 숨기기 */
+    overflow: hidden;
 }
 /* 임시 첫번째메뉴만 보임 */
-.gnb > ul > li:first-child .smenu {
+.gnb > ul > li:nth-child(5) .smenu {
     display: flex;
 }
 
@@ -75,11 +83,64 @@ body * {
 
 /* 서브메뉴(최하위) */
 .swrap {
+    /* 플렉스박스 */
     display: flex;
+    /* 플렉스 줄바꿈설정 */
+    flex-wrap: wrap;
     width: 100%;
     padding: 20px;
 }
 /* 서브 각 박스 (dl) */
 .swrap dl {
     width: 200px;
+}
+/* 하위메뉴(dt) */
+.swrap dt {
+    position: relative;
+    /* 가로크기 일정함! */
+    width: 120px;
+    font-size: 16px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    /* 하단보더 */
+    border-bottom: 1px solid #ccc;
+}
+/* dt, dd 하단선 가상요소 */
+.swrap dt::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 1px;
+    transform: translateY(6px);
+    background-color: #555;
+    transition: width .2s;
+}
+.swrap dd a {
+    /* a요소 글자있는 부분까지만 선이 생기게함! */
+    display: inline-block;
+    color: #777;
+}
+.swrap dd a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 1px;
+    transform: translateY(-9px);
+    background-color: #555;
+    transition: width .2s;
+}
+/* dt오버시 하단선 */
+.swrap dt:hover::after,
+.swrap dd a:hover::after {
+    width: 100%;
+}
+
+/* 서브메뉴(dd) */
+.swrap dd {
+    font-size: 13px;
+    line-height: 2.5;
+}
+/* dd a오버시 글자 */
+.swrap dd a:hover {
+    color: #000;
 }
