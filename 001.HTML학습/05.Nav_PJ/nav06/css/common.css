@@ -30,6 +30,24 @@ body * {
 /* 1-1. 탑메뉴영역 */
 .tmenu {
     height: 80px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+.twrap{
+    display: flex;
+    justify-content: space-between
+}
+.login span a {
+    font-size: 12px;
+    color: #fff;
+}
+.login span:first-child::after {
+    content: '|';
+    position: relative;
+    margin: 0 10px;
+    color: rgb(160, 160, 160);
+    font-size: 12px;
+    display: inline-block;
 }
 /* 1-2. GNB 영역 */
 .gnb {
@@ -51,19 +69,33 @@ body * {
 
 /* 하위메뉴 */
 .smenu {
-    /* display: flex; */
     position: absolute;
     left: 0;
     background-color: #fff;
     width: 1300px;
-    display: none;
-    /* 넘치는 자식요소 숨기기 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+    /***** 숨기기장치 *****/
     overflow: hidden;
+    /* 넘치는 자식요소 숨기기 */
+    height: 0;
+    /* 높이값 : 0 -> 각각의 서브높이만큼 오버시 변경! */
+    opacity: 0;
+    /* 투명도 : 0 -> 오버시 1로 보이게함 */
+
+    /* 트랜지션 : 속시이지 */
+    transition: .4s ease-in-out ;
 }
+/* 하위메뉴 구조랩핑박스 .smbx */
+.smbx {
+    /* h2,div의 플렉스박스 */
+    display: flex;    
+}
+
 /* 임시 첫번째메뉴만 보임 */
-.gnb > ul > li:nth-child(5) .smenu {
+/* .gnb > ul > li:nth-child(5) .smenu {
     display: flex;
-}
+} */
 
 /* 서브메뉴 타이틀 */
 .smenu h2 {
