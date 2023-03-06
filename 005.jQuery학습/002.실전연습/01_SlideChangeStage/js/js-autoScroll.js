@@ -42,19 +42,54 @@ function loadFn() {
             (2) 차이점 :
                 - 마우스 휠의 동작에만 반응하는 이벤트는 wheel
                 - 스크롤바의 이동에 반응하는 이벤트는 scroll
+
+        ____________________________________________________
+
+        [ addEventListener 메서드의 옵션에 관하여 ]
+
+        기존 addEventListener의 3번째 파라미터로 캡쳐링/버블링 여부를 
+        제어할 수 있는 부분이 EventListenerOptions이라는 객체형태의 
+        추가 옵션을 받을수 있음
+
+        EventListenerOptions 사용 전
+        document.addEventListener('touchstart', handler, false);
+
+        EventListenerOptions 사용 후
+        document.addEventListener("touchstart", handler, {
+            capture: false,
+            once: false,
+            passive: false
+        });
+
+        ※ 현재 크롬에서 지원하는 EventListenerOptions 옵션은 다음과 같다.
+
+        (1) capture: 이벤트 캡쳐링 적용 여부. 크롬 49부터 지원
+        (2) once: 이벤트를 한번만 호출하고 해제되는 옵션. 크롬 55부터 지원
+        (3) passive: 스크롤 성능 향상을 위한 옵션으로 true일 경우, 
+                스크롤을 위해 블록되는 것을 방지함. 이 경우, 
+                preventDefault를 사용할 수 없음. 크롬 51부터 지원
+                이 중, passive 속성은 성능향상을 위해, 
+                브라우저의 기능을 프로그래밍으로 제어할수 있음
+                -> 최근 업데이트된 브라우저는 passive기본값이
+                true로 셋팅되므로 window, document, body 이 세가지
+                객체에 대해 스크롤 막기 기능을 비활성화 하였다!!!
+                따라서 기본기능을 막고자 하면 passive:false로
+                기능을 활성화 해야한다!!!
         
     ***************************************************/
 
     // 1. 전체 휠 이벤트 설정하기
-    window.addEventListener("wheel", wheelFn);
+    window.addEventListener("wheel", wheelFn, {passive:false});
 
     // 2. 휠 이벤트 함수 만들기 //////////
-    function wheelFn() {
+    function wheelFn(e) {
 
-        // 1. 호출확인
+        // (0). 기본기능 멈추기
+        // addEventListener 옵션 {passive:false}필수!
+        e.preventDefault();
+        
+        // (1). 호출확인
         console.log("휠~~~");
-
-
         
     } //////////////// wheelFn 함수 ////////////////
 
