@@ -101,8 +101,8 @@ function loadFn() {
     // 이벤트 대상: .gnb > ul > li
     const list = document.querySelectorAll(".gnb>ul>li");
     // 이벤트 종류: mouseenter / mouseleave
-    // 변경 대상1: .smenu
-    // 변경 내용1: height값, opacity값
+    // 변경 대상: .smenu
+    // 변경 내용: height값, opacity값
 
     // console.log(list);
 
