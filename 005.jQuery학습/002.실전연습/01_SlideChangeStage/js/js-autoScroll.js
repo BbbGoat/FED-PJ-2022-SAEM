@@ -79,8 +79,13 @@ function loadFn() {
     ***************************************************/
 
     // 0. 변수 설정하기
-    // 전체페이지 변수
+    // (1) 전체 페이지 변수
     let pgnum = 0; // 현재 페이지번호(첫페이지 0)
+    // (2) 전체 페이지 수
+    const pgcnt = document.querySelectorAll(".page").length;
+    console.log("전체페이지수", pgcnt);
+    // (3) 광스크롤 금지변수 (0이면 허용, 1이면 불허용)
+    let prot_sc = 0;
                 
     // 1. 전체 휠 이벤트 설정하기
     window.addEventListener("wheel", wheelFn, {passive:false});
@@ -93,7 +98,7 @@ function loadFn() {
         e.preventDefault();
         
         // (1) 호출확인
-        console.log("휠~~~");
+        // console.log("휠~~~");
 
         // (2) 휠 방향 알아내기
         // 이벤트객체.wheelDelta
@@ -104,14 +109,18 @@ function loadFn() {
         // (3) 방향에 따른 페이지번호 증감
         // 스크롤 아랫방향 : 페이지번호 증가
         if (dir < 0) {
+            // 페이지번호 1씩증가
             pgnum++;
-            if (pgnum > 6) pgnum = 6;
-        }
+            // 한계수 : 페이지 끝번호 (페이지수 - 1)
+            if (pgnum > pgcnt - 1) pgnum = pgcnt - 1;
+        } //// if /////
         // 스크롤 윗방향 : 페이지번호 감소
         else {
+            // 페이지번호 1씩감소
             pgnum--;
+            // 한계수 : 페이지 첫번호 -> 0
             if (pgnum < 0) pgnum = 0;
-        }
+        } //// else /////
 
         console.log("페이지번호", pgnum);
 
@@ -119,10 +128,7 @@ function loadFn() {
         // scrollTo(가로,세로)
         window.scrollTo(0, window.innerHeight * pgnum);
         // 세로 이동위치: 윈도우높이값 * 페이지번호
-
-
         
     } //////////////// wheelFn 함수 ////////////////
-
     
 } ////////////////// loadFn 함수 ///////////////////
