@@ -25,8 +25,12 @@ function loadFn() {
 
     // 이벤트 연결 함수등록하기 ////
     // GNB메뉴 이벤트연결
-    gnb.forEach((ele,idx) => { // ele - 요소, idx - 순번
-        ele.addEventListener("click",() => movePg(idx));
+    gnb.forEach((ele,idx,obj) => { // ele - 요소, idx - 순번, obj - 전체객체
+        ele.addEventListener("click",() => movePg(idx,obj));
+        // 전체 객체(obj)를 함수에 전달하는 이유는?
+        // -> 인디케이터도 GNB와 같은 기능을 수행하기때문에
+        // 호출시 자기자신 전체를 보내야 각각에 맞게 기능을 수행할 수 있다
+
     }); ////////// forEach ////////////////
 
     /***************************************************
@@ -114,11 +118,11 @@ function loadFn() {
         e.preventDefault();
 
         // 광스크롤막기! /////////
-        console.log(prot_sc)
+        // console.log(prot_sc)
         if (prot_sc === 1) return; // 1일경우 걸러준다!
         prot_sc = 1; // 들어오면 0에서 1로 재할당!
         setTimeout(() => {
-            console.log("settimeout")
+            console.log("setTimeout작동!")
             prot_sc = 0;
         }, 800); // 0.8초의 시간후 다시 허용상태전환
         
@@ -149,10 +153,8 @@ function loadFn() {
 
         console.log("페이지번호", pgnum);
 
-        // (4) 페이지 이동하기
-        // scrollTo(가로,세로)
-        window.scrollTo(0, window.innerHeight * pgnum);
-        // 세로 이동위치: 윈도우높이값 * 페이지번호
+        // (4) 페이지 이동하기 + 메뉴변경 -> updatePg함수호출!
+        updatePg(gnb);
         
     } //////////////// wheelFn 함수 ////////////////
 
@@ -161,11 +163,39 @@ function loadFn() {
         함수명: movePg
         기능: 메뉴 클릭시 해당위치로 이동하기
     *****************************************/
-    function movePg(seq) { // seq - 순번(idx)
-        // 기본기능막기
+    function movePg(seq,obj) { // seq - 순번(idx), obj - 요소전체객체
+        // 1. 기본기능막기
         event.preventDefault();
-        // 호출확인
-        console.log("이동!", seq);
+        // 2. 호출확인
+        console.log("이동!", seq, obj);
+        // 3. 페이지번호(pgnum)업데이트 하기!
+        pgnum = seq;
+        console.log("메뉴클릭 페이지번호:", pgnum);
+
+        // 4. 업데이트 페이지호출 -> 페이지이동, 메뉴변경
+        updatePg(obj);
+        
     } //////////////// movePg 함수 /////////////////
+
+    /**************************************** 
+        함수명: updatePg
+        기능: 페이지 이동시 설정값 업데이트하기
+    ****************************************/
+    function updatePg(obj) { // obj - 변경할 메뉴전체 객체
+        // 1. 함수호출확인
+        console.log("업데이트!");
+
+        // 2. 페이지이동하기
+        // scrollTo(가로,세로)
+        window.scrollTo(0, window.innerHeight * pgnum);
+        // 세로 이동위치: 윈도우높이값 * 페이지번호
+
+        // 3. 메뉴 초기화하기(클래스 on 제거하기)
+        for (let x of obj) {
+            x.parentElement.classList.remove("on");
+        }
+        // 4. 해당메뉴에 클래스 넣기
+        obj[pgnum].parentElement.classList.add("on");
+    } /////////////// updatePg 함수 ////////////////
     
 } ////////////////// loadFn 함수 ///////////////////
