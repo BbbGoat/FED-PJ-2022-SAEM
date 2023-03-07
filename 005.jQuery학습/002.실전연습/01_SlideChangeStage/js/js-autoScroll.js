@@ -9,7 +9,6 @@ setTimeout(() => {
 // 로딩함수 호출 ///////////
 window.addEventListener("DOMContentLoaded",loadFn);
 
-
 /******************************************** 
     함수명: loadFn
     기능: 페이지 로딩시 함수 기능 수행
@@ -115,6 +114,10 @@ function loadFn() {
     // 1. 전체 휠 이벤트 설정하기
     window.addEventListener("wheel", wheelFn, {passive:false});
 
+    /***************************************** 
+        함수명: wheelfn
+        기능: 마우스 휠 이벤트시 페이지 이동
+    *****************************************/
     // 2. 휠 이벤트 함수 만들기 //////////
     function wheelFn(e) {
 
@@ -220,8 +223,10 @@ function loadFn() {
     // 1. 대상선정: .minfo
     const minfo = document.querySelectorAll(".minfo");
     // console.log(minfo);
+    
     // 2. 이벤트설정
     minfo.forEach((ele,idx) => {initCSS(ele,idx)});
+    
     // 3. 함수만들기
     function initCSS(ele,seq) { // ele - 요소, seq - 순번(.minfo idx)
         // 1. 함수호출확인
