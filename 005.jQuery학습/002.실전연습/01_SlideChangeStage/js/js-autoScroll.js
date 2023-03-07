@@ -225,7 +225,7 @@ function loadFn() {
     // 3. 함수만들기
     function initCSS(ele,seq) { // ele - 요소, seq - 순번(.minfo idx)
         // 1. 함수호출확인
-        console.log("초기화!", seq);
+        // console.log("초기화!", seq);
 
         // 2. 해당요소 스타일 속성 선택
         let sty = ele.style;
