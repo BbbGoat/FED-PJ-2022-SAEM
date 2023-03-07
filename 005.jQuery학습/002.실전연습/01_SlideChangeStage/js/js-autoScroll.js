@@ -231,13 +231,44 @@ function loadFn() {
         let sty = ele.style;
 
         // 3. 각 요소별 초기화하기
-        if (seq === 0) { // 1번페이지
 
-        } //////// if ////////////
-        else if (seq === 1) { // 2번페이지
+        // 트랜지션 공통초기화
+        sty.transition = "none";
+
+        // 페이지별 초기화
+        if(seq===0){ // 1번페이지
+            // 오른쪽에 나가있음!
+            sty.left = "150%";
+        } ///// if /////////////
+        else if(seq===1){ // 2번페이지
             // 투명하게!
-            sty.opacity = 0.5;
-        } //////// else if ///////
+            sty.opacity = 0;
+        } ///// else if //////////
+        else if(seq===2){ // 3번페이지
+            // 위로 올라가있음!
+            sty.top = "-20%";
+        } ///// else if //////////
+        else if(seq===3){ // 4번페이지
+            // 중앙 스케일0
+            sty.transform = "translate(-50%, -50%) scale(0)";
+        } ///// else if //////////
+        else if(seq===4){ // 5번페이지
+            // y축회전
+            sty.transform = "translate(-50%, -50%) rotateY(180deg)";
+            // 투명하게
+            sty.opacity = 0;
+        } ///// else if //////////
+        else if(seq===5){ // 6번페이지
+            // 스케일0, 평면회전
+            sty.transform = "translate(-50%, -50%) scale(0) rotate(720deg)";
+        } ///// else if //////////
+        else if(seq===6){ // 7번페이지
+            // x축확대
+            sty.transform = "translate(-50%, -50%) scaleX(3)";
+            // 투명하게
+            sty.opacity = 0;
+        } ///// else if //////////
+
     } /////////////// initCSS 함수 /////////////////
 
     /******************************************** 
@@ -253,20 +284,61 @@ function loadFn() {
         let sty = minfo[seq].style;
 
         // 3. 전체초기화!
+        minfo.forEach((ele,idx)=>{initCSS(ele,idx)});
         
         // 4. 해당 페이지 액션주기
-        if (seq === 0) { // 1번페이지
-
-        } //////// if ////////////
-        else if (seq === 1) { // 2번페이지
+        if(seq===0){ // 1번페이지
+            // 중앙으로 들어옴!
+            sty.left = "50%";
+            // 트랜지션주기
+            sty.transition = "all 0.4s cubic-bezier(0.21, 0.78, 0.96, 1.39) 0s";
+        } ///// if /////////////
+        else if(seq===1){ // 2번페이지
             // 투명도 복원하기!
             sty.opacity = 1;
             // 트랜지션주기
             sty.transition = "1.5s ease-in";
-        } //////// else if ///////
+        } ///// else if //////////
+        else if(seq===2){ // 3번페이지
+            // 위에서 중앙으로 이동!
+            sty.top = "50%";
+            // 트랜지션주기
+            sty.transition = "all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55) 0s";
+        } ///// else if //////////
+        else if(seq===3){ // 4번페이지
+            // 중앙 스케일 복원
+            sty.transform = "translate(-50%, -50%) scale(1)";
+            // 트랜지션주기
+            sty.transition = "1s ease-in-out";
+        } ///// else if //////////
+        else if(seq===4){ // 5번페이지
+            // y축회전 원상복귀
+            sty.transform = "translate(-50%, -50%) rotateY(0deg)";
+            // 나타나게함
+            sty.opacity = 1;
+            // 트랜지션주기
+            sty.transition = "1s ease-in-out";
+        } ///// else if //////////
+        else if(seq===5){ // 6번페이지
+            // 스케일0, 평면회전
+            sty.transform = "translate(-50%, -50%) scale(1) rotate(0deg)";
+            // 트랜지션주기
+            sty.transition = "1s ease-in-out";
+        } ///// else if //////////
+        else if(seq===6){ // 7번페이지
+            // x축확대
+            sty.transform = "translate(-50%, -50%) scaleX(1)";
+            // 투명하게
+            sty.opacity = 1;
+            // 트랜지션주기
+            sty.transition = "1s ease-in-out";
+        } ///// else if //////////
 
         
     } //////////// pageAction 함수 ////////////////
+
+    // 첫페이지 페이지액션 적용위해 최초호출하기
+    setTimeout(() => pageAction(0), 1000);
     
         
 
