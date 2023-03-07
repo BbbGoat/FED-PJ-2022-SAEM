@@ -2,10 +2,13 @@
 
 /* onePage 스타일시트 - onepage.css */
 
+/* 큐트폰트 CDN */
+@import url(https://fonts.googleapis.com/css2?family=Cute+Font&display=swap);
+
 html {
     /* 부드러운 스크롤 적용!(스크롤애니메이션)
-    -> 스크롤이동시간, 이징가속도는 조절할 수 없다!
-    제이쿼리 코딩으로 이것을 조절할 예정임! */
+-> 스크롤이동시간, 이징가속도는 조절할 수 없다!
+제이쿼리 코딩으로 이것을 조절할 예정임! */
     scroll-behavior: smooth;
 }
 
@@ -42,6 +45,9 @@ h3 {
 
 /* 페이지 공통 class */
 .page {
+    position: relative;
+    /* 부모자격 */
+
     /* 한페이지 보이는 화면 채우기 */
     height: 100vh;
 }

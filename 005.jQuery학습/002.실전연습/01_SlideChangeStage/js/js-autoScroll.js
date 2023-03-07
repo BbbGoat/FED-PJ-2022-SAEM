@@ -194,7 +194,7 @@ function loadFn() {
     ****************************************/
     function updatePg(obj) { // obj - 변경할 메뉴전체 객체
         // 1. 함수호출확인
-        console.log("업데이트!");
+        console.log("업데이트 함수!");
 
         // 2. 페이지이동하기
         // scrollTo(가로,세로)
@@ -207,6 +207,68 @@ function loadFn() {
         }
         // 4. 해당메뉴에 클래스 넣기
         obj[pgnum].parentElement.classList.add("on");
+
+        // 5. 페이지 이동 후 해당 페이지 액션주기
+        // pageAction함수 호출하기 (페이지 이동 시차를 1초 설정!)
+        setTimeout(() => pageAction(pgnum),1000);
     } /////////////// updatePg 함수 ////////////////
+
+    /****************************************** 
+        함수명: initCSS
+        기능: 등장할 요소들의 초기값 셋팅
+    ******************************************/
+    // 1. 대상선정: .minfo
+    const minfo = document.querySelectorAll(".minfo");
+    // console.log(minfo);
+    // 2. 이벤트설정
+    minfo.forEach((ele,idx) => {initCSS(ele,idx)});
+    // 3. 함수만들기
+    function initCSS(ele,seq) { // ele - 요소, seq - 순번(.minfo idx)
+        // 1. 함수호출확인
+        console.log("초기화!", seq);
+
+        // 2. 해당요소 스타일 속성 선택
+        let sty = ele.style;
+
+        // 3. 각 요소별 초기화하기
+        if (seq === 0) { // 1번페이지
+
+        } //////// if ////////////
+        else if (seq === 1) { // 2번페이지
+            // 투명하게!
+            sty.opacity = 0.5;
+        } //////// else if ///////
+    } /////////////// initCSS 함수 /////////////////
+
+    /******************************************** 
+        함수명: pageAction
+        기능: 페이지별 액션주기
+    ********************************************/
+    function pageAction(seq) { // seq - 변경순번
+        
+        // 1. 호출확인
+        console.log("페이지액션!");
+
+        // 2. 변경대상 스타일 속성선택
+        let sty = minfo[seq].style;
+
+        // 3. 전체초기화!
+        
+        // 4. 해당 페이지 액션주기
+        if (seq === 0) { // 1번페이지
+
+        } //////// if ////////////
+        else if (seq === 1) { // 2번페이지
+            // 투명도 복원하기!
+            sty.opacity = 1;
+            // 트랜지션주기
+            sty.transition = "1.5s ease-in";
+        } //////// else if ///////
+
+        
+    } //////////// pageAction 함수 ////////////////
+    
+        
+
     
 } ////////////////// loadFn 함수 ///////////////////
