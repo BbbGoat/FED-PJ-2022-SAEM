@@ -82,13 +82,27 @@ function setBan(obj,seq) { // obj - 최상위요소 객체, seq - 요소순번
     // 태그변수
     let hcode = `<ul class="slide">`;
 
-    for (let i = 1; i <= 13; i++) {
-        hcode += `
-            <li>
-                <img src="./nav06/img_nav06/ban${i}.png" alt="배너이미지">
-            </li>
-        `;
-    } /////////// for문 ////////////
+    // 배너 종류별 배너 셋팅 구분하기
+
+    if (seq === 0) {// 1번배너
+        for (let i = 1; i <= 13; i++) {
+            hcode += `
+                <li>
+                    <img src="./nav06/img_nav06/ban${i}.png" alt="배너이미지">
+                </li>
+            `;
+        } ////// for문 ///////
+    } ////// if문 : 2번배너 /////////////////
+
+    else if (seq === 1) {// 2번배너
+        for (let i = 1; i <= 5; i++) {
+            hcode += `
+                <li>
+                    <img src="./nav06/img_nav06/sban${i}.jpg" alt="배너이미지">
+                </li>
+            `;
+        } ////// for문 ///////
+    } ////// if문 : 2번배너 /////////////////
     
     hcode += `</ul>`;
 
