@@ -41,25 +41,15 @@
 
 *****************************************************/
 
-window.addEventListener("DOMContentLoaded", () => {
-
-    // 1. 최상위 배너박스 대상선정: .banbx
-    const banbx = document.querySelectorAll(".banbx");
-
-    // 2. 배너박스 일괄 셋팅하기
-    banbx.forEach((ele) => {
-        setBan(ele);
-    });
-    
-}); ////////////// 로드구역 ///////////////////////////
+window.addEventListener("DOMContentLoaded", setBan);
 
 // 배너셋팅함수 /////////////////////////
-function setBan(obj) { // obj - 최상위요소 객체
+function setBan() {
     // 1. 호출확인
     // console.log("배너야~!");
 
     // 2. 대상선정 : .bancont
-    const bancont = obj.querySelector(".bancont")
+    const bancont = document.querySelector(".bancont")
     // console.log(bancont);
     
     // 3. 태그 구성하기
@@ -89,17 +79,17 @@ function setBan(obj) { // obj - 최상위요소 객체
 
     // 1. 대상선정 //////////////////////////
     // 1-1. 이벤트 대상: .abtn
-    const abtn = obj.querySelectorAll(".abtn");
+    const abtn = document.querySelectorAll(".abtn");
 
     // 1-2. 변경 대상: .slide
-    const slide = obj.querySelector(".slide");
+    const slide = document.querySelector(".slide");
 
     // 1-3. 블릿 대상: .indic li
-    // const indic = obj.querySelectorAll(".indic li");
+    // const indic = document.querySelectorAll(".indic li");
     // console.log(indic);
 
     // 1-4. 슬라이드 li리스트
-    let slist = obj.querySelectorAll(".slide>li");
+    let slist = document.querySelectorAll(".slide>li");
 
     // [ 초기화1 - 순번붙이기 ] ///////////////////
     // 잘라내기로 li순번이 뒤섞이므로 블릿변경 매칭을 위한
@@ -113,7 +103,7 @@ function setBan(obj) { // obj - 최상위요소 객체
     // 맨뒤 맨앞이동 함수만들기
     const chgSeq = () => {
         // 현재 슬라이드 li 새로읽기(2번반복시 li의 순서가 달라지기때문)
-        slist = obj.querySelectorAll(".slide>li");
+        slist = document.querySelectorAll(".slide>li");
         // 맨뒤 맨앞이동하기 -> 변경대상: .slide -> slide변수
         slide.insertBefore(slist[slist.length - 1], slist[0]);
         // slide.insertBefore(넣을놈,넣을놈전놈)
