@@ -197,7 +197,7 @@ function loadFn() {
     ****************************************/
     function updatePg(obj) { // obj - 변경할 메뉴전체 객체
         // 1. 함수호출확인
-        console.log("업데이트 함수!");
+        console.log("업데이트 함수!", obj);
 
         // 2. 페이지이동하기
         // scrollTo(가로,세로)
