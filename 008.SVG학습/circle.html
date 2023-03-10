@@ -113,9 +113,7 @@
 
             /* 트랜지션 : 속시이지 */
             transition: stroke-dashoffset .8s ease-in-out;
-
         }
-
         /* 컨텐츠 박스에 마우스 오버시 라인애니 */
         .svg1:hover .c1 {
             stroke-dashoffset: 0;
@@ -125,6 +123,7 @@
         .svg2 {
             background: url(./images/black.jpg) no-repeat top/cover;
         }
+        /* 사각형 svg - rect */
         .rt1{
             fill: none;
             stroke: black;
@@ -142,7 +141,27 @@
         }
 
         /* 3. 닥스박스 : 다각형(6각형) */
-        
+        .svg3 {
+            background: url(./images/doc.jpg) no-repeat top/cover;
+            /* 다각형 클리핑 적용하기
+            clip-path: polygon(x1 y1, x2 y2, ...) */
+            clip-path: polygon(150px 0px, 300px 100px, 300px 200px, 150px 300px, 0px 200px, 0px 100px);
+        }
+        /* 다각형 svg - polygon */
+        .pg1 {
+            fill: none;
+            stroke: lightgreen;
+            stroke-width: 20;
+            stroke-linecap: round;
+            /* 데쉬선 */
+            stroke-dasharray: 300%;
+            stroke-dashoffset: 300%;
+            /* 트랜지션 */
+            transition: .6s;
+        }
+        .svg3:hover .pg1 {
+            stroke-dashoffset: 0;
+        }
 
         /* 다각형 */
         
@@ -184,7 +203,9 @@
         <!-- 3.닥스박스 : 다각형(6각형) -->
         <section>
             <div class="cbx svg3">
-                
+                <svg>
+                    <polygon class="pg1" points="150,10 290,100 290,200 150,290 10,200 10,100">
+                </svg>
             </div>
         </section>
         <section>
