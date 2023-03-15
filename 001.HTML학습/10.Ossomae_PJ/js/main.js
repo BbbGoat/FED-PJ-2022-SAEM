@@ -6,8 +6,22 @@ window.addEventListener("DOMContentLoaded",()=>{
     console.log("로딩완료!");
     const gbx = document.querySelector(".gbx");
 
+    /********************************** 
+        함수명: goSlide
+        기능: 이동방향에 따른 요소 이동하기
+    **********************************/
+    const goSlide = (dir) => { // dir - 버튼구분(1-오른쪽, 0-왼쪽)
+        // 1. 호출확인
+        console.log("나야ddddd나!",dir);
+        
+        
+    }; ////////// goSlide 함수 ////////////
+    
     // 오른쪽버튼
     document.querySelector(".rb").onclick = () => {
+
+        goSlide(1);
+
         console.log("오른쪽!");
 
         // 이동대상 : .gbx > div
@@ -22,6 +36,8 @@ window.addEventListener("DOMContentLoaded",()=>{
     // 왼쪽버튼
     document.querySelector(".lb").onclick = () => {
         console.log("왼쪽!");
+
+        goSlide(0);
 
         // 이동대상 : .gbx > div
         let tg = gbx.querySelectorAll("div");
