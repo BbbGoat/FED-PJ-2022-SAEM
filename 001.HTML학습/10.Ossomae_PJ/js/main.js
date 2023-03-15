@@ -12,7 +12,26 @@ window.addEventListener("DOMContentLoaded",()=>{
     **********************************/
     const goSlide = (dir) => { // dir - 버튼구분(1-오른쪽, 0-왼쪽)
         // 1. 호출확인
-        console.log("나야ddddd나!",dir);
+        console.log("나야나!",dir);
+
+        // 2. 대상선정
+        // 이동대상 : .gbx > div
+        let tg = gbx.querySelectorAll("div");
+        
+        // 3. 분기하기
+        
+        // 3-1. 오른쪽버튼 클릭시
+        if (dir) {
+            // 첫번째 자식요소 div 맨뒤로이동
+        // appendChild(첫번째요소)
+        gbx.appendChild(tg[0]);
+        } //////// if : 오른쪽 //////
+        // 3-2. 왼쪽버튼 클릭시
+        else {
+            // 마지막 자식요소 div 맨앞이동
+        // insertBefore(마지막요소,첫번째요소)
+        gbx.insertBefore(tg[tg.length-1],tg[0]);
+        } /////// else : 왼쪽 //////
         
         
     }; ////////// goSlide 함수 ////////////
