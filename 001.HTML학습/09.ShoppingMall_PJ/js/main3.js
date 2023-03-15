@@ -85,23 +85,100 @@ function loadFn() {
     // 3. 이동하기 : 해당순번 슬라이드 li에 클래스 "on" 넣기
     // 변경대상: slide변수 (#slide > li)
     // 전체초기화!
-    slide.forEach((ele) => ele.classList.remove("on"));
-    // 해당순번 li에 클래스넣기
-    slide[snum].classList.add("on");
+    // slide.forEach((ele) => ele.classList.remove("on"));
+    // // 해당순번 li에 클래스넣기
+    // slide[snum].classList.add("on");
+    chgSlide(slide);
 
     // 4. 블릿변경 : 해당순번 블릿 li에 클래스 "on" 넣기
     // 변경대상: indic변수 (.indic > li)
     // 전체초기화!
-    indic.forEach((ele) => ele.classList.remove("on"));
-    // 해당순번 li에 클래스넣기
-    indic[snum].classList.add("on");
+    chgSlide(indic);
   }; ///////////// goSlide함수 /////////////
 
   // 3. 대상에 이벤트 설정하기
   abtn.forEach((ele, idx) => {
     ele.onclick = () => {
+      // 슬라이드 함수 호출
       goSlide(idx);
+      // 자동넘김멈춤함수 호출
+      clearAuto();
     }; //////// click 함수 ////////
   }); ////////// forEach ///////////
-}
-/////////////// loadFn 함수 //////////////
+
+  // 인터발함수 지우기위한 변수
+  let autoI;
+  // 타임아웃함수 지우기위한 변수
+  let autoT;
+
+  /************************************ 
+        함수명: autoSlide
+        기능: 인터발함수로 슬라이드함수 호출
+    ************************************/
+  function autoSlide() {
+    console.log("인터발시작!");
+    // 인터발함수로 슬라이드함수 호출하기
+    autoI = setInterval(() => goSlide(1), 3000);
+  } ////////////// autoSlide함수 //////////
+
+  // 자동넘김 최초호출!
+  autoSlide();
+
+  /************************************ 
+        함수명: clearAuto
+        기능: 인터발함수를 지우고 다시셋팅
+   ************************************/
+  function clearAuto() {
+    console.log("인터발멈춤!");
+    // 1. 인터발 지우기
+    clearInterval(autoI);
+
+    // 2. 타임아웃도 지우지 않으면
+    // 쌓여서 타임아웃 쓰나미실행이 발생한다!
+    clearTimeout(autoT);
+
+    // 3. 잠시후 다시 작동하도록 타임아웃으로
+    // 인터발함수를 호출한다!
+    // 5초후(인터발은 3초후, 토탈 8초후 작동시작)
+    autoT = setTimeout(autoSlide, 5000);
+  } ///////// clearAuto 함수 /////////////
+
+  
+  
+
+    /**************************************** 
+        블릿클릭시 슬라이드 이동하기  
+    ****************************************/
+    // 이벤트대상: .indic li -> indic변수
+    // 이벤트 종류: click
+    indic.forEach((ele,idx)=>{
+        ele.onclick = () => {
+            // 1. 전역변수 snum 업데이트하기!
+            // 왜? 블릿순번 === 슬라이드순번 이므로!
+            snum = idx;
+
+            // 2. 블릿변경
+            chgSlide(indic);
+
+            // 4. 슬라이드변경
+            chgSlide(slide);
+
+            // 5. 자동넘김멈춤 함수호출!
+            clearAuto();
+
+        }; ////////// click ///////////
+    }); /////////// forEach ///////////////
+
+
+    /*************************************** 
+        슬라이드 / 블릿 변경기능 공통함수
+        함수명: chgSlide
+    ***************************************/
+   function chgSlide(obj) {
+        // 전체리스트 초기화
+        obj.forEach((ele) => ele.classList.remove("on"));
+        // 해당순번 li에 클래스넣기
+        obj[snum].classList.add("on");
+   }
+
+} /////////////// loadFn 함수 //////////////
