@@ -180,6 +180,6 @@ function loadFn() {
         obj.forEach((ele) => ele.classList.remove("on"));
         // 해당순번 li에 클래스넣기
         obj[snum].classList.add("on");
-   }
+   } //////////// chgSlide 함수 ///////////////////
 
-} /////////////// loadFn 함수 //////////////
+} /////////////// loadFn 함수 ///////////////////////////////////
