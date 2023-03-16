@@ -139,7 +139,7 @@ function loadFn() {
 
         // 2-2. 방향별 읽어올 슬라이드 순번으로 "data-seq"값 읽어오기
         let cseq = clist[seq].getAttribute("data-seq");
-        console.log("현재순번:", cseq);
+        // console.log("현재순번:", cseq);
 
         // 2-3. 블릿초기화
         for(let x of indic) x.classList.remove("on");
@@ -147,11 +147,13 @@ function loadFn() {
         // 2-4. 읽어온 슬라이드 순번의 블릿에 클래스 "on"넣기
         indic[cseq].classList.add("on");
 
-
+        // 3. 블릿클릭시 이동 현재순번변수(iseq)에 순번일치하기!
+        iseq = Number(cseq);
 
     }; ////////// goSlide함수 ///////////
 
-    // 3. 대상에 이벤트 설정하기
+
+    // 3. 이동버튼대상에 이벤트 설정하기
     abtn.forEach((ele, idx) => {
         ele.onclick = () => {
             // 1. 인터발지우기함수 호출!
@@ -238,6 +240,7 @@ function loadFn() {
     // 이벤트 : click
     // 순번변수 - 블릿순번 블릿 li클릭함수에서 공유함!
     let iseq = 0;
+
     indic.forEach((ele,idx) => { // ele - 요소, idx - 순번
         // 클릭이벤트 설정하기
         ele.onclick = () => {
@@ -246,17 +249,107 @@ function loadFn() {
             // 2. 현재 순번 - iseq
             // 3. 순번차 : 클릭된 순번 - 현재 순번
             let diff = cseq - iseq;
+            // 순수값 차이 -> 절대값 : Math.abs()
+            // >>> 음수,양수 => 양수
+            let pure = Math.abs(diff);
+            
             console.log("클릭된순번", cseq);
             console.log("현재순번", iseq);
             console.log("순번차", diff);
+            console.log("순수값!", pure);
             
-            // 4. 현재 블릿 초기화
+            // 4. 방향별 슬라이드 이동하기
+            // 4-1. 양수면 오른쪽
+            if (diff > 0) {
+                // (1) 오른쪽 버튼 클릭시 다음 슬라이드가
+                //     나타나도록 슬라이드 박스의 left값을
+                //     (-100% * 순수차)로 변경시킨다.
+                slide.style.left = -100 * pure + "%";
+                slide.style.transition = "left .4s ease-in-out";
+        
+                // (2) 슬라이드 이동후!!! (0.4초후)
+                setTimeout(()=>{
+                    // for문으로 자를수(순수값)만큼 순서대로 처리!
+
+                    // 계산되는 차이수(1씩감소하여 left값에 계산시킴!)
+                    let temp = pure;
+
+                    // 왼쪽으로 밀린 li들 하나씩 맨끝으로 이동시키고
+                    // 틀어지지 않도록 left값도 조절!
+                    for (let i = 0; i < pure; i++) {
+
+                        // temp 1씩감소하기!
+                        temp--;
+                        console.log("i:",i);
+                        console.log("temp:",temp);
+                        
+                        // (2-1) 바깥에 나가있는 첫번째 슬라이드
+                        //       li를 잘라서 맨뒤로 보낸다!
+                        // 슬라이드li가 잘라내면 매번변경되므로
+                        // 새로읽어서 맨뒤로 이동한다!
+                        slide.appendChild(slide.querySelectorAll("li")[0]);
+                        // (2-2) 동시에 left값을 0으로 변경한다!
+                        slide.style.left = -100 * temp + "%";
+                        // (2-3) 트랜지션 없애기!
+                        slide.style.transition = "none";
+
+                    } //////////////// for /////////////////
+                },400); //// 타임아웃 //////
+
+            } //////////// if /////////////
+
+            // 4-2. 음수면 왼쪽
+            else if (diff < 0) {
+
+                // (1) 왼쪽버튼 클릭시 이전 슬라이드가
+                // 나타나도록 하기위해 우선 맨뒤 li를
+                // 맨앞으로 이동한다. -> 개수만큼 처리한다! (pure 순수차이값)
+                // slide.insertBefore(넣을놈, 넣을놈전놈)
+                
+                for (let i = 0; i < pure; i++) {
+
+                    // 이동할 리스트
+                    let clist = slide.querySelectorAll("li");
+                    
+                    // (1)맨끝슬라이드를 맨앞에다 삽입
+                    slide.insertBefore(clist[clist.length-1], clist[0])
+                    
+                    // (2) 동시에 left값을 -100%로 변경한다.
+                    // i값이 0부터 반복회수만큼 증가하므로 이것을 이용함!
+                    // -100, -200, -300 ... 계산을 위해 i+1
+                    // 밖에서 안으로 들어오는 효과를 위해 화면 밖으로
+                    // 슬라이드를 내보내야 하므로 -100부터 시작해야한다
+                    // left 0부터 시작할 경우 슬라이드 효과가 안된다!
+                    slide.style.left = ((i+1)*-100)+"%";
+                    // 이때 트랜지션을 없앤다(한번실행후 부터 생기므로!)
+                    slide.style.transition = "none";
+                    
+                } ///////// for //////////////////
+                
+                // (3) 그 후 left값을 0으로 애니메이션하여
+                // 슬라이드가 왼쪽에서 들어온다.
+                // 동일 속성인 left가 같은 코딩처리 공간에
+                // 동시에 있으므로 이것을 분리해야 효과가 있다!
+                // setTimeout을 사용한다!
+                setTimeout(() => {
+                    slide.style.left = "0";
+                    slide.style.transition = "left .4s ease-in-out";
+                }, 0); /////// 타임아웃 ////////
+                
+            } /////////// else if /////////
+
+            // 4-3. 0이면 나가!
+            else {
+                return;
+            } /////////// else ////////////
+            
+            // 5. 현재 블릿 초기화
             indic[iseq].classList.remove("on");
 
-            // 5. 클릭된 순번으로 현재순번 변경
+            // 6. 클릭된 순번으로 현재순번 변경
             iseq = cseq;
             
-            // 6. 클릭된 블릿에 on 넣기
+            // 7. 클릭된 블릿에 on 넣기
             indic[iseq].classList.add("on");
         }; ////// click 함수 /////////
     }); ///////// forEach //////////////
