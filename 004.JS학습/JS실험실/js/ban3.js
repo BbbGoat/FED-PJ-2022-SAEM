@@ -65,6 +65,9 @@ function loadFn() {
     // 1-4. 슬라이드 li리스트
     let slist = document.querySelectorAll("#slide>li");
 
+    // [ 드래그 대상(#slide) 드래그적용함수 호출하기! ]
+    goDrag(slide);
+
     // [ 초기화1 - 순번붙이기 ] ///////////////////
     // 잘라내기로 li순번이 뒤섞이므로 블릿변경 매칭을 위한
     // 고유순번을 사용자정의 속성(data-)으로 만들어준다!
@@ -207,7 +210,7 @@ function loadFn() {
             // 0. 기본이동막기
             event.preventDefault();
             // 1. 인터발지우기함수 호출!
-            clearAuto();
+            // clearAuto();
             // 2. 슬라이드 함수 호출!
             goSlide(idx);
         }; ///// click함수 //////
@@ -247,7 +250,7 @@ function loadFn() {
    } ////////////// autoSlide함수 //////////
 
    // 자동넘김 최초호출!
-   autoSlide();
+//    autoSlide();
 
    /************************************ 
         함수명: clearAuto
@@ -270,7 +273,86 @@ function loadFn() {
    } ///////// clearAuto 함수 /////////////
    
 
+    /**********************************************
+        [ 슬라이드에 드래그 적용시 체크사항 ]
+        1. 드래그 적용시 한쪽방향만 적용시킨다!
+        (가로슬라이드인 경우 x축만 적용활성화함)
+        2. 드래그 대상 슬라이드의 모든 하위요소는
+        선택이 안되도록 아래와 같이 CSS속성을 셋팅함!
+        ->  user-select: none;
+            -webkit-user-drag: none;
+            예) #slide * {선택/드래그 금지속성셋팅}
+    **********************************************/
 
+    /********************************************* 
+        [ 드래그 다중적용 함수 만들기 ]
+        함수명: goDrag
+        기능: 다중 드래그 기능 적용
+    *********************************************/
+    function goDrag(obj){
+
+        // 변수만들기 /////////////////
+        // (1) 드래그상태 변수
+        let drag = false; // true-드래그중, false-드래그아님
+        // (2) 첫번째 위치포인트 first x, first y
+        let fx, fy;
+        // (3) 마지막 위치포인트 last x, last y
+        let lx=0, ly=0; // 마지막위치는 처음에 0 할당!
+        // (4) 움직일 때 위치포인트 move x, move y
+        let mvx, mvy;
+        // (5) 위치이동 차이 결과변수 result x, result y
+        let rx, ry;
+        
+        // 함수만들기 /////////////////
+        // (1) 드래그상태 true
+        const dTrue = () => drag = true;
+        // (1) 드래그상태 false
+        const dFalse = () => drag = false;
+
+        // (3) 드래그 움직일때 작동함수
+        const dMove = () => {
+            // console.log("드래그상태:",drag);
+            // 드래그 상태일때만 실행!
+            if (drag) {
+                // 1. 드래그 상태에서 움직일때 위치값 : mvx, mvy
+                mvx = event.pageX;
+                mvy = event.pageY;
+                // 2. 움직일때 위치값 - 처음 위치값 : rx, ry
+                // x축값은 left값, y축값은 top값 이동이다!
+                rx = mvx - fx;
+                ry = mvy - fy;
+                // 3. x,y 움직인 위치값을 타겟요소에 적용!
+                obj.style.left = (rx+lx)+"px";
+                obj.style.top = (ry+ly)+"px";
+                // 한번드래그 후 다시 드래그시 움직인 위치값이 필요함!
+                // -> 마지막 위치값 저장필요 -> lx,ly
+                // -> 항상 최종위치에서 움직인 위치를 더한다!
+
+                console.log(`fx:${fx} | fy:${fy}`);
+                console.log(`mvx:${mvx} | mvy:${mvy}`);
+                console.log(`rx:${rx} | ry:${ry}`);
+                console.log(`lx:${lx} | ly:${ly}`);
+            } /////// if : 드래그일때 ////////
+        }; //////// dMove //////////
+        
+        // (4) 첫번째 위치포인트 셋팅함수
+        const firstPoint = () => {fx = event.pageX; fy = event.pageY;}
+
+        // (5) 마지막 위치포인트 셋팅함수
+        const lastPoint = () => {lx += rx; ly += ry;}
+        // 최종 이동결과 값인 rx, ry를 항상 대입연산하여 값을 업데이트한다!
+        
+        // 이벤트 등록하기 ////////////
+        // (1) 마우스 눌렀을때 : 드래그 true + 첫번째 위치값 업데이트
+        obj.addEventListener("mousedown", () => {dTrue();firstPoint();});
+        // (2) 마우스 뗐을때 : 드래그 false + 마지막 위치값 업데이트
+        obj.addEventListener("mouseup", ()=>{dFalse();lastPoint();});
+        // (3) 마우스 움직일때
+        obj.addEventListener("mousemove",dMove);
+        // (4) 마우스 벗어날때
+        obj.addEventListener("mouseleave",dFalse);
+
+    } /////////////////////// goDrag 함수 ////////////////////////
 
 
 } //////////////// loadFn 함수 ///////////////
