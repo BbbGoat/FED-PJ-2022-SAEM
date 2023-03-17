@@ -44,6 +44,9 @@ window.addEventListener("DOMContentLoaded", loadFn);
 
 *****************************************************/
 
+// 슬라이드 이동함수 전역화!
+let goSlide;                                 
+
 /****************************************** 
     함수명: loadFn
     기능: 로딩 후 버튼 이벤트 및 기능구현
@@ -98,7 +101,7 @@ function loadFn() {
 
     // 2. 슬라이드 변경함수 만들기
     // 호출시 seq에 들어오는 값중 1은 오른쪽, 0은 왼쪽
-    const goSlide = (seq) => {
+     goSlide = (seq) => {
         //  console.log("슬고우!", seq);
 
         //  console.log("못들어갔어!!!!");
@@ -274,14 +277,28 @@ function loadFn() {
    
 
     /**********************************************
+      
         [ 슬라이드에 드래그 적용시 체크사항 ]
+
         1. 드래그 적용시 한쪽방향만 적용시킨다!
         (가로슬라이드인 경우 x축만 적용활성화함)
+
         2. 드래그 대상 슬라이드의 모든 하위요소는
         선택이 안되도록 아래와 같이 CSS속성을 셋팅함!
         ->  user-select: none;
             -webkit-user-drag: none;
             예) #slide * {선택/드래그 금지속성셋팅}
+
+        3. 마지막 포인트값(1x)을 초기값과 같은 값으로
+        셋팅한다! -> #slide에는 left:-220% 적용됨
+
+        4. 이동함수를 호출할 수 있게 전역함수화 한다
+        -> 함수바깥쪽에 선언해준다!
+
+        5. 드래그시 이동할때 적용된 트랜지션을 지워준다!
+        -> transition: none;
+        -> 드래그 함수내 mousemove 이벤트구역에 설정!
+
     **********************************************/
 
     /********************************************* 
@@ -290,6 +307,7 @@ function loadFn() {
         기능: 다중 드래그 기능 적용
     *********************************************/
     function goDrag(obj){
+        // obj - 드래그 대상(슬라이드 요소)
 
         // 변수만들기 /////////////////
         // (1) 드래그상태 변수
@@ -297,7 +315,8 @@ function loadFn() {
         // (2) 첫번째 위치포인트 first x, first y
         let fx, fy;
         // (3) 마지막 위치포인트 last x, last y
-        let lx=0, ly=0; // 마지막위치는 처음에 0 할당!
+        let lx = obj.offsetLeft, // -> 슬라이드 처음 left 값 셋팅!
+            ly = 0; // 마지막위치는 처음에 0 할당!
         // (4) 움직일 때 위치포인트 move x, move y
         let mvx, mvy;
         // (5) 위치이동 차이 결과변수 result x, result y
@@ -312,8 +331,13 @@ function loadFn() {
         // (3) 드래그 움직일때 작동함수
         const dMove = () => {
             // console.log("드래그상태:",drag);
+            
             // 드래그 상태일때만 실행!
             if (drag) {
+                
+                // 트랜지션 없애기
+                obj.style.transition = "none";
+                
                 // 1. 드래그 상태에서 움직일때 위치값 : mvx, mvy
                 mvx = event.pageX;
                 mvy = event.pageY;
@@ -323,15 +347,16 @@ function loadFn() {
                 ry = mvy - fy;
                 // 3. x,y 움직인 위치값을 타겟요소에 적용!
                 obj.style.left = (rx+lx)+"px";
-                obj.style.top = (ry+ly)+"px";
+                // obj.style.top = (ry+ly)+"px"; -> y축 적용안함!
+
                 // 한번드래그 후 다시 드래그시 움직인 위치값이 필요함!
                 // -> 마지막 위치값 저장필요 -> lx,ly
                 // -> 항상 최종위치에서 움직인 위치를 더한다!
 
-                console.log(`fx:${fx} | fy:${fy}`);
-                console.log(`mvx:${mvx} | mvy:${mvy}`);
-                console.log(`rx:${rx} | ry:${ry}`);
-                console.log(`lx:${lx} | ly:${ly}`);
+                // console.log(`fx:${fx} | fy:${fy}`);
+                // console.log(`mvx:${mvx} | mvy:${mvy}`);
+                // console.log(`rx:${rx} | ry:${ry}`);
+                // console.log(`lx:${lx} | ly:${ly}`);
             } /////// if : 드래그일때 ////////
         }; //////// dMove //////////
         
@@ -346,7 +371,12 @@ function loadFn() {
         // (1) 마우스 눌렀을때 : 드래그 true + 첫번째 위치값 업데이트
         obj.addEventListener("mousedown", () => {dTrue();firstPoint();});
         // (2) 마우스 뗐을때 : 드래그 false + 마지막 위치값 업데이트
-        obj.addEventListener("mouseup", ()=>{dFalse();lastPoint();});
+        obj.addEventListener("mouseup", ()=>{
+            dFalse();
+            lastPoint();
+            // 이동판별함수 호출!
+            goWhere(obj);
+        });
         // (3) 마우스 움직일때
         obj.addEventListener("mousemove",dMove);
         // (4) 마우스 벗어날때
@@ -354,6 +384,40 @@ function loadFn() {
 
     } /////////////////////// goDrag 함수 ////////////////////////
 
+    /************************************************** 
+        함수명: goWhere
+        기능: 드래그시 왼쪽/오른쪽 이동 판별
+        호출: 드래그시 mouseup 이벤트 함수에서 호출!
+    **************************************************/
+    function goWhere(obj) { // obj - 드래그대상(슬라이드요소)
+        // 1. 현재 드래그대상 left 위치값
+        let tgLeft = obj.offsetLeft;
+        console.log("현재left:",tgLeft);
+        // 2. 부모박스를 기준한 -220% left 위치값 구하기
+        let tgPoint = obj.parentElement.clientWidth*2.2;
+        console.log("기준left",tgPoint);
+
+        // 3. 방향 판별하기 : 기준값에 특정값을 더하고 뺌
+        // 3-1. 왼쪽방향이동 (오른쪽버튼 클릭과 동일)
+        if (tgLeft < -tgPoint - 50) {
+            console.log("왼쪽으로!");
+            // 이동함수 호출(전달값 1)
+            goSlide(1);
+        }
+        // 3-2. 오른쪽방향이동 (왼쪽버튼 클릭과 동일)
+        else if (tgLeft > -tgPoint + 50) {
+            console.log("오른쪽으로!");
+            // 이동함수 호출(전달값 0)
+            goSlide(0);
+        }
+        // 3-3. 제자리로 돌아옴
+        else {
+            console.log("제자리");
+            // 기준값 left로 다시 보냄!
+            obj.style.left = -tgPoint + "px";
+        }
+
+    } ///////////// goWhere 함수 ///////////////////
 
 } //////////////// loadFn 함수 ///////////////
 /////////////////////////////////////////////
