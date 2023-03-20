@@ -92,5 +92,19 @@ window.addEventListener("DOMContentLoaded", () => {
         
     }); //////// scroll ///////////////
 
-    console.log("로딩완료!");
+    // 상단이동버튼(.tbtn) 클릭시 상단이동하기
+    // 부드러운 스크롤 pos 스크롤 위치값 업데이트도 필요!
+    tbtn.onclick = () => {
+        // 기본이동막기
+        event.preventDefault();
+
+        // 부드러운 스크롤 전역 스크롤값을
+        // 0으로 변경하여 최상단으로 이동!
+        pos = 0;
+
+        // 위치이동하기
+        window.scrollTo(0, 0);
+        
+    }; ////////// click ////////////
+    
 }); ////////////// 로딩구역 ///////////////////////
