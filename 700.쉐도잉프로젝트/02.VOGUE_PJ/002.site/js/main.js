@@ -74,7 +74,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         // 현재스크롤 위치변수
         let scTop = window.scrollY;
-        cg(scTop);
+        // cg(scTop);
 
         // 상단영역 슬림메뉴 적용하기 //
         if (scTop >= 100) topA.classList.add("on");
