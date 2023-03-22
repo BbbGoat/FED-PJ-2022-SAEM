@@ -7,7 +7,7 @@
 // import { mTitle, sTitle } from "./textData.js";
 
 // 별칭사용하기
-import { mTitle as mTit, sTitle as sTit } from "./textData.js";
+import { mTitle as mTit, sTitle as sTit, personInfo as pInfo } from "./textData.js";
 
 /***********************************************
     [ import 형식 ]
@@ -48,4 +48,7 @@ tpart.innerHTML = `
     <h2>${mTit}</h2>
     <h3>${sTit}</h3>
 `;
+
+// 4. 내용넣기
+pInfo.forEach(val => demo.innerHTML += val);
 
