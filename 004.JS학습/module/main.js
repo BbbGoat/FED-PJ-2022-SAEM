@@ -7,10 +7,10 @@
 // import { mTitle, sTitle } from "./textData.js";
 
 // 별칭사용하기
-import { mTitle as mTit, sTitle as sTit, personInfo as pInfo } from "./textData.js";
+import { mTitle as mTit, sTitle as sTit, personInfo as pInfo, mvData as mv } from "./textData.js";
 
 // 메시지내용 구성함수 import
-import {message as msg} from "./msgFormat.js";
+import { message as msg } from "./msgFormat.js";
 
 /***********************************************
     [ import 형식 ]
@@ -38,27 +38,36 @@ import {message as msg} from "./msgFormat.js";
     -> msgFormat.js
 ***********************************************/
 
-// 1. 타이틀 출력박스
+// 1. 출력박스
+// (1) 타이틀 출력박스
 const tpart = document.querySelector(".tpart");
 
-// 2. 내용출력박스
+// (2) 내용출력박스
 const demo = document.querySelector("#demo");
 
-console.log(tpart,demo);
+// (3) 영화정보 출력박스
+const mvpart = document.querySelector(".mvpart");
 
-// 3. 제목넣기
+console.log(tpart, demo, mvpart);
+
+// 2. 제목넣기
 tpart.innerHTML = `
     <h2>${mTit}</h2>
     <h3>${sTit}</h3>
 `;
 
-// 4. 내용넣기
+// 3. 내용넣기
+demo.innerHTML = msg("공유", 43);
+demo.innerHTML += msg("톰행크스", 55);
+demo.innerHTML += msg("졸리", 48);
 
-demo.innerHTML = msg("공유",43);
-demo.innerHTML += msg("톰행크스",55);
-demo.innerHTML += msg("졸리",48);
-
-pInfo.forEach(val => {
+pInfo.forEach((val) => {
     // val[0] - 이름, val[1] - 나이
-    demo.innerHTML += msg(val[0],val[1])
+    demo.innerHTML += msg(val[0], val[1]);
 });
+
+// 4. 영화정보 뿌리기
+// ol > li 형식으로 .mvpart 박스에 영화정보로
+// JS클래스를 생성하여 화면에 뿌려준다!
+
+// 
