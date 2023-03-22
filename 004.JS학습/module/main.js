@@ -53,6 +53,11 @@ tpart.innerHTML = `
 `;
 
 // 4. 내용넣기
+
+demo.innerHTML = msg("공유",43);
+demo.innerHTML += msg("톰행크스",55);
+demo.innerHTML += msg("졸리",48);
+
 pInfo.forEach(val => {
     // val[0] - 이름, val[1] - 나이
     demo.innerHTML += msg(val[0],val[1])
