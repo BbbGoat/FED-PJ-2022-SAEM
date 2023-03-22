@@ -24,7 +24,7 @@ $(document).ready(function(e) {
 		$("p").eq(1).css({
 			marginTop:"100px",
 			transition:"0.4s",
-		})
+		});
 		// 4. div 중 클래스가 middle인 요소를 찾아 margin-top값을 200px, height값을 200px,
 		// 배경색을 lime 색으로 transition 주시오.
 		// $("div").css().animate().filter(".middle")
@@ -37,14 +37,34 @@ $(document).ready(function(e) {
 			marginTop:"200px",
 			height:"200px",
 			backgroundColor:"lime",
-		})
+		});
 				
 		// 5. div 중에서 p태그를 포함하는 요소를 선택하여 border를 10px ridge blue로 설정하시오.
 		$("div").has("p").css({ // div중에서 p를 포함한 모든 div 선택
 			border:"10px ridge blue",
-		})
+		});
 		
 		// 6. is() 메서드
+		// -> 선택요소의 클래스/아이디/요소 여부를 판별함!
+		// 예)
+		// $("p").click(function(){$(this).is(".my")});
+		// -> 선택된 p요소의 클래스가 "my"인가?
+		// -> 맞으면 true / 아니면 false
+
+		// 추가미션: p태그를 클릭했을 때 클래스가 "my"인 경우
+		// 텍스트를 "나야나!"로 변경!
+		// 아닌경우 "아님"으로 출력!
+		$("p").click(function(){
+			// 클릭된 p요소가 .my인지 판별!
+			let isP = $(this).is(".my");
+			if(isP){
+				$(this).text("나야나");
+			}
+			else {
+				$(this).text("아님");
+			}
+
+		});
 
 		
 		
@@ -68,7 +88,7 @@ $(document).ready(function(e) {
 <div id="main">
     <div class="middle">div</div>
     <p>p</p>
-    <p>p</p>
+    <p class="my">p</p>
     <p>p</p>
     <p>p</p>
     <div id = "sub">
