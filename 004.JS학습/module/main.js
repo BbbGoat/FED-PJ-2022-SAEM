@@ -9,6 +9,9 @@
 // 별칭사용하기
 import { mTitle as mTit, sTitle as sTit, personInfo as pInfo } from "./textData.js";
 
+// 메시지내용 구성함수 import
+import {message as msg} from "./msgFormat.js";
+
 /***********************************************
     [ import 형식 ]
     import 전달변수 from 파일경로;
@@ -50,5 +53,7 @@ tpart.innerHTML = `
 `;
 
 // 4. 내용넣기
-pInfo.forEach(val => demo.innerHTML += val);
-
+pInfo.forEach(val => {
+    // val[0] - 이름, val[1] - 나이
+    demo.innerHTML += msg(val[0],val[1])
+});
