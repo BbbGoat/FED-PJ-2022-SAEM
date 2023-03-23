@@ -94,7 +94,8 @@
         mi[1] = new MovieInfo("https://movie-phinf.pstatic.net/20221227_112/16721270739480lDiS_JPEG/movie_image.jpg?type=m203_290_2","교섭","드라마","임순례","황정민(정재호), 현빈(박대식)","아쌀라말라이쿰");
 
         // 2. 생성자함수로 만든 객체 확인하기
-        console.log("mi[0] 할당객체:",mi[0],mi[1]);
+        // console.log("mi[0] 할당객체:",mi[0]);
+        // console.log("mi[1] 할당객체:",mi[1]);
 
         // 3. 만들어진 객체 화면에 출력: 객체는 for in문!
         // 객체가 담긴 mi배열은 for of문!
@@ -102,7 +103,7 @@
         let hcode = "";
 
         for (let x of mi) {
-        console.log(x);
+        console.log("for문 안 mi의 x",x);
         // 이미 객체를 가져왔으므로(x에 담겨있음)
         // 바로 속성으로 값을 셋팅함!
         hcode += `
@@ -112,6 +113,9 @@
             `;
 
         hcode += "</ul>";
+        
+        // 함수찍어보기
+        console.log(x.함수);
             
         } //////// for of 문 ////////////////
             
