@@ -1,8 +1,5 @@
 // 달력 생성자함수 /////
 
-// 호출
-// MakeDallyeok();
-
 function MakeDallyeok(sel) { // sel - 달력 넣을 요소 선택자
     // 선택함수 //////
     const qs = (x) => document.querySelector(x);
@@ -178,10 +175,10 @@ function MakeDallyeok(sel) { // sel - 달력 넣을 요소 선택자
     const addZero = (x) => (x < 10 ? "0" + x : x);
     // 보낸숫자가 10보다 작으면 앞에 "0"을 더해서 리턴함!
 
-    this.initDallyeok(); /// 최초호출!
+    // this.initDallyeok(); /// 최초호출!
 
     // (2) 이전달력 출력하기 함수 //////////////
-    const prevCal = () => {
+    this.prevCal = () => {
         // 이전월로 변경하여 initDallyeok()함수호출
         // getMonth() 월가져오기 / setMonth() 월 셋팅하기!
         this.curr_date.setMonth(this.curr_date.getMonth() - 1);
@@ -189,57 +186,59 @@ function MakeDallyeok(sel) { // sel - 달력 넣을 요소 선택자
     }; ////////////// prevCal함수 //////////////
 
     // (3) 다음달력 출력하기 함수 //////////////
-    const nextCal = () => {
+    this.nextCal = () => {
         // 다음월로 변경하여 initDallyeok()함수호출
         // getMonth() 월가져오기 / setMonth() 월 셋팅하기!
         this.curr_date.setMonth(this.curr_date.getMonth() + 1);
         this.initDallyeok();
-    }; ////////////// prevCal함수 //////////////
+    }; ////////////// nextCal함수 //////////////
 
-    // (4) 달력 HTML 코드 넣기 함수 /////////////
-    // 위쪽에서 최초호출하므로 선언적함수로 만든다! 
-    function insertHcode() {
-
-        // 달력 HTML 코드를 리턴함!
+    // (4) 달력 HTML 코드 넣기 함수 /////////
+    // 위쪽에서 최초호출하므로 선언적함수로 만든다!
+    function insertHcode(){
+        // 달력 html코드를 리턴함!
         return `
-            <!-- 달력전체박스 -->
-            <div class="calender">
-            <!-- 달력상단:해당년/월표시 -->
-            <header class="header">
-                <!-- 달력이동버튼:이전/다음 -->
-                <button class="mbtn btnL">〈</button>
-                <div class="title">
-                <div class="this.yearTit"></div>
-                <div class="this.monthTit"></div>
-                </div>
-                <!-- 달력이동버튼:이전/다음 -->
-                <button class="mbtn btnR">〉</button>
-            </header>
-            <!-- 달력 표시박스 -->
-            <section class="main">
-                <!-- 주단위 구분박스 -->
-                <div class="week">
-                <div class="day">Sun</div>
-                <div class="day">Mon</div>
-                <div class="day">Tue</div>
-                <div class="day">Wed</div>
-                <div class="day">Thu</div>
-                <div class="day">Fri</div>
-                <div class="day">Sat</div>
-                </div>
-                <!-- 해당월의 달력날짜 구성박스 -->
-                <div class="this.dates"></div>
-            </section>
+        <!-- 달력전체박스 -->
+        <div class="calender">
+          <!-- 달력상단:해당년/월표시 -->
+          <header class="header">      
+            <!-- 달력이동버튼:이전 -->
+            <button class="mbtn btnL">〈</button>
+            <div class="title">
+              <div class="yearTit"></div>
+              <div class="monthTit"></div>
             </div>
+            <!-- 달력이동버튼:다음 -->
+            <button class="mbtn btnR">〉</button>
+          </header>
+          <!-- 달력날짜표시박스 -->
+          <section class="main">
+            <!-- 주단위 구분박스 -->
+            <div class="week">
+              <div class="day">Sun</div>
+              <div class="day">Mon</div>
+              <div class="day">Tue</div>
+              <div class="day">Wed</div>
+              <div class="day">Thu</div>
+              <div class="day">Fri</div>
+              <div class="day">Sat</div>
+            </div>
+            <!-- 해당월의 달력날짜 구성박스 -->
+            <div class="dates"></div>
+          </section>
+        </div>
         `;
 
-    } ////////////// insertHcode /////////////
+    } //////////// insertHcode 함수 ///////////
 
 
-    
-    
-    
+
+
     // 버튼에 클릭설정하기 ///
-    qs(".btnL").onclick = prevCal;
-    qs(".btnR").onclick = nextCal;
+    qs(sel+" .btnL").onclick = this.prevCal;
+    qs(sel+" .btnR").onclick = this.nextCal;
 } //////////// MakeDallyeok //////////////
+
+// 달력 생성자함수 내보내기 ////
+export default MakeDallyeok;
+// default 는 이름변경없는 단 하나의 모듈을 내보낼때 사용함
