@@ -131,6 +131,21 @@ function MakeDallyeok() {
                     if(isSpan){ // null이 아닐때만 true처리되어 들어감!
                         let cls = isSpan.classList.contains("bm");
                         cg(cls);
+                        if(cls) { // 이전달일 경우
+                            // 월에서 1을 뺀다!
+                            // Number(문자형숫자) -> 숫자형으로 변환
+                            // -, *, / 연산은 브라우저가 숫자로 자동변환해준다
+                            // 그러나 +연산은 문자 더하기 가능하므로
+                            // 이것을 강제 형변환해야 안전하다!
+                            cmonth = Number(cmonth) - 1 ;
+                            cg("이전달:"+cmonth);
+                            
+                        } //////////// if /////////////
+                        else { // 다음달일 경우
+                            cmonth = Number(cmonth) + 1 ;
+                            cg("다음달:"+cmonth);
+                            
+                        } ///////// else /////////////
                         
                     } ///////////// if //////////////
                     
