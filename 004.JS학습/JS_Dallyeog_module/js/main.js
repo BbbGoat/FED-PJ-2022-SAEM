@@ -32,5 +32,9 @@ $(".myipt").click(function(){
 }); ///////// click /////////////
 
 $(".calender").click(function(){
-    $(this).hide();
+    let val = $(this).find(".dinfo").val();
+    // val() 메서드 - input의 value값을 읽어온다
+    $(this).parents().prev().val(val);
+    // val(값) -> input에 내용 넣기
+    // $(this).hide();
 }); ///////// click ////////////
