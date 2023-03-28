@@ -62,7 +62,7 @@ function loadFn() {
 
     // 2. 슬라이드 변경함수 만들기
     // 호출시 seq에 들어오는 값중 1은 오른쪽, 0은 왼쪽
-    function goSlide(seq) {
+    const goSlide = (seq) => {
         console.log("슬고우!", seq);
 
         // console.log("못들어갔어!!!!");
