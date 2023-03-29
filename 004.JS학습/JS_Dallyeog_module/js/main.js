@@ -41,6 +41,8 @@ $(".calender").on("mouseenter click",function(){
         // 일반익명함수일때 this -> .date
         // 이벤트를 싸고있는 이벤트 대상을 this로 만들고 싶을때
         // -> 화살표함수를 사용한다! -> 싸고 있는 .calender가 this임!
+        // -> 화살표함수는 this가 부모를 대상으로 한다!
+        // (상위에서 화살표함수가 아닌 함수를 찾아 부모로함)
         console.log("화살표함수에서 this:",this);
         // this -> .calender!!!
         
