@@ -1,6 +1,6 @@
 // 달력 생성자함수 /////
 
-function MakeDallyeok(sel) { // sel - 달력 넣을 요소 선택자
+function MakeDallyeok(sel) { // sel - 달력넣을 요소 선택자
     // 선택함수 //////
     const qs = (x) => document.querySelector(x);
     const qsa = (x) => document.querySelectorAll(x);
@@ -9,7 +9,6 @@ function MakeDallyeok(sel) { // sel - 달력 넣을 요소 선택자
 
     // 0. 최초 달력코드 넣기
     qs(sel).innerHTML = insertHcode();
-
 
     // 1. 변수셋팅 /////////////
 
@@ -56,7 +55,7 @@ function MakeDallyeok(sel) { // sel - 달력 넣을 요소 선택자
 
         // 7. 전달 날짜 앞쪽 채우기
         // 조건: 현재달첫날짜 요일이 0이 아니면 내용있음!
-        // cg(thisFirst.getDay());
+        // cg(this.thisFirst.getDay());
         if (this.thisFirst.getDay() !== 0) {
             // for문 셋팅 : 몇바뀌돌리나? 요일순번보다 작을때까지++
             for (let i = 0; i < this.thisFirst.getDay(); i++) {
@@ -75,14 +74,13 @@ function MakeDallyeok(sel) { // sel - 달력 넣을 요소 선택자
 
         // 2. 현재월 삽입하기 ///////////////////
         // 반복문 구성: 현재월 1일부터 마지막날짜까지 반복 배열추가
-        // 현재월마지막날짜 : this.thisLast.getDate()
+        // 현재월마지막날짜 : thisLast.getDate()
         for (let i = 1; i <= this.thisLast.getDate(); i++) {
             dset.push(i);
         } /////////////// for ///////////////////
 
         // 3. 다음달 나머지 칸 삽입하기
         // 다음달은 클래스 "am"으로 구분함!
-        
         // 반복구성: 1부터 2주분량정도 넣는다!
         for (let i = 1; i < 14; i++) {
             dset.push(`
@@ -104,7 +102,7 @@ function MakeDallyeok(sel) { // sel - 달력 넣을 요소 선택자
                 this.today.getMonth() == this.curr_date.getMonth() &&
                 this.today.getFullYear() == this.curr_date.getFullYear()
             ) {
-                hcode += `<div class="date this.today">${dset[i]}</div>`;
+                hcode += `<div class="date today">${dset[i]}</div>`;
             } else {
                 hcode += `<div class="date">${dset[i]}</div>`;
             }
@@ -115,7 +113,7 @@ function MakeDallyeok(sel) { // sel - 달력 넣을 요소 선택자
         this.dates.innerHTML = hcode;
 
         // 각 날짜 .date 요소에 링크설정하기
-        qsa(".date").forEach(
+        qsa(sel+" .date").forEach(
             (ele) =>
                 (ele.onclick = () => {
                     // 년
@@ -130,39 +128,43 @@ function MakeDallyeok(sel) { // sel - 달력 넣을 요소 선택자
                     cg(isSpan);
                     // 없을 경우 null값이 나옴 -> if문에서 false처리됨!
                     if(isSpan){ // null이 아닐때만 true처리되어 들어감!
+                        // span요소의 클래스가 "bm"이면 true
                         let cls = isSpan.classList.contains("bm");
                         cg(cls);
-                        if(cls) { // 이전달일 경우
+                        if(cls){ //////// 이전달일 경우 /////
                             // 월에서 1을 뺀다!
-                            // Number(문자형숫자) -> 숫자형으로 변환
-                            // -, *, / 연산은 브라우저가 숫자로 자동변환해준다
+                            // Number(문자형숫자) -> 숫자형변환
+                            // -,*,/ 연산은 브라우저가 자동변환해준다
                             // 그러나 +연산은 문자 더하기 가능하므로
                             // 이것을 강제 형변환해야 안전하다!
-                            cmonth = Number(cmonth) - 1 ;
+                            cmonth = Number(cmonth) - 1;
                             cg("이전달:"+cmonth);
-                            
-                            // 만약 1월이면 이전달은 0이 아니므로 12로 처리
-                            if (cmonth === 0) {
+
+                            // 만약 1월이면 이전달은 0이 아니므로 12로처리
+                            if(cmonth===0){ 
                                 cmonth = 12;
-                                // 년도도 전년도로 1뺌!
+                                // 년도도 전년도로 1뺌
                                 cyear = Number(cyear) - 1;
-                            } //////// if ///////////
-                            
-                        } //////////// if /////////////
-                        else { // 다음달일 경우
-                            cmonth = Number(cmonth) + 1 ;
+                            } ///////// if //////////
+
+                        } ///////////// if /////////////
+                        else{ ///// 다음달일 경우 ///////
+                            // 월에서 1을 더한다!
+                            cmonth = Number(cmonth) + 1;
                             cg("다음달:"+cmonth);
-                            
-                            // 만약 12월이면 다음달은 13이 아니므로 1로 처리
-                            if (cmonth === 13) {
+
+                            // 만약 12월이면 다음달은 13이 아니므로 1로처리
+                            if(cmonth===13){ 
                                 cmonth = 1;
-                                // 년도도 다음년도로 1더함!
+                                // 년도도 다음년도로 1더함
                                 cyear = Number(cyear) + 1;
-                            } //////// if ///////////
-                        } ///////// else /////////////
-                        
-                    } ///////////// if //////////////
-                    
+                            } ///////// if //////////
+
+
+                        } /////////// else ////////////
+
+                    } /////////// if //////////////
+
                     // 최종날짜 데이터
                     let comp = cyear + "-" + addZero(cmonth) + "-" + addZero(cdate);
 
@@ -170,7 +172,8 @@ function MakeDallyeok(sel) { // sel - 달력 넣을 요소 선택자
 
                     // 달력의 히든필드에 저장
                     qs(sel+" .dinfo").value = comp;
-                })
+
+                }) ////////// click /////////
         );
     }; ///////// initDallyeok 함수 //////
 
@@ -244,6 +247,6 @@ function MakeDallyeok(sel) { // sel - 달력 넣을 요소 선택자
     qs(sel+" .btnR").onclick = this.nextCal;
 } //////////// MakeDallyeok //////////////
 
-// 달력 생성자함수 내보내기 ////
+// 달력 생성자함수 내보내기 //////
 export default MakeDallyeok;
 // default 는 이름변경없는 단 하나의 모듈을 내보낼때 사용함
