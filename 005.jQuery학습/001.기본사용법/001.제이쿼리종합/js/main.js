@@ -26,5 +26,59 @@ $(() => {
 
     ***********************************/
 
+        // 0. 주인공들 변수에 할당!
+        // (1) 미니언즈
+        const mi = $(".mi");
+
+        // (2) 건물 li
+        const bd = $(".building li");
+
+        // (3) 버튼들
+        const btns = $(".btns button");
+
+        // (4) 메시지박스
+        const msg = $(".msg");
+
+        // (5) 좀비, 주사기 요소 변수처리
+        let mz1 = `<img src="./images/mz1.png" alt="좀비1" class="mz">`;
+        let mz2 = `<img src="./images/mz2.png" alt="좀비2" class="mz">`;
+        let zom = `<img src="./images/zom.png" alt="좀비들" class="mz">`;
+        let inj = `<img src="./images/inj.png" alt="주사기" class="inj">`;
+
+        // console.log(mi,bd,btns,msg);
+
+        // 1. 건물 각 방에 번호넣기 + 좀비/주사기 넣기
+        // 대상: .building li -> bd변수
+        // 사용제이쿼리 메서드 :
+        // (1) each((순서,요소) => {}) : 요소의 개수만큼 순서대로 돌아줌!
+        // (2) append(요소) : 요소내부에 자식요소 추가(또는 이동)!
+
+        bd.each((idx,ele) => {
+            // console.log(idx,ele);
+            // 1. 각 방에 숫자로 순번넣기
+            $(ele).text(idx);
+            // 2. 좀비/주사기 넣기
+            switch(idx) {
+                case 9 : $(ele).append(mz1); break;
+                case 7 : $(ele).append(mz2); break;
+                case 1 : $(ele).append(zom); break;
+                case 2 : $(ele).append(inj); break;
+            } /////// switch case /////
+
+        }) //////// each /////////
+
+        // 좀비는 모두 숨기기
+        $(".mz").hide();
+        // 시간없는 hide()는 display:none 처리함!
+
+        // 2. 버튼셋팅하기 ///////////
+        // 대상: .btns buttons -> btns 변수
+        btns.hide().first().show();
+        
+
+        
+
+        
+
     
 }); /////////////// jQB ////////////////////
