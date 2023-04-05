@@ -20,6 +20,8 @@ prot[0] = 0;
 const gnb = $(".gnb li");
 // indic 메뉴 li
 const indic = $(".indic li");
+// 각 페이지별 등장요소
+const minfo = $(".minfo");
 
 
 /**************************************** 
@@ -31,6 +33,9 @@ $(window).on("wheel", wheelFn);
 $(".gnb a").click(chgMenu);
 // 인디케이터 클릭시 : 대상 - indic a
 $(".indic a").click(chgMenu);
+
+// 새로고침시 스크롤위치 캐싱 변경하기(맨위로!)
+$("html,body").animate({scrollTop:"0px"});
 
 /**************************************** 
     함수명: wheelFn
@@ -113,7 +118,8 @@ function movePg() {
     // 대상: html,body -> 두개를 모두 잡아야 공통적으로 적용됨!
     $("html,body").animate({
         scrollTop:($(window).height()*pno)+"px"
-    },800,"easeOutBounce")
+    },800,"easeOutBounce",showEle // 콜백함수 호출!
+    );
 
     // 대상: GNB메뉴, 인디케이터 메뉴
     gnb.eq(pno).addClass("on").siblings().removeClass("on");
@@ -121,3 +127,34 @@ function movePg() {
         
 
 } ////////// movePg 함수 ////////////////
+
+// 등장할 요소 초기화
+minfo.css({
+    opacity: 0,
+    transform: "translate(-50%,50%)",
+    transition: ".3s ease-out",
+}); //////// css /////////////
+
+/**************************************** 
+    함수명: showEle
+    기능: 페이지이동 후 요소 등장하기
+****************************************/
+function showEle() {
+
+    // .minfo 페이지별 등장하기!
+    pg.eq(pno).find(".minfo")
+    .css({
+        opacity: 1,
+        transform: "translate(-50%,-50%)",
+    }) //////// css /////////////
+    .parents(".page").siblings().find(".minfo")
+    .css({
+        opacity: 0,
+        transform: "translate(-50%,50%)",
+        transition: ".3s ease-out",
+    })
+
+} ///////// showEle 함수 ////////////////
+
+// 등장액션함수 최초호출 ////
+setTimeout(showEle, 1000);
