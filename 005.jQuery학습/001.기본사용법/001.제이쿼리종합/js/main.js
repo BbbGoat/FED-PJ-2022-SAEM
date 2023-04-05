@@ -74,6 +74,48 @@ $(() => {
         // 2. 버튼셋팅하기 ///////////
         // 대상: .btns buttons -> btns 변수
         btns.hide().first().show();
+
+        // 3. 공통함수 : actMini() ////////
+        const actMini = () => {};
+
+        // 4. "들어가기" 버튼 클릭시
+        btns.first()
+        .click(function(){
+            // 1. 클릭된 버튼 사라지기
+            $(this).slideUp(300);
+
+            // 2. 메시지 없애기 : .msg -> msg변수
+            msg.fadeOut(300);
+
+            // 3. 위치값 알아내기
+            // 위치: li 8번방 -> bd변수에 있는 모든 li 중 8번
+            let room = bd.eq(8);
+            // 위치값 배열변수
+            let pos = [];
+
+            // top 위치값
+            pos[0] = room.offset().top;
+            // left 위치값 : 방에서 중앙이동(+li가로크기절반-미니언즈가로크기절반)
+            pos[1] = room.offset().left + room.width()/2 - mi.width()/2;
+
+            // 제이쿼리 위치값 정보 메서드 : offset() -> 하위속성: top,left
+            // 제이쿼리 가로,세로 크기정보 메서드 : width(), height()
+            
+
+            console.log(room,pos);
+
+            // 4. 미니언즈 이동하기
+            // 대상: .mi -> mi변수
+            mi.animate({
+                top: pos[0]+"px",
+                left: pos[1]+"px",
+            },800,"easeOutElastic",function(){ // 콜백함수
+                // 메시지 넣고 나타나기
+                msg.text("와~! 아늑하다! 옆방으로 가보자!")
+                .fadeIn(300)
+            }); ////////// animate /////////
+            
+        })
         
 
         
