@@ -159,6 +159,67 @@ $(() => {
             // 공통함수 호출! : this는 클릭된 버튼
             actMini(this,9,fn);
         }) ////// "옆방으로" 버튼 끝 //////
+        // 6. "윗층으로 도망가!" 버튼 클릭시 ////
+        .next()
+        .click(function(){
+            let fn = () => {  // actMini에 전달할 콜백함수
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            };
+            // 공통함수 호출! : this는 클릭된 버튼
+            actMini(this,7,fn);
+        }) ////// "윗층으로 도망가!" 버튼 끝 //////
+        // 7. "다시옆방으로!" 버튼 클릭시 ////
+        .next()
+        .click(function(){
+            let fn = () => {  // actMini에 전달할 콜백함수
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            };
+            // 공통함수 호출! : this는 클릭된 버튼
+            actMini(this,6,fn);
+        }) ////// "다시옆방으로!" 버튼 끝 //////
+        // 8. "무서우니 윗층으로!" 버튼 클릭시 ////
+        .next()
+        .click(function(){
+            let fn = () => {  // actMini에 전달할 콜백함수
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            };
+            // 공통함수 호출! : this는 클릭된 버튼
+            actMini(this,4,fn);
+        }) ////// "무서우니 윗층으로!" 버튼 끝 //////
+        // 9. "치료주사방으로!" 버튼 클릭시 ////
+        .next()
+        .click(function(){
+            let fn = () => {  // actMini에 전달할 콜백함수
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            };
+            // 공통함수 호출! : this는 클릭된 버튼
+            actMini(this,2,fn);
+        }) ////// "치료주사방으로!" 버튼 끝 //////
+        // 10. "3번방으로!" 버튼 클릭시 ////
+        .next()
+        .click(function(){
+            let fn = () => {  // actMini에 전달할 콜백함수
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            };
+            // 공통함수 호출! : this는 클릭된 버튼
+            actMini(this,3,fn);
+        }) ////// "3번방으로!" 버튼 끝 //////
+        // 11. "1번방으로!" 버튼 클릭시 ////
+        .next()
+        .click(function(){
+            let fn = () => {  // actMini에 전달할 콜백함수
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            };
+            // 공통함수 호출! : this는 클릭된 버튼
+            actMini(this,1,fn);
+        }) ////// "1번방으로!" 버튼 끝 //////
+        
         
 
         
