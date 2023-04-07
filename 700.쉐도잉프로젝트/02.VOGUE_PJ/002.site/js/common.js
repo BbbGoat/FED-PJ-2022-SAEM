@@ -13,7 +13,7 @@ window.addEventListener("DOMContentLoaded",() => {
     // pos전역변수에 업데이트 한다!
     window.addEventListener("mouseup", () => {
         pos = window.scrollY;
-        console.log(pos);
+        // console.log(pos);
     }); /////////// scroll ////////////
     
 }); /////////////////// load ///////////////////////
