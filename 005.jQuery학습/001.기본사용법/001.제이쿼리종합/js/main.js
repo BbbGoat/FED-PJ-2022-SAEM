@@ -73,7 +73,8 @@ $(() => {
 
         // 2. 버튼셋팅하기 ///////////
         // 대상: .btns buttons -> btns 변수
-        btns.hide().first().show();
+        // btns.hide().first().show();
+        btns.hide().eq(5).show();
 
 
 
@@ -315,16 +316,6 @@ $(() => {
             // 공통함수 호출! : this는 클릭된 버튼
             actMini(this,1,fn);
         }) ////// "1번방으로!" 버튼 끝 //////
-        // 11. "0번방으로!" 버튼 클릭시 ////
-        .next()
-        .click(function(){
-            let fn = () => {  // actMini에 전달할 콜백함수
-                // 다음버튼 보이기
-                $(this).next().delay(500).slideDown(300);
-            };
-            // 공통함수 호출! : this는 클릭된 버튼
-            actMini(this,0,fn);
-        }) ////// "0번방으로!" 버튼 끝 //////
         // 12. "헬기를 호출!" 버튼 클릭시 ////
         .next()
         .click(function(){
@@ -338,7 +329,7 @@ $(() => {
                 .fadeIn(300)
                 .animate({
                     right: bd.eq(1).width() + "px",
-                },3000,"easeInExpo")
+                },3000,"easeInExpo");
 
                 // 헬기 등장
                 $(".heli")
@@ -346,16 +337,61 @@ $(() => {
                     left: "20%", // 미니언즈 위치까지 이동
                 },4000,"easeOutBack",function(){ // 콜백함수
                     // 헬기 이미지 변경(this -> .heli)
-                    $(this).attr("src", "images/heli2.png");
+                    $(this).attr("src","images/heli2.png");
                     // 원본 미니언즈는 사라짐!
                     mi.hide();
                 })
-
+                .delay(500) // 0.5초 쉬었다가
+                .animate({
+                    left: "70%", // 다시 오른쪽 끝으로 이동
+                },4000,"easeInOutCirc",function(){ // 애니후 실행함수
+                    // 끝쪽에서 조종사 좀비로!
+                    $(this).attr("src","images/heli3.png")
+                })
+                .delay(300)
+                .animate({
+                    left: "100%" // 아주 천천히 바깥으로 나감!
+                },10000,"linear",()=>{ // 헬기 나간 후
+                    // 간판 떨어뜨리기
+                    // 1단계 : 중간까지 떨어짐
+                    // -> 간판에 class"on" 주기
+                    let tit = $(".tit");
+                    tit.addClass("on");
+                    // 2단계 : 맨 아래까지 떨어짐
+                    // 3초후 간판에 class "on2" 추가
+                    setTimeout(()=>{
+                        tit.addClass("on2");
+                    },3000);
+                    
+                    // 건물 무너뜨리기
+                    // 간판 떨어진 후 실행(6초후)
+                    setTimeout(()=>{
+                        bd.parent().addClass("on");
+                        // parent() -> 부모요소인 .building
+                    }, 6000);
+                    
+                })
             };
             // 공통함수 호출! : this는 클릭된 버튼
             actMini(this,0,fn);
         }) ////// "헬기를 호출!" 버튼 끝 //////
         
+        // 간판에 마우스 오버시/아웃시 색상변경하기
+        // hover(함수1, 함수2)
+        $(".tit").hover(
+            function(){ // hover
+                $(this).css({
+                    backgroundColor:"blue",
+                    color:"cyan",
+                }); ///// css ///////
+            },
+            function(){ // out
+                $(this).css({
+                    backgroundColor:"pink",
+                    color:"yellow",
+                }); ///// css ///////
+            },
+        ); //////// hover 
         
 
         
