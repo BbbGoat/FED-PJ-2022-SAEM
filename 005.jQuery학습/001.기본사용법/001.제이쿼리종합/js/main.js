@@ -73,8 +73,8 @@ $(() => {
 
         // 2. 버튼셋팅하기 ///////////
         // 대상: .btns buttons -> btns 변수
-        // btns.hide().first().show();
-        btns.hide().eq(5).show();
+        btns.hide().first().show();
+        // btns.hide().eq(7).show();
 
 
 
@@ -369,8 +369,26 @@ $(() => {
                         bd.parent().addClass("on");
                         // parent() -> 부모요소인 .building
                     }, 6000);
-                    
-                })
+
+                    // 추가구현 : 시간(6초+건물기다리고 무너진시간 8초)
+                    // 건물 무너진후 좀비 하나 올라와 오른쪽으로 사라지기
+                    setTimeout(()=>{
+                        // 건물을 다시 기울기 원복!
+                        bd.parent().attr("style","transform:rotate(0deg) !important");
+                        // 애니메이션 각도보다 우선순위 강제로 올림!
+                        
+                        // 9번방 좀비 선택
+                        bd.eq(9).find(".mz")
+                        .animate({
+                            bottom: "594%"
+                        },5000)
+                        .delay(3000)
+                        .animate({
+                            right:"-244%"
+                        },5000)
+                    },15000);
+        
+                }) //////// 헬기 나간후 함수 끝 //////////
             };
             // 공통함수 호출! : this는 클릭된 버튼
             actMini(this,0,fn);
