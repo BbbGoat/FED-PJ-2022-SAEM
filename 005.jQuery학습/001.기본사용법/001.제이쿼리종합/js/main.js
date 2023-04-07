@@ -293,6 +293,9 @@ $(() => {
         .next()
         .click(function(){
             let fn = () => {  // actMini에 전달할 콜백함수
+                // 메시지 보이기
+                msg.html("어서 윗층으로 가자!").fadeIn(300);
+                
                 // 다음버튼 보이기
                 $(this).next().delay(500).slideDown(300);
             };
@@ -303,12 +306,55 @@ $(() => {
         .next()
         .click(function(){
             let fn = () => {  // actMini에 전달할 콜백함수
+                // 메시지 보이기
+                msg.html("이제 곧 탈출이닷!").fadeIn(300);
+
                 // 다음버튼 보이기
                 $(this).next().delay(500).slideDown(300);
             };
             // 공통함수 호출! : this는 클릭된 버튼
             actMini(this,1,fn);
         }) ////// "1번방으로!" 버튼 끝 //////
+        // 11. "0번방으로!" 버튼 클릭시 ////
+        .next()
+        .click(function(){
+            let fn = () => {  // actMini에 전달할 콜백함수
+                // 다음버튼 보이기
+                $(this).next().delay(500).slideDown(300);
+            };
+            // 공통함수 호출! : this는 클릭된 버튼
+            actMini(this,0,fn);
+        }) ////// "0번방으로!" 버튼 끝 //////
+        // 12. "헬기를 호출!" 버튼 클릭시 ////
+        .next()
+        .click(function(){
+            let fn = () => {  // actMini에 전달할 콜백함수
+                // 메시지 보이기
+                msg.html("도와줘요!!!").fadeIn(300);
+
+                // 1번방 단체좀비들 달려들기!
+                bd.eq(1)
+                .find(".mz")
+                .fadeIn(300)
+                .animate({
+                    right: bd.eq(1).width() + "px",
+                },3000,"easeInExpo")
+
+                // 헬기 등장
+                $(".heli")
+                .animate({
+                    left: "20%", // 미니언즈 위치까지 이동
+                },4000,"easeOutBack",function(){ // 콜백함수
+                    // 헬기 이미지 변경(this -> .heli)
+                    $(this).attr("src", "images/heli2.png");
+                    // 원본 미니언즈는 사라짐!
+                    mi.hide();
+                })
+
+            };
+            // 공통함수 호출! : this는 클릭된 버튼
+            actMini(this,0,fn);
+        }) ////// "헬기를 호출!" 버튼 끝 //////
         
         
 
