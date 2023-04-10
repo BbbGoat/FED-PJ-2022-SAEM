@@ -17,10 +17,19 @@ $(()=>{ //////////// jQB ///////////////////
         // 기본기능막기(서브밋 기능차단!)
         e.preventDefault();
 
+        // 공백데이터 처리하기
+        const groSpace = (val) => val.replace(/\s/g,"");
+        
+        
         // 유효성 검사하기
         // 아이디, 비번 중 하나라도 비어있으면 불통과!
-        if(mid.val() === "" || mpw.val() === "") {
+        // groSpace를 조건에 넣어서 스페이스일 경우도 불통과로 만들기
+        if(groSpace(mid.val()) === "" || groSpace(mpw.val()) === "") {
             alert("모두 넣으시오~~!");
+            // 초기화! + 아이디에 포커스
+            mid.val("").focus();
+            mpw.val("");
+            
         } // if : 불통과시 ////
         else {
             // 원래는 DB에서 조회된 결과를 받고
