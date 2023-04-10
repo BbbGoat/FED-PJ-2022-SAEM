@@ -156,6 +156,47 @@ $(()=>{
         // 1. 선택박스 변경된 값 읽어오기
         let cv = $(this).val();
         console.log("선택값:", cv);
+
+        // 2. 선택옵션별 분기문
+        if (cv === "init") {
+            // "선택해주세요"
+
+            // 1. 메시지출력
+            eml1.siblings(".msg").text("이메일 옵션 선택필수!")
+            // 2. 직접입력창 숨기기
+            eml2.fadeOut(300);
+            
+        } //// if : 선택해주세요 ////
+
+        else if (cv === "free") {
+            // "직접입력"
+
+            // 1. 직접입력창 보이기
+            eml2.fadeIn(300).val("").focus();
+            // val(값) -> 입력창에 값넣기(빈문자값은 기존값을 지워준다!)
+            // focus() -> 입력창에 포커스(커서깜박임!)
+
+            // 2. 기존 메시지 지우기
+            eml1.siblings(".msg").empty();
+            
+        } //// else if : 직접입력 ////
+        
+        else {
+            // 이메일 선택일 경우
+
+            // 1. 직접입력창 숨기기
+            eml2.fadeOut(300);
+            
+            // 2. 기존 메시지 지우기
+            eml1.siblings(".msg").empty();
+            
+            // 3. 이메일 전체 주소 조합하기
+            let comp = eml1.val() + "@" + cv;
+            // cv는 select의 option의 value값
+            
+
+        } //// else : 이메일 주소 ////
+
         
     }); ///////// change 이벤트 /////////////
     
