@@ -163,6 +163,8 @@ $(()=>{
 
             // 1. 메시지출력
             eml1.siblings(".msg").text("이메일 옵션 선택필수!")
+            .removeClass("on"); // 빨간색글자로
+
             // 2. 직접입력창 숨기기
             eml2.fadeOut(300);
             
@@ -187,18 +189,39 @@ $(()=>{
             // 1. 직접입력창 숨기기
             eml2.fadeOut(300);
             
-            // 2. 기존 메시지 지우기
-            eml1.siblings(".msg").empty();
-            
-            // 3. 이메일 전체 주소 조합하기
+            // 2. 이메일 전체 주소 조합하기
             let comp = eml1.val() + "@" + cv;
             // cv는 select의 option의 value값
-            
+
+            // 3. 이메일 유효성 검사함수 호출
+            resEml(comp);
+
 
         } //// else : 이메일 주소 ////
 
         
     }); ///////// change 이벤트 /////////////
+
+    /************************************** 
+        함수명 : resEml (result Email)
+        기능 : 이메일 검사결과 처리
+    **************************************/
+    const resEml = (comp) => {
+        // comp - 완성된 이메일 주소
+        console.log("이메일주소:",comp);
+        console.log("이메일검사결과:",vReg(comp,"eml"));
+
+        // 이메일 정규식 검사에 따른 메시지 보이기
+        if (vReg(comp,"eml")) {
+            eml1.siblings(".msg").text("적합한 이메일 형식입니다!")
+            .addClass("on");
+        } //// if : 통과시 //////
+        else {
+            eml1.siblings(".msg").text("맞지않는 이메일 형식입니다!")
+            .removeClass("on");
+        } //// else : 불통과시 //////
+
+    }; ////////// resEml 함수 //////////////
     
    
 }); /////////////////// jQB //////////////////////
