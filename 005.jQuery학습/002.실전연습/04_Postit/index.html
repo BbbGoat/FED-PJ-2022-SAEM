@@ -101,6 +101,26 @@
                 $(this).removeClass("invert");
             }); /////// dragstop ///////////
 
+            // 2. 드롭대상박스에 드롭될때 동영상 보여주기
+            // droppable() 메서드 : 드롭되는 요소처리
+            // 이벤트대상 : .dropshow
+
+            $(".dropshow").droppable({
+                drop: function(evt,ele){
+                    // evt - 이벤트전달변수, ele - 드롭된 박스
+                    console.log("나 빠졌다~~!");
+
+                    // 1. 드롭영역의 배경이미지 변경하기
+                    // 드롭된 요소 -> ele.draggable
+                    let isrc = ele.draggable.find("img").attr("src");
+                    console.log(isrc);
+
+                    $(this).css({
+                        backgroundImage: `url(${isrc})`,
+                    })
+                }
+            });
+
 
 
         }); //////////// jQB ///////////////////
