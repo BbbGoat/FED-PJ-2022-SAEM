@@ -76,12 +76,12 @@ window.addEventListener("DOMContentLoaded", () => {
         let scTop = window.scrollY;
         // cg(scTop);
 
-        // 상단영역 슬림메뉴 적용하기 //
-        if (scTop >= 100) topA.classList.add("on");
+        // 상단영역 슬림메뉴 적용하기 + !mobsts -> 0일때(DT일때)만 적용 //
+        if (scTop >= 100 && !mobsts) topA.classList.add("on");
         else topA.classList.remove("on");
 
-        // 위로이동버튼 보이기/숨기기 //
-        if (scTop >= 300) tbtn.classList.add("on");
+        // 위로이동버튼 보이기/숨기기 + !mobsts -> 0일때(DT일때)만 적용 //
+        if (scTop >= 300 && !mobsts) tbtn.classList.add("on");
         else tbtn.classList.remove("on");
         
         // 값 확인하기
