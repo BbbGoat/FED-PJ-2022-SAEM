@@ -17,6 +17,24 @@ window.addEventListener("DOMContentLoaded",() => {
     }); /////////// scroll ////////////
 
 
+    /// 모바일 메뉴 초기셋팅하기 ////
+    // 대상 : .top / #top
+    $(".top").append(mobcode.mobtn);
+    $("#top").append(mobcode.mobx);
+
+    /// 모바일 버튼 기능 구현하기 ///
+    // 1. 햄버거버튼 클릭시 전체메뉴 보이기
+    // 이벤트대상: .hbtn / 변경대상: #mobx
+    $(".hbtn").click(()=>{$("#mobx").slideToggle(400)});
+    
+    // 2. 검색버튼 클릭시 검색박스 보이기
+    // 이벤트대상: .sbtn / 변경대상: .mos
+    $(".sbtn").click(()=>{$(".mos").slideToggle(200)});
+
+    // slideToggle(시간)은 slideUp()/slideDown()을 자동전환한다!
+
+
+
     
 }); /////////////////// load ///////////////////////
 
