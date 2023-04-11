@@ -54,6 +54,50 @@ $(()=>{
         let atxt = $(this).text().trim();
         // html상에 들어가있는 앞뒤 공백도 제거하기 위해 trim() 사용
         console.log(atxt);
+
+        // 2. 이동할 페이지 주소 할당하기
+        let url;
+        switch (atxt) {
+            case "인스타그램":
+                url = "https://www.instagram.com/VOGUEKOREA/";
+                break;
+            case "페이스북":
+                url = "https://www.facebook.com/VOGUEkr";
+                break;
+            case "트위터":
+                url = "https://twitter.com/VogueKorea";
+                break;
+            case "유튜브":
+                url =
+                    "https://www.youtube.com/user/VogueKorea?sub_confirmation=1";
+                break;
+            case "로그인":
+                url = "login";
+                break;
+            case "회원가입":
+                url = "member";
+                break;
+            case "갤러리":
+                url = "gallery";
+                break;
+            case "카카오스토리":
+                url = "https://story.kakao.com/ch/voguekr";
+                break;
+        } ////////// switch /////////////
+
+        console.log(url); // url 확인
+
+        // 3. 페이지 이동하기
+        if (atxt === "로그인" || atxt === "회원가입" || atxt === "갤러리") {
+            // 페이지로 이동하기
+            location.href = url + ".html";
+        }
+        else {
+            // 외부 새창 열기
+            // window.open(주소) - 새창열기
+            window.open(url);
+        }
+        
         
     }); //////////// click //////////////////
 
