@@ -63,6 +63,26 @@
                     
                     (3) 비동기전송 후 처리를 위한 로드함수구역 만들기
                     -> 인스턴스변수.onload = function(){처리소스};
+                    -> 여기서 onload라는 것은 서버에서 결과를 로드한다는 의미임!
+                    -> 결과처리 상태값은 : 인스턴스변수.status 값으로 한다!
+
+                        [ status 결과상태 종류 ]
+                            1) 200 : "OK" - 처리완료됨
+                            2) 403 : "Forbidden" - 파일접근거부
+                            3) 404 : "Not Found" - 파일없음
+                            -> statusText로 받으면 숫자가 아닌, 뒤의 문자형으로 리턴한다!
+
+                        [ response 결과내용 종류 ]
+                            1) responseText : 데이터를 문자형식 받기
+                            2) responseXML : 데이터를 XML형식 받기
+                            3) responseURL : 데이터 전송 URL 받기
+
+                    
+                    (4) 오픈 셋팅된 요청객체를 전송한다!
+                        인스턴스변수.send()
+                        -> open() -> onload -> send() 순으로 코딩
+
+                        
 
          *******************************************************************/
 
@@ -115,15 +135,40 @@
                     }, 3000); ////// setTimeout //////
                 }); /////// 약속기다림 Promise /////////
 
-                // 약속객체로 부터 처리후 then메서드에 실행코드 넣기
-                // then(함수) -> 하나의 함수만 쓰면 성공처리함수를 받음!
-                약속기다림.then(function(값){
-                    화면뿌려("와~~우"+값);
-                    화면뿌려(`<img src="https://ojsfile.ohmynews.com/STD_IMG_FILE/2014/0103/IE001663873_STD.jpg" style="height:70vh" alt="약속">`);
-                }); ////////// then 메서드 ////////////
+            // 약속객체로 부터 처리후 then메서드에 실행코드 넣기
+            // then(함수) -> 하나의 함수만 쓰면 성공처리함수를 받음!
+            약속기다림.then(function(값){
+                화면뿌려("와~~우"+값);
+                화면뿌려(`<img src="https://ojsfile.ohmynews.com/STD_IMG_FILE/2014/0103/IE001663873_STD.jpg" style="height:70vh" alt="약속">`);
+            }); ////////// then 메서드 ////////////
 
 
-            // 3. 
+            // 3. 파일을 전송 받은 후 실행하는 약속객체 생성하기
+            let 파일약속 = new Promise(function(성공함수,실패함수){
+                
+                // AJAX(비동기통신) 서버파일요청하기
+                // (1) XMLHttpRequest 객체 인스턴스 만들기
+                let ajax = new XMLHttpRequest();
+
+                // (2) 비동기 파일요청 열기(전송기능 메모리생성)
+                ajax.open("GET","https://tombap8.github.io/FED-PJ-2022-tom/001.HTML%ED%95%99%EC%8A%B5/06.CGV_PJ/001.%EB%B6%84%EC%84%9D%EC%84%A4%EA%B3%84/CGV_Mockup.pdf");
+
+                // (3) 결과를 리턴받는 onload이벤트 함수구역 만들기
+                ajax.onload = function(){
+                    console.log(ajax.status);
+
+                    if (ajax.status == 200) {
+                        성공함수(ajax.responseURL);
+                        // 성공시 전송받은 파일 URL을 받는다!
+                    }
+                    else {
+                        실패함수(ajax.statusText);
+                    }
+                    
+                }; ///////// onload 구역 ////////////
+
+
+            }); //////////// 파일약속 Promise ///////////////////
             
 
         }); /////////////// load //////////////////////////////
