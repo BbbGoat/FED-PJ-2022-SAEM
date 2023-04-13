@@ -47,28 +47,52 @@
 
         *****************************************************/
 
-        // 변수에 제이슨 파싱후 할당!
-        let myjson = JSON.parse(JSON.stringify(jsonData))
-
-        // 제이슨 파싱 확인
-        console.log(myjson);
+        // 제이슨변수
+        let myjson;
         
-        // shopping -> 메뉴 찍기
-        console.log(myjson.shopping.메뉴);
 
-        // "living" 속성의 데이터를 for in문으로 돌아 찍기!
-        let mydata = myjson["living"];
-            for(let x in mydata){ // x는 속성명
-                document.write(`<h2>${x} : ${mydata[x]}</h2>`);
-            } /////////// for in ///////////////
+        // 프라미스 적용하기!!!
+        let myProm = new Promise((success)=>{
+            
+            // 시간이 걸리는 것을 가정하여 setTimeout 셋팅
+            setTimeout(() => {
+                
+                // 변수에 제이슨 파싱후 할당!
+                myjson = JSON.parse(JSON.stringify(jsonData));
+                // 성공함수호출
+                success("제이슨성공!");
+                
+            }, 6000); // 6초지연
+            
+        }); ////////// myProm /////////
+        
+        // 프라미스 성공후 실행메서드 then()
+        myProm.then((msg)=>{
 
-            document.write("<hr>"); // 구분선
+            // 성공메시지확인
+            console.log(msg);
+            
+            // 제이슨 파싱 확인
+            console.log(myjson);
+            // shopping -> 메뉴 찍기
+            console.log(myjson.shopping.메뉴);
+    
+            // "living" 속성의 데이터를 for in문으로 돌아 찍기!
+            let mydata = myjson["living"];
+                for(let x in mydata){ // x는 속성명
+                    document.write(`<h2>${x} : ${mydata[x]}</h2>`);
+                } /////////// for in ///////////////
 
-            // "fashion" 속성의 데이터를 for in문으로 돌아 찍기!
-            let mydata2 = myjson["fashion"];
-            for(let x in mydata2){ // x는 속성명
-                document.write(`<h2>${x} : ${mydata2[x]}</h2>`);
-            } /////////// for in ///////////////
+                document.write("<hr>"); // 구분선
+
+                // "fashion" 속성의 데이터를 for in문으로 돌아 찍기!
+                let mydata2 = myjson["fashion"];
+                for(let x in mydata2){ // x는 속성명
+                    document.write(`<h2>${x} : ${mydata2[x]}</h2>`);
+                } /////////// for in ///////////////
+
+        }); ///////// then //////////////
+
         
 
  </script>
