@@ -274,10 +274,23 @@
 
     <h2>5. 조건분기</h2>
     <div id="app5">
-        <button v-on:click="show=!show">뒤집어!</button>
+        <button v-on:click="show=!show">뒤집어!{{show}}</button>
+        <!-- 
+            v-on:click 요소 클릭시
+            값 show = !(not)show
+            해석 : true이면 false, false이면 true로 불린값 결과전환
+         -->
         <p>
             나는 사실 사람이 아니다!
             <span v-if="show">뻥이요~!</span>
+            <!-- 
+                v-if 조건문 디렉티브
+                -> 값으로쓴 조건에 따라
+                해당요소가 화면에 출력될지
+                출력하지 않을지를 결정할 수 있다!
+                (결과적으로 가상돔에서 출력을 안하면
+                실제 돔에서는 태그를 그리지 않게된다!)
+             -->
         </p>
     </div>
 
