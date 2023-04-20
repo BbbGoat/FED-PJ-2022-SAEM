@@ -9,6 +9,8 @@ $(()=>{ /////////////////// jQB /////////////////////
     const abtn = $(".act button");
     // 1-2. 퍼센트원 : .btns
     const btns = $(".btns");
+    // 1-3. 진행바 : .lbar
+    const bar = $(".lbar");
 
     
     // 2. 이벤트 설정
@@ -20,6 +22,45 @@ $(()=>{ /////////////////// jQB /////////////////////
         progFn(2,96);
         progFn(3,54);
     }); /////// click /////////////
+
+    // 2-2. 두번째버튼(팽수2) - 진행바
+    abtn.last().one("click", () => {
+
+        // 바텍스트
+        const btxt = bar.prev().find("b");
+
+        // 숫자변수
+        let num = 0;
+        
+        const progBar = () => {
+            num++;
+            // 퍼센트 수치증가
+            btxt.text(num);
+            // 바 width 증가
+            bar.css({width:num+"%"});
+
+            // 재귀호출
+            setTimeout(()=>{
+                if (num < 100) progBar();
+                else {
+                    console.log("음악틀어~!");
+                    // 이미 페이지에 삽입된 오디오요소를
+                    // 재생시킨다!
+                    // 비디오/오디오 재생메서드 : play()
+                    // 비디오/오디오 멈춤메서드 : pause()
+                    // 비디오/오디오 요소는 제이쿼리에서
+                    // get()메서드를 사용하여 선택함 -> get(0) 또는 [0]
+                    $("#myaud").get(0).play();
+                    // console.log($("#myaud").get(0));
+                } // else //
+            },40); /// setTimeout //
+        }; //////// progBar ////////
+
+        progBar(); // 호출
+
+    }); /////// click /////////////
+    
+
 
 
     /****************************************** 
