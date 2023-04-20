@@ -132,31 +132,40 @@
                     {{v.제목}}
                 </h2>
                 <!-- 2-1-2. 서브메뉴(LNB:Local Navigation Bar) -->
-                <nav class="lnb">
+                <nav class="lnb" v-if="v.메뉴!=='없음'">
+                    <ul>
+                        <li v-for="(m,i) in v.메뉴">
+                            <a href="#">{{m}}</a>
+                        </li>
+                    </ul>
                 </nav>
             </header>
             <!-- 2-2. 카테고리 페이지 컨텐츠영역 -->
             <div class="icont">
                 <section class="pt2">
                     <div class="cbx bgi bg1-1">
-                        <h2></h2>
+                        <!-- 
+                            v-html은 html코드 디렉티브
+                            v-text는 문자데이터 디렉티브
+                         -->
+                        <h2 v-html="v.타이틀[0]"></h2>
                     </div>
                     <div class="cbx bgi bg1-2">
-                        <h2></h2>
+                        <h2 v-html="v.타이틀[1]"></h2>
                     </div>
                     <div class="cbx bgi bg1-3">
-                        <h2></h2>
+                        <h2 v-html="v.타이틀[2]"></h2>
                     </div>
                 </section>
                 <section class="pt2">
                     <div class="cbx bgi bg2-1">
-                        <h2></h2>
+                        <h2 v-html="v.타이틀[3]"></h2>
                     </div>
                     <div class="cbx bgi bg2-2">
-                        <h2></h2>
+                        <h2 v-html="v.타이틀[4]"></h2>
                     </div>
                     <div class="cbx bgi bg2-3">
-                        <h2></h2>
+                        <h2 v-html="v.타이틀[5]"></h2>
                     </div>
                 </section>
             </div>

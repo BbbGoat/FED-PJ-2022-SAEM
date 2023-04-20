@@ -39,6 +39,17 @@ $(()=>{
             axios
             .get("./js/mdata.json")
             .then(x=>this.items=x);
+
+            // 탭메뉴 타이틀 변경하기
+            $("title").prepend(pm+" ");
+        },
+        // 메서드 구역
+        methods: {
+            chgTit(){
+
+                
+            } //// chgTit 메서드
+        
         }
     }); /////////////// Vue ///////////////
 
