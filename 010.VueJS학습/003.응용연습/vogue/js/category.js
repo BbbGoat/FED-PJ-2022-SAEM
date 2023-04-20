@@ -16,7 +16,7 @@ if (pm.indexOf("?")===-1){
 pm = pm.split("?")[1].split("=")[1];
 // pm값 특수문자 복원하기
 pm = decodeURIComponent(pm);
-console.log(pm);
+console.log("pm:",pm);
 
 
 ///////////// 로딩구역 //////////////////////////
@@ -25,7 +25,7 @@ $(()=>{
     console.log("카테고리 로딩완료!!");
 
     // Vue JS 데이터 바인딩 코드 /////
-    new Vue({
+    const vmCont = new Vue({
         // 대상선정: 메인 컨텐츠영역 요소
         el: "#cont",
         data: {
@@ -42,15 +42,39 @@ $(()=>{
 
             // 탭메뉴 타이틀 변경하기
             $("title").prepend(pm+" ");
-        },
-        // 메서드 구역
-        methods: {
-            chgTit(){
-
-                
-            } //// chgTit 메서드
-        
         }
     }); /////////////// Vue ///////////////
+
+    // GNB 메뉴 SPA를 위한 재정의하기!
+    // -> 뷰JS 인스턴스를 생성하면 대상요소가
+    // 기존 JS의 모든 기능이 초기화하여 작동되지 않는다!
+    new Vue({
+        el: "#gnb",
+        data: {
+
+        },
+        methods: {
+            // 메뉴 변경하기
+            chgMenu(e){
+               console.log("나야나!");
+               // 컨텐츠 영역의 뷰에 설정된 변수 catName에
+               // 접근하여 변수의 값을 변경한다!
+               // vmCont변수에 인스턴스가 담겼으므로
+               // vmCont.catName으로 접근하여
+               // 클릭된 요소의 글자를 읽고 이를 소문자로 변경
+               // " & " 를 "-"로 치환만 해주면 된다!
+
+               // a요소 문자열 변경하기
+               let txt = e.target.innerText.replace(" & ","-").toLowerCase();
+               console.log("링크를위한 텍스트값",txt);
+               
+               // 뷰 데이터에 반영하기 -> 가상돔에 변경 -> 실제돔반영!
+               vmCont.catName = txt;
+
+               // 서브페이지에서 탭메뉴 타이틀 변경하기
+               $("title").text(vmCont.catName+" | 2023 보그 코리아 (Vogue Korea)");
+            }
+        }, // methods 구역
+    }); //////////// GNB Vue ///////////////
 
 }); ////////////////// jQB /////////////////////
