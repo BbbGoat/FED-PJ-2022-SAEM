@@ -10,21 +10,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <!-- 제이쿼리 UI CDN -->
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+        
+        <script src="./js/main.js"></script>
 
         <script>
             // 부드러운 스크롤
-            startSS();
-
-            // pos전역변수에 업데이트 한다!
-            window.addEventListener("mouseup", () => {
-                pos = window.scrollY;
-                // console.log(pos);
-            }); /////////// scroll ////////////
-            // 키보드로 이동시
-            window.addEventListener("keyup", () => {
-                pos = window.scrollY;
-                // console.log(pos);
-            }); /////////// scroll ////////////
+            // startSS();
 
             
             $(()=>{ ////////////////// jQB //////////////////////////
@@ -48,7 +39,7 @@
                     let jQrect = jqtg - scTop;
 
                     console.log("JS:",retVal(tg2[2]));
-                    console.log("jQ",jQrect);
+                    console.log("jQ:",jQrect);
                     
                 }); ////////////// scroll //////////////
 

@@ -1,7 +1,8 @@
 // 패럴렉스 PJ JS - main.js
 
 // 로드 이벤트
-window.addEventListener("DOMContentLoaded", loadFn);
+$(window).on("DOMContentLoaded",loadFn);
+// window.addEventListener("DOMContentLoaded", loadFn);
 
 // 로드함수
 function loadFn() {
@@ -9,38 +10,24 @@ function loadFn() {
 
     /**********************************************************/
 
-    // 1. 부드러운 스크롤 적용하기
+    // // 1. 부드러운 스크롤 적용하기
     startSS();
 
     // 만약 스크롤바를 직접 드래그할 경우
     // mouseup (즉, 스크롤바를 놓는경우)
     // 이벤트 발생시 y축 스크롤바 위치를
     // pos전역변수에 업데이트 한다!
-    window.addEventListener("mouseup", () => {
-        pos = window.scrollY;
+    $(window).on("mouseup keyup", () => {
+        pos = $(this).scrollTop();
         // console.log(pos);
-    }); /////////// scroll ////////////
-    // 키보드로 이동시
-    window.addEventListener("keyup", () => {
-        pos = window.scrollY;
-        // console.log(pos);
-    }); /////////// scroll ////////////
+    }); /////////// mouseup + keyup ////////////
+
 
     /**********************************************************/
 
-    // 2. 공통선택자함수
-    const qs = (x) => document.querySelector(x);
-    const qsa = (x) => document.querySelectorAll(x);
-
-    // 3. 등장위치리턴함수
-    const retVal = (x) => {
-        return x.getBoundingClientRect().top;
-        // getBoundingClientRect().top -> top을 기준으로한 대상 위치값
-        // -> 화면 위로 올라가면 마이너스값        
-    };
     
-    // 4. 보이는 화면 높이값 : 등장요소의 시작값이 이것임!
-    const winH = window.innerHeight;
+    // 2. 보이는 화면 높이값 : 등장요소의 시작값이 이것임!
+    const winH = $(window).height();
     console.log("winH",winH);
 
     // 5. 패럴렉스 수치범위 : 움직일값 설정
@@ -49,9 +36,9 @@ function loadFn() {
 
     // 6. 패럴렉스 대상선정
     // (1). 글자박스
-    const tg1 = qsa(".txt");
+    const tg1 = $(".txt");
     // (2). 아이콘
-    const tg2 = qsa(".icon");
+    const tg2 = $(".icon");
 
     // 7. 패럴렉스 이동함수 //
     const moveEl = (elpos,ele,setH) => {
@@ -69,9 +56,9 @@ function loadFn() {
             console.log("x:",-x);
 
             // 2. 해당요소에 위치이동 CSS 반영
-            ele.style.cssText = `
-                transform:translateY(${-x}px);
-            `;
+            $(ele).css({
+                transform: `translateY(${-x}px)`,
+            });
             // cssText 속성은 style 속성값을 직접 넣어준다!(css문법 그대로 사용)
             
             // 대상요소의 트랜스폼 Y축 이동
@@ -88,29 +75,35 @@ function loadFn() {
     }; //////////// moveEl ///////////////
 
 
+    // 제이쿼리로 getBoundingClientRect().top값 만들기
+    // 요소위치값 - 현재스크롤 위치값
+    const retVal = (elpos,scTop) => {
+        return elpos - scTop;
+    };
+    
     // 8. 스크롤 이벤트함수 만들기
-    window.addEventListener("scroll", () => {
+    $(window).on("scroll", () => {
 
-        
+        // 현재스크롤위치값
+        let scTop = $(this).scrollTop();
+
         // 대상1 : 글자박스 패럴렉스호출!
-        tg1.forEach((ele)=>{
-            moveEl(retVal(ele),ele,setH2)
+        tg1.each((idx,ele)=>{
+            moveEl(retVal($(ele).offset().top,scTop),ele,setH2)
             // moveEl(위치값,요소,지정한범위)
         });
-        // 대상2 : 글자박스 패럴렉스호출!
-        tg2.forEach((ele)=>{
-            moveEl(retVal(ele),ele,setH1)
+        // 대상2 : 아이콘 패럴렉스호출!
+        tg2.each((idx,ele)=>{
+            moveEl(retVal($(ele).offset().top,scTop),ele,setH1)
             // moveEl(위치값,요소,지정한범위)
         });
         
     }); //////////// scroll 이벤트 ////////////////
 
     // 로딩시 맨위로 이동하기
-    setTimeout(() => {
-        // 맨위로 이동
-        window.scrollTo(0,0);
-        // 부드러운 스크롤 위치값 반영!
-        pos = 0; // 안하면 새로고침시 튄다!
-    },400);
+    $("html,body").animate({scrollTop:"0"},200,()=>{
+        // 이것 안하면 다시 스크롤시 튐!
+        pos = $(this).scrollTop();
+    }); ///////// animate ////////
     
 } ////////////////////// loadFn 함수 ///////////////////

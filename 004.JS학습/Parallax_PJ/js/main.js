@@ -97,7 +97,7 @@ function loadFn() {
             moveEl(retVal(ele),ele,setH2)
             // moveEl(위치값,요소,지정한범위)
         });
-        // 대상2 : 글자박스 패럴렉스호출!
+        // 대상2 : 아이콘 패럴렉스호출!
         tg2.forEach((ele)=>{
             moveEl(retVal(ele),ele,setH1)
             // moveEl(위치값,요소,지정한범위)
