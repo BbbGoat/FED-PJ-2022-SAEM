@@ -97,11 +97,11 @@
 
 /* 양쪽이동버튼(영역+버튼) */
 /* 영역공통 */
-.btna {
+/* .btna {
     position: absolute;
     width: 20%;
     height: 100%;
-}
+} */
 /* 왼쪽영역 */
 .ar1 {
     left: 0;
