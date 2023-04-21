@@ -6,7 +6,55 @@
         <title>Parallax PJ</title>
         <link rel="stylesheet" href="./css/main.css" />
         <script src="./js/smoothScroll20.js"></script>
-        <script src="./js/main.js" type="module"></script>
+        <!-- 제이쿼리 라이브러리 CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <!-- 제이쿼리 UI CDN -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+
+        <script>
+            // 부드러운 스크롤
+            startSS();
+
+            // pos전역변수에 업데이트 한다!
+            window.addEventListener("mouseup", () => {
+                pos = window.scrollY;
+                // console.log(pos);
+            }); /////////// scroll ////////////
+            // 키보드로 이동시
+            window.addEventListener("keyup", () => {
+                pos = window.scrollY;
+                // console.log(pos);
+            }); /////////// scroll ////////////
+
+            
+            $(()=>{ ////////////////// jQB //////////////////////////
+
+                const qsa = (x) => document.querySelectorAll(x);
+                const retVal = (x) => x.getBoundingClientRect().top;
+                const tg2 = qsa(".icon");
+
+                // 대상위치값 : offset().top
+                const jqtg = $(".icon").eq(2).offset().top;
+                console.log("대상 시작위치:",jqtg);
+                
+                ///// 제이쿼리 스크롤 이벤트 구역 /////
+                $(window).scroll(()=>{
+                    // 제이쿼리 스크롤 위치값: 현재스크롤위치
+                    let scTop = $(window).scrollTop();
+                    // console.log("현재스크롤위치",scTop);
+                    
+                    // 제이쿼리에서 getBoundingClientRect() 값 구하기
+                    // 구하기 -> 요소위치값 - 현재스크롤위치값
+                    let jQrect = jqtg - scTop;
+
+                    console.log("JS:",retVal(tg2[2]));
+                    console.log("jQ",jQrect);
+                    
+                }); ////////////// scroll //////////////
+
+            }); ////////////////////// jQB //////////////////////////
+        </script>
+
     </head>
     <body>
         <div class="page">
