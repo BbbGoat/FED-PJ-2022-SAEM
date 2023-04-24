@@ -113,19 +113,29 @@ slide.on("dragstop",function(){
             // 커버제거하기
             cover.hide();
         });
-    } //// if : 왼쪽이동 ////
 
+        // 블릿변경함수호출
+        addOn(2);
+        // 왼쪽이동이므로 2번째 슬라이드
+        
+    } //// if : 왼쪽이동 ////
+    
     // 2. 오른쪽으로 이동 : -90% 초과일때
     else if (sleft > -winW*0.9) {
         slide.animate({
             left: "0px",
         },600,"easeOutQuint",()=>{ // 콜백함수
-
+            
             // 이동후 맨뒤 li 맨앞으로 이동하기
             slide.prepend(slide.find("li").last()).css({left:"-100%"});
             // 커버제거하기
             cover.hide();
         });
+
+        // 블릿변경함수호출
+        addOn(0);
+        // 오른쪽이동이므로 0번째 슬라이드
+        
     } //// else if : 오른쪽이동 ////
 
     // 3. 제자리로 이동 : -110% ~ -90%
@@ -169,8 +179,29 @@ blist.each((idx,ele)=>{
 }); /////////// each ////////////
 
 /**************************** 
-    블릿 on 넣기 함수
+    [ 블릿 on 넣기 함수 ]
+    1) 오른쪽으로 이동일 경우
+    -> 0번째 슬라이드의 data-seq값
+    2) 왼쪽으로 이동일 경우
+    -> 2번째 슬라이드의 data-seq값
+    3) 위의 선택값으로 블릿의
+    li순번에 on넣고 나머지는 뺀다!
 ****************************/
-function addOn() {
+// 대상선정: .bindic li
+const bindic = $(".bindic li");
 
+function addOn(seq) { // seq - 읽을 슬라이드 순번
+    
+    // 방향을 어떻게 알지?
+    // 0은 오른쪽, 2는 왼쪽이동
+
+    // 1. 해당 슬라이드 data-seq 읽어오기
+    let dseq = slide.find("li").eq(seq).attr("data-seq");
+    console.log(dseq);
+
+    // 2. 해당 슬라이드와 동일한 순번 블릿에 on넣기
+    bindic.eq(dseq).addClass("on")
+    .siblings().removeClass("on");
+
+    
 } ////////// addOn 함수 ///////////////
