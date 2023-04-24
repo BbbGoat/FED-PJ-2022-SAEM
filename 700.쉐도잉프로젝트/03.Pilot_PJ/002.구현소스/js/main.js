@@ -294,7 +294,7 @@ let autoAgain;
 const clearAuto = () => {
     clearInterval(autoNext);
     clearTimeout(autoAgain);
-    autoAgain = setTimeout(banAutoSlide,4000);
+    autoAgain = setTimeout(banAutoSlide,5000);
 
 }; ///////////// clearAuto 함수 //////////////
 
