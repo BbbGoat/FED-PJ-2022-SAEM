@@ -163,7 +163,7 @@ blist.each((idx,ele)=>{
     if (idx === 0) {
         $(ele).attr("data-seq", bcnt-1)
     }
-    else { // 두번째 부터 끝까지 0부터(1작음!)
+    else { // 두번째 부터 끝까지 0부터 순차적으로 설정(0시작을 위해 -1빼줘야함)
         $(ele).attr("data-seq", idx-1)
     }
 }); /////////// each ////////////
