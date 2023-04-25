@@ -249,7 +249,7 @@ function showTit() {
     let bantit = bantxt[clsnm];
     
     // 호출확인
-    console.log("배너타이틀!", clsnm, bantit);
+    // console.log("배너타이틀!", clsnm, bantit);
 
     // 모든 추가 타이틀 지우기
     $(".btit").remove();
@@ -307,7 +307,7 @@ slide.on("drag dragstart dragstop", clearAuto);
 // 변수에 담아 정지하기 ///
 let autoNext;
 
-const banAutoSlide = ()=>{
+const banAutoSlide = () => {
 
     autoNext = setInterval(()=>{
         slide.animate({
