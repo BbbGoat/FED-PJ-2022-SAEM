@@ -33,9 +33,14 @@ Vue.component("list-comp",{
     // 컴포넌트 내부 변수셋팅
     data: function(){
         return {
+            // 1. 상품이미지 경로
             gsrc:`img_gallery/${this.haha}.jpg`,
+            // 2. 상품명
             gname:`sofia23${this.haha+this.endlet}`+(this.myseq%2?"🧡":"💙"),
-            gprice:this.insComma(12340*this.haha/2)+`원`,
+            // 3. 단위가격(원가격)
+            gprice:this.insComma((12340*this.haha)/2)+`원`,
+            // 4. 할인가격 : 30% 할인된 가격(원가격*0.7) - 반올림 Math.round()
+            sale:this.insComma(Math.round(12340*this.haha)/2 * 0.7)+`원`,
         }
     },
     // 컴포넌트 내부 메서드셋팅
@@ -54,6 +59,19 @@ Vue.component("list-comp",{
         insComma(x) {
             return x.toString()
             .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        },
+
+        // 세일표시 여부 리턴 메서드
+        condiRet() {
+            return (
+                this.haha==3 ||
+                this.haha==5 ||
+                this.haha==14 ||
+                this.haha==26 ||
+                this.haha==38 ||
+                this.haha==45 ||
+                this.haha==50
+            );
         }
     }
 }); /////////// 전역 컴포넌트 2 //////////
@@ -120,9 +138,18 @@ new Vue ({
             // console.log(tg.find("h2").text());
             // console.log(tg.find("h3").text());
 
-            // 상품명/가격 큰박스에 넣기
+            // 상품명 큰박스에 넣기
             $("#gtit,#gcode").text(tg.find("h2").text());
-            $("#gprice,#total").text(tg.find("h3").text());
+            // 상품가격 큰박스에 넣기
+            // 세일일 경우와 아닌경우 나누기!
+            if (tg.find("h3 span").first().is(".del")){ // 세일일때
+                $("#gprice,#total")
+                .html("<small>30% 세일가 : </small>"+tg.find("h3 span").last().text());
+            } ////// if /////
+            else { // 세일 아닐때
+                $("#gprice,#total") 
+                .text(tg.find("h3 span").first().text());
+            } ///// else /////
 
         } ////////////// setVal 함수 //////////////
         
