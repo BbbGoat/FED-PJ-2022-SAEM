@@ -106,8 +106,26 @@ new Vue ({
             // 4. 다음/이전 이미지 변경을 위한 data-num 속성 읽기
             nowNum = $(this).attr("data-num");
             console.log(nowNum);
+
+            // 5. 값 셋팅하기
+            setVal();
             
         }); //////////// click //////////
+        
+        // 상품명 / 가격 등 데이터 셋업 함수
+        function setVal() {
+
+            // nowNum값에 의한 대상선정!
+            const tg = $(`.grid>div[data-num=${nowNum}]`);
+            // console.log(tg.find("h2").text());
+            // console.log(tg.find("h3").text());
+
+            // 상품명/가격 큰박스에 넣기
+            $("#gtit,#gcode").text(tg.find("h2").text());
+            $("#gprice,#total").text(tg.find("h3").text());
+
+        } ////////////// setVal 함수 //////////////
+        
 
         // 2. 닫기버튼 클릭시 큰이미지박스 숨기기
         $(".cbtn").click(function(e){
@@ -125,10 +143,10 @@ new Vue ({
             // 1. 오른쪽버튼 여부
             let isB = $(this).is(".rb");
 
-            // 마지막순번의 이미지번호 구하기
+            // 2. 마지막순번의 이미지번호 구하기
             const maxNum = $(".grid>div").last().attr("data-num");
             
-            // 2. 방향 분기하기
+            // 3. 방향 분기하기
             if (isB) {
                 nowNum++;
                 if (nowNum > maxNum) nowNum = 1;
@@ -139,11 +157,14 @@ new Vue ({
             }
 
             console.log("변경된 nowNum:",nowNum);
-            // 3. 큰 이미지 변경하기
+
+            // 4. 큰 이미지 변경하기
             $(".gimg img").attr("src",`./img_gallery/${nowNum}.jpg`);
+
+            // 5. 값 셋팅하기
+            setVal();
 
         }); ////// click /////////
 
- 
     } ////// mounted 함수구역 //////
 }); ///////////////// 뷰 JS 인스턴스 /////////////////////////
