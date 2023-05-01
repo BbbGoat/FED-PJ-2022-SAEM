@@ -21,7 +21,12 @@ function autoScroll() {
 
     // 배너초기화 적용함수
     const callInit = () => {
-        if (!mob) initSet(); // 모바일아니면 초기화
+        if (!mob) {
+            initSet(); // 모바일아니면 초기화
+            // 중간페이지일 경우 초기화 제외(지우기)
+            $(".page").eq(pno)
+            .find(".imgc,.txtc a").attr("style","")
+        }
         else { // 모바일이면 초기화 셋팅지우기
             $(".imgc,.txtc a").attr("style","");
         }

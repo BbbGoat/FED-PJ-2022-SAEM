@@ -277,35 +277,47 @@ new Vue({
             3. 빈값금지
         **************************************/
 
-        // 대상 : #sum
+        // 대상: #sum
         // 이벤트 : keyup (입력즉시반응)
-        $("#sum").keyup(function(){
+        $("#sum").keyup(function () {
             // 0. 요소자신
             let ele = $(this);
-            // 1. 입력된 값: input요소는 val() 메서드로!
+            // 1. 입력된 값 : input요소는 val() 메서드로!
             let txt = ele.val();
+            // 2. 숫자가 아닌경우 : isNaN() - 숫자가 아니면 treu
+            // - 조건: 숫자가 아니거나 1미만 이거나 빈값이면!
+            // -> 소수점방지 : txt.indexOf(".")!==-1 
+            // 문자열.indexOf(".") -> 점문자가 없으면 -1임
 
-            // 2. 숫자가 아닌경우 : isNaN() - 숫자가 아니면 true
-            // - 조건 : 숫자가 아니거나 1 미만이거나 빈값이면!
-            if (isNaN(txt) || txt < 1 || txt === "" || txt.indexOf(".")!==-1) {
+            if(txt === "") return;
+
+            if (isNaN(txt) || 
+            txt < 1 || 
+            txt === "" ||
+            txt.indexOf(".")!==-1) {
                 initTot(); // 초기화!
-            }
-            // 3. 숫자인경우 tot없뎃 + setVal()호출!
+            } /// if ///
+            // 3. 숫자인경우 tot업뎃 + setVal()호출!
             else {
                 tot = txt;
-                if (txt>=100) {
-                    alert("100개 이상인 경우 \n쇼핑몰에 직접 전화주세요!\n Tel:02-333-3333");
+                if(txt>=100){
+                    alert("100개이상인 경우 \n쇼핑몰에 직접전화주세요~!\nTel:02-333-3333");
                 }
                 // 숫자앞에 0을 넣으면 없애기!
                 // 문자형숫자를 숫자형으로 변환하면 된다!
                 ele.val(Number(txt));
-            }
-
-            setVal();
-            // 4. 계산수행
-            console.log("직접입력:",txt)
+            } /// else ///
             
-        });
+            // 4. 계산수행
+            setVal();
+
+            console.log("직접입력:", txt);
+        }).blur(function(){
+            if($(this).val().trim() === ""){
+                initTot();
+                setVal();
+            }
+        }); ///// 
         
     }, //////// mounted 함수구역 /////
 }); ///////////// 뷰JS 인스턴스 //////////////////
