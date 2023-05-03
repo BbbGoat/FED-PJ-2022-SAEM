@@ -68,11 +68,12 @@ new Vue({
 }); ////////////// 하단영역 Vue 인스턴스 /////////////////////
 
 
+
 // 스와이퍼 플러그인 인스턴스 생성하기 ////
 // 스와이퍼 생성함수
 function makeSwiper() {
 
-    var swiper = new Swiper(".mySwiper", {
+    let swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         // spaceBetween: 30,
         loop: true,
@@ -227,6 +228,23 @@ function sinsangFn() {
             sc_sts = 0; // 한번만 실행!
             call_sts = 0; // 콜백중단!
         }
+
+        ////////////////////////////////////////////////////
+        // 서브 배너 스와이퍼 API를 이용한 작동멈춤셋팅하기! //
+        ////////////////////////////////////////////////////
+        // 기준: 화면 높이값보다 스크롤 위치가 크면 멈춤!
+        //      -> 스와이퍼API : swiper.autoplay.stop()
+        //      작으면 자동넘김!
+        //      -> 스와이퍼API : swiper.autoplay.start()
+
+        // if (scTop > winH) {
+        //     swiper.autoplay.stop();
+        // }
+        // else {
+        //     swiper.autoplay.start();
+        // }
+        
+
         
     }); ///////////// scroll /////////////
    
