@@ -7,6 +7,7 @@ import comData from "./tempData/data-common.js";
 // 신상정보
 import sinsang from "./sinsang.js";
 
+let swiper;
 
 // ########### 상단영역 메뉴 뷰템플릿 셋팅하기 ########## //
 // Vue.component(내가지은요소명,{옵션})
@@ -73,7 +74,7 @@ new Vue({
 // 스와이퍼 생성함수
 function makeSwiper() {
 
-    let swiper = new Swiper(".mySwiper", {
+    swiper = new Swiper(".mySwiper", {
         slidesPerView: 1,
         // spaceBetween: 30,
         loop: true,
@@ -237,16 +238,14 @@ function sinsangFn() {
         //      작으면 자동넘김!
         //      -> 스와이퍼API : swiper.autoplay.start()
 
-        // if (scTop > winH) {
-        //     swiper.autoplay.stop();
-        // }
-        // else {
-        //     swiper.autoplay.start();
-        // }
-        
-
+        if (scTop > winH) {
+            swiper.autoplay.stop();
+        }
+        else {
+            swiper.autoplay.start();
+        }
+    
         
     }); ///////////// scroll /////////////
-   
-    
+
 } //////////////// sinsangFn 함수 ///////////////////
