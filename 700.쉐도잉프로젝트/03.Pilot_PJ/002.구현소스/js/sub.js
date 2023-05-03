@@ -105,7 +105,11 @@ function sinsangFn() {
     // 위치값변수
     let lpos = 0;
     // 재귀호출 상태값변수(1-호출가능/0-호출불가)
-    let call_sts = 1;
+    let call_sts = 0;
+    // 스크롤시 상태값변수
+    let sc_sts = 0;
+    // 재귀호출 타임아웃용 변수
+    let callT;
     
     function moveList() {
     
@@ -127,9 +131,12 @@ function sinsangFn() {
             left: lpos + "px"
         });
     
+        // 타임아웃비우기
+        clearTimeout(callT);
+        
         // 재귀호출하기(비동기호출-setTimeout)
         // 조건: call_sts 상태값이 1일때만 호출함! 
-        if (call_sts) setTimeout(moveList,40);
+        if (call_sts) callT = setTimeout(moveList,40);
         
     } /////////////// moveList 함수 /////////////////
 
@@ -146,7 +153,8 @@ function sinsangFn() {
         function(){ // out
             call_sts = 1; // 콜백허용!
             moveList();
-        }); ////// hover ///////
+        }
+    ); ////// hover ///////
 
     /**************************************************** 
         신상품 리스트 li에 마우스 오버시 정보보이기
@@ -177,7 +185,8 @@ function sinsangFn() {
         function(){ // out
             // ibox 나갈때 지우기
             $(".ibox").remove();
-        }); ///// hover ///////
+        }
+    ); ////////// hover ///////
 
     /********************************************** 
         스크롤 위치가 신상품 박스가 보일때만 움직이기
@@ -193,6 +202,7 @@ function sinsangFn() {
 
     // 3. 화면높이값
     let winH = $(window).height();
+    console.log("화면높이값:",winH);
     
     // 4. 스크롤 이벤트함수 ///////
     $(window).scroll(function(){
@@ -206,12 +216,15 @@ function sinsangFn() {
 
         // 3. 신상품 리스트 이동/멈춤 분기하기 
         // (1) 이동기준 gBCR값이 화면 높이보다 작고 0보다 클때 이동
-        if (gBCR < winH && gBCR > 0) {
+        if (gBCR < winH && gBCR > 0 && sc_sts === 0) {
+            sc_sts = 1; // 한번만 실행
             call_sts = 1; // 콜백허용!
             moveList(); // 함수재호출!
         } 
         // (2) 기타경우 멈춤
-        else {
+        // (조건: 윈도우 높이보다 크거나 0보다 작고 sc_sts === 1일때)
+        else if ((gBCR > winH || gBCR < 0) && sc_sts === 1) {
+            sc_sts = 0; // 한번만 실행!
             call_sts = 0; // 콜백중단!
         }
         
