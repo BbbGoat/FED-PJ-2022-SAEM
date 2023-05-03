@@ -4,6 +4,8 @@
 import menuFn from "./mainjs/menu.js";
 // 공통 데이터 가져오기
 import comData from "./tempData/data-common.js";
+// 신상정보
+import sinsang from "./sinsang.js";
 
 
 // ########### 상단영역 메뉴 뷰템플릿 셋팅하기 ########## //
@@ -34,6 +36,9 @@ new Vue({
 
         // 부드러운 스크롤 실행
         startSS();
+
+        // 신상품 기능함수 호출
+        sinsangFn();
         
     }
 }); ////////////// 상단영역 Vue 인스턴스 /////////////////////
@@ -87,3 +92,91 @@ function makeSwiper() {
       });
 
 }
+
+function sinsangFn() {
+    
+    /********************************************** 
+        함수명: moveList
+        기능: 신상품 리스트박스를 연속하여
+            왼쪽방향으로 흘러가게 함!
+    **********************************************/
+    // 대상: .flist
+    const flist = $(".flist");
+    // 위치값변수
+    let lpos = 0;
+    // 재귀호출 상태값변수(1-호출가능/0-호출불가)
+    let call_sts = 1;
+    
+    function moveList() {
+    
+        // 1. 이동위치값(left값) 감소하기
+        lpos--;
+        // console.log("위치값:",lpos);
+    
+        // 2. 한계값 초기화하기 + 첫번째 요소 맨뒤로 이동하기!
+        if (lpos < -300) {
+            // 위치값 초기화
+            lpos = 0;
+    
+            // 첫번째 li 맨뒤로 이동!
+            flist.append(flist.find("li").first())
+        }
+    
+        // 3. 이동하기
+        flist.css({
+            left: lpos + "px"
+        });
+    
+        // 재귀호출하기(비동기호출-setTimeout)
+        // 조건: call_sts 상태값이 1일때만 호출함! 
+        if (call_sts) setTimeout(moveList,40);
+        
+    } /////////////// moveList 함수 /////////////////
+
+    // 신상품 이동함수 최초호출
+    moveList();
+
+    // 신상품 리스트에 마우스 오버시 멈춤
+    // 신상품 리스트에 마우스 아웃시 이동
+    // hover(함수1,함수2)
+    flist.hover(
+        function(){ // over
+            call_sts = 0; // 콜백중단!
+        },
+        function(){ // out
+            call_sts = 1; // 콜백허용!
+            moveList();
+        }); ////// hover ///////
+
+    /**************************************************** 
+        신상품 리스트 li에 마우스 오버시 정보보이기
+        1. 대상: .flist li
+        2. 정보구분법: li의 클래스명으로 신상품정보와
+                      매칭하여 상품정보박스를 동적으로
+                      생성하여 애니메이션을 주어 보이게함
+    ****************************************************/
+    flist.find("li").hover(
+        function(){ // over
+            // 1. 클래스 정보 알아내기
+            let clsnm = $(this).attr("class");
+            // 2. 클래스 이름으로 셋팅된 신상정보 객체 데이터 가져오기
+            let gd_info = sinsang[clsnm];
+            console.log(clsnm,gd_info);
+            // 3. 상품정보박스 만들고 보이게하기
+            // 마우스 오버된 li 자신 $(this)에 넣는다!
+            $(this).append(`<div class="ibox"></div>`);
+            // .ibox에 상품정보 넣기
+            // ^는 특수문자이므로 정규식에 넣을때 역슬래쉬와 함께 씀
+            // -> /\^/
+            $(".ibox").html(gd_info.replace(/\^/g,"<br>"))
+            .animate({
+                top:"110%",
+                opacity: 1,
+            },300, "easeOutCirc");
+        },
+        function(){ // out
+            // ibox 나갈때 지우기
+            $(".ibox").remove();
+        }); ///// hover ///////
+    
+} //////////////// sinsangFn 함수 ///////////////////
