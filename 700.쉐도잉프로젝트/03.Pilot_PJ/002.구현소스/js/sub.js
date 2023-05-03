@@ -190,11 +190,32 @@ function sinsangFn() {
     
     // 2. 스크롤위치변수
     let scTop = 0;
+
+    // 3. 화면높이값
+    let winH = $(window).height();
+    
+    // 4. 스크롤 이벤트함수 ///////
     $(window).scroll(function(){
-        // 스크롤 위치값
+        // 1. 스크롤 위치값
         scTop = $(this).scrollTop();
-        console.log("getBoundingClientRect ===",tgpos-scTop);
-    })
+        
+        // 2. gBCR 값 구하기
+        let gBCR = tgpos-scTop;
+        
+        console.log("getBoundingClientRect ===",gBCR);
+
+        // 3. 신상품 리스트 이동/멈춤 분기하기 
+        // (1) 이동기준 gBCR값이 화면 높이보다 작고 0보다 클때 이동
+        if (gBCR < winH && gBCR > 0) {
+            call_sts = 1; // 콜백허용!
+            moveList(); // 함수재호출!
+        } 
+        // (2) 기타경우 멈춤
+        else {
+            call_sts = 0; // 콜백중단!
+        }
+        
+    }); ///////////// scroll /////////////
    
     
 } //////////////// sinsangFn 함수 ///////////////////
