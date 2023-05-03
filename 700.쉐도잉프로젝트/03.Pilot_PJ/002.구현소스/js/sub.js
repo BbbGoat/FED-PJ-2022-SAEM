@@ -178,5 +178,23 @@ function sinsangFn() {
             // ibox 나갈때 지우기
             $(".ibox").remove();
         }); ///// hover ///////
+
+    /********************************************** 
+        스크롤 위치가 신상품 박스가 보일때만 움직이기
+    **********************************************/
+    // JS의 getBoundingClientRect() 의 값과 같은것은?
+    // 적용박스 offset().top 위치값 - scroll바 위치값
+
+    // 1. 대상요소위치값
+    let tgpos = flist.offset().top;
+    
+    // 2. 스크롤위치변수
+    let scTop = 0;
+    $(window).scroll(function(){
+        // 스크롤 위치값
+        scTop = $(this).scrollTop();
+        console.log("getBoundingClientRect ===",tgpos-scTop);
+    })
+   
     
 } //////////////// sinsangFn 함수 ///////////////////
