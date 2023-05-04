@@ -90,11 +90,11 @@ export default new Vuex.Store({
         initSet(state,param) {
             console.log("데이터변경! 초기화!");
             // state.imgsrc = param;
-            // 파라미터가 객체일 경우(데이터 다수일때!)
 
-            // 이미지데이터 셋업
+            // 파라미터가 객체일 경우(데이터 다수일때!
+            // 1. 이미지데이터 셋업
             state.imgsrc = param.url;
-            // 설명데이터 셋업
+            // 2. 설명데이터 셋업
             state.desc = param.txt;
             
         }, ////// initSet 메서드 ///////
