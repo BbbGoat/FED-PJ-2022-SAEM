@@ -22,6 +22,12 @@ header a {
     color: #222;
     text-decoration: none;
 }
+header a.on {
+    font-size: 30px;
+    color: orangered;
+    text-decoration: overline;
+    text-decoration-style: wavy;
+}
 header a:hover {
     color: orangered;
     text-decoration: overline;
