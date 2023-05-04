@@ -47,13 +47,20 @@
             이 버전이 맞지 않으면 뷰엑스 스토어에서 에러가 발생함!)
 
         - 재밌는 것이 있음....!
+        내보낼 때 const store = new Vuex.Store
+        라고 해서 store가 호출명이 아님!
+
+        export default new Vuex.Store()
+
+        위와같이 이름없이 내보내도 store라는 이름으로 나간다!
+        즉, store는 규정상 정해진 static한 이름이다!
     
 ************************************************************/
 
 /////////////// 뷰엑스 스토어를 활용한 변수 셋팅하기 ////////////////
 // 1. 뷰엑스 스토어 인스턴스를 생성한다!
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
     // (1) 데이터 셋팅구역:
     state: {
         // 도시데이터 셋업
@@ -97,4 +104,4 @@ const store = new Vuex.Store({
 
 
 // 내보내기
-export default store;
+// export default store;
