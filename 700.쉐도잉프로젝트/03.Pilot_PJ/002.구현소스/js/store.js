@@ -50,6 +50,8 @@ const store = new Vuex.Store({
             st.cnt = st.subData[pm].cnt;
             // 2. 해당 카테고리 이름 업데이트
             st.cat = st.subData[pm].cat;
+            // 3. 해당 카테고리 메뉴 업데이트
+            st.menu = st.subData[pm].menu;
             
         }, ////////////////// chgData 메서드 //////////////////
         
