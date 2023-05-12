@@ -17,13 +17,17 @@ import store from "./store.js";
 let swiper;
 
 // ########### 서브영역 메뉴 뷰템플릿 셋팅하기 ########## //
-// Vue.component(내가지은요소명,{옵션})
+// 1. 배너파트 컴포넌트
 Vue.component("ban-comp",{
     template: subData.banner,
 }); ////////////////// 상단영역 Vue component /////////////////
 
+// 2. 컨텐츠1 영역 컴포넌트
+Vue.component("cont1-comp",{
+    template: subData.cont1,
+}); ////////////////// 상단영역 Vue component /////////////////
+
 // ########### 서브영역 뷰 인스턴스 생성하기 ########## //
-// Vue.component(내가지은요소명,{옵션})
 new Vue({
     el: `#cont`,
     store, // 뷰엑스 스토어 등록 필수!!!

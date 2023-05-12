@@ -53,6 +53,7 @@ const store = new Vuex.Store({
             // -> commit('메서드명',전달값)
 
             commit('setData',result);
+            // this.commit('setData',result);
             
             
         }, //// initData /////
