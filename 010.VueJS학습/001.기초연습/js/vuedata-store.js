@@ -3,7 +3,9 @@
 
 const store = new Vuex.Store({
     // (1) 데이터 셋팅구역:
-    state: {}, /////// state 구역 ////////
+    state: {
+        items: {}, // josn 데이터 담을 변수
+    }, /////// state 구역 ////////
 
     // (2) 데이터 변경 메서드구역: 호출시 commit() 사용!
     mutations: {},
