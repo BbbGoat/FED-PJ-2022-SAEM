@@ -8,7 +8,7 @@ Vue.component("my-comp",{
     template:`
     <div class="grid">
         <div v-for="(v,i) in $store.state.items.data">
-            <img v-bind:src="'./img_gallery/'+v.idx+'.jpg'" alt="dress" />
+            <img v-bind:src="'./img_gallery/'+(v.idx > 50? 1 : v.idx)+'.jpg'" alt="dress" />
             <aside>
                 <h2>{{v.gname}}</h2>
                 <h3>{{v.gprice}}</h3>
@@ -36,7 +36,7 @@ new Vue({
     created() {
         // 엑시오스 사용하여 json 데이터 가져오기
         // axios.get(제이슨파일).then(데이터=>담을변수=데이터)
-        axios.get("./js/data.json")
+        axios.get("./js/goods.json")
         .then(x => store.state.items = x);
         // 스토어에 items 전역변수에 셋팅함!
         console.log(store.state.items);
