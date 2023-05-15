@@ -34,6 +34,11 @@ Vue.component("cont2-comp", {
     template: subData.cont2,
 }); ////////// 상단영역 Vue component //////////
 
+// 4. 컨텐츠3 영역 컴포넌트
+Vue.component("cont3-comp", {
+    template: subData.cont3,
+}); ////////// 상단영역 Vue component //////////
+
 //###### 서브영역 뷰 인스턴스 셋팅하기 #######
 new Vue({
     el:"#cont",
@@ -91,10 +96,15 @@ new Vue({
 
         // 전체메뉴클릭시 전체메뉴창 닫기
         $(".mlist a").click(()=>{
-            $(".ham").trigger("click")
-
-            // 부드러운스크롤 위치값  업데이트!
+            // 1. 전체메뉴창 닫기
+            $(".ham").trigger("click");
+            // 2. 부드러운스크롤 위치값 업데이트!
             sc_pos = 0;
+            // 3. 스와이퍼 첫번째 슬라이드로 이동!
+            swiper.slideTo(0);
+            // 첫슬라이드는 0번: 스와이퍼 API 이용!
+            // 4. 등장액션 스크롤리빌 다시 호출!
+            $.fn.scrollReveal();
         });
         // $(선택요소).trigger(이벤트명)
         // -> 선택요소의 이벤트 강제발생함!
