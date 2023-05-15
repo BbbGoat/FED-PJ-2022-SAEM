@@ -90,8 +90,12 @@ new Vue({
         $.fn.scrollReveal();  
 
         // 전체메뉴클릭시 전체메뉴창 닫기
-        $(".mlist a").click(
-            ()=>$(".ham").trigger("click"));
+        $(".mlist a").click(()=>{
+            $(".ham").trigger("click")
+
+            // 부드러운스크롤 위치값  업데이트!
+            sc_pos = 0;
+        });
         // $(선택요소).trigger(이벤트명)
         // -> 선택요소의 이벤트 강제발생함!
         // 참고) JS 클릭이벤트 강제발생
