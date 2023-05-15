@@ -29,14 +29,15 @@ const store = new Vuex.Store({
             },
         },
         // 공통처리 메뉴 변수
-        menu: ["NEW MEN'S ARRIVAL", "WINDBREAKER", "BEACH STYLE", "SPORT STYLE"],
+        menu: [],
         // 공통처리 배너개수 변수
-        cnt: 3,
+        cnt: 0,
         // 공통처리 카테고리명 변수
-        cat: "men",
+        cat: "",
     },
     // state 데이터 변경 메서드구역!
     mutations: {
+        // 데이터 
         // 데이터 변경 셋업 메서드
         chgData(dt,pm){ // dt-state데이터, pm-전달값
             console.log("데이터변경:",pm);
@@ -47,7 +48,9 @@ const store = new Vuex.Store({
             dt.cat = dt.subData[pm].cat;
             // 3. 해당 카테고리 메뉴 업데이트
             dt.menu = dt.subData[pm].menu;
+            
         }, ///////// chgData메서드 ///////
+        
     },
 });
 
