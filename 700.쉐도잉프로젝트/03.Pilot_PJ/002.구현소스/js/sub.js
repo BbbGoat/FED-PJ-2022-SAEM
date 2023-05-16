@@ -75,6 +75,11 @@ Vue.component("cont4-comp", {
     template: subData.cont4,
 }); ////////// 상단영역 Vue component //////////
 
+// 6. 상세보기 영역 컴포넌트
+Vue.component("detail-comp", {
+    template: subData.detail,
+}); ////////// 상단영역 Vue component //////////
+
 //###### 서브영역 뷰 인스턴스 셋팅하기 #######
 new Vue({
     el: "#cont",
@@ -125,16 +130,44 @@ new Vue({
         $.fn.scrollReveal();
 
         // 전체메뉴클릭시 ///////////
-        $(".mlist a").click(() => {
+        $(".mlist a").click((e) => {
+            // 0. 기본이동막기
+            e.preventDefault();
             // 1. 전체메뉴창 닫기
             $(".ham").trigger("click");
-            // 2. 부드러운 스크롤 위치값 업데이트
+            // 2. 부드러운 스크롤 위치값 업데이트 + 맨 위 이동
             sc_pos = 0;
+            $("html,body").animate({scrollTop:"0"},1);
             // 3. 스와이퍼 첫번째 슬라이드로 이동!
             swiper.slideTo(0);
             // 첫슬라이드는 0번: 스와이퍼 API이용!
             // 4. 등장액션 스크롤리빌 다시 호출!
             $.fn.scrollReveal();
+            // 5. URL 강제 변경하기
+            // 변경이유 : SPA 변경시 전달변수 내용일치 -> 새로고침시 현재변경로딩!
+            history.pushState(null,null,"sub.html?cat="+store.state.name);
+            /*****************************************************
+                [ history.pushState() 메서드 ]
+
+                1. 브라우저 세션 기록 스택항목 추가메서드
+                2. 비동기식으로 작동함(주소이동없이 주소만 업데이트됨!)
+                3. 전달값 :
+                    history.pushState(상태,사용안됨,URL)
+
+                    (1) 상태 : 새로운 페이지 이동시 popstate가 됨
+                    (2) 사용안됨 : 전부터 사용되던 전달값.지금사용안됨
+                        보통 (1),(2)는 null로 셋팅함
+                    (3) URL : 이 주소는 현재 페이지가 포함된
+                        주소 카테고리(폴더)를 기준으로 작성됨
+
+                4. 사용기본폼 : 
+                    history.pushState(null,null,"my.html?hi=bye") 
+            *****************************************************/
+
+            // 6. 상세보기 박스가 열려있을 수 있으므로 닫기!
+            $("#bgbx").hide();
+
+
         });
         // $(선택요소).trigger(이벤트명)
         // -> 선택요소의 이벤트 강제발생함!
@@ -173,7 +206,73 @@ new Vue({
 
         // 로고 클릭시 첫페이지로 이동!!!
         $("#logo").click(() => (location.href = "index.html"));
-    },
+
+        // 상품 클릭시 상세보기 정보 셋팅하여 보이기
+        $(".flist a").click(function(e){
+            // 0. 기본이동막기
+            e.preventDefault();
+            // 1. 클릭된 요소의 부모(li)의 클래스 읽어오기
+            let cls = $(this).parent().attr("class");
+            console.log("클래스명:",cls);
+
+            // 2. 클릭된 요소의 다음형제요소의 정보값 읽어오기
+            // split("<br>") br태그로 잘라서 배열에 담음!
+            let ginfo = $(this).next(".ibox").html().split("<br>");
+            console.log("상품정보:",ginfo);
+
+            // 3. 뷰엑스 스토어 업데이트(리액티브 데이터 반영!)
+            store.state.cls = cls;
+            store.state.gname = ginfo[0];
+            store.state.gcode = ginfo[1];
+            store.state.gprice = ginfo[2];
+            
+            // 4. 슬라이드 애니메이션 하여 나타나기!
+            $("#bgbx").slideDown(400);
+            
+            // 계산함수 초기화 + 호출
+            // $("#sum").val(1);
+            // sfsf();
+
+        }); ///////// click ///////////
+
+        // 상세보기 박스 닫기버튼 클릭시 닫기!
+        $(".cbtn").click(function(e){
+            e.preventDefault();
+            $("#bgbx").slideUp(400);
+        }); ///// click ////////
+
+        $(".small a").click(e=>{
+            e.preventDefault();
+            // 추가기능코드 구현...
+        }); ///// click ////////
+
+        
+        
+        // 임의로 만든 계산함수
+
+        // function sfsf() {
+            
+        //     let total = store.state.gprice;
+        //     total = total.split(",");
+        //     let res = total[0]+total[1]
+        //     res = res.split("원")
+        //     console.log("total!!!!!!!!!",Number(res[0]));
+        //     // total = total.split("원");
+        //     // let res = total[0]+total[1]
+        //     // console.log("total!!!!!!!!!",res);
+            
+        //     // 가져올 수량
+        //     $("#sum").blur(function(){
+        //         let sum = $(this).val();
+        //         let valnum = Number(sum)
+        //         console.log("블러이벤트 발생!!:",valnum)
+        //         // 최종 출력
+        //         $("#total").text((Number(res[0])*valnum)+"원");
+        //     })
+        // }
+        
+    }, ////////////////// mounted ///////////////////////////////
+    
     // created 실행구역 : DOM연결전
     created: function () {},
 }); //////// 상단영역 뷰 인스턴스 ////////
