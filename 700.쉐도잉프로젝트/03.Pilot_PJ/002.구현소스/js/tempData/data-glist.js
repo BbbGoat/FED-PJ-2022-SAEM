@@ -29,12 +29,6 @@ const comData = {
                         More List
                     </router-link>
                 </li>
-                <li>
-                    <a href="#women">WOMEN</a>
-                </li>
-                <li>
-                    <a href="#style">STYLE</a>
-                </li>
             </ul>
         </nav>
 
