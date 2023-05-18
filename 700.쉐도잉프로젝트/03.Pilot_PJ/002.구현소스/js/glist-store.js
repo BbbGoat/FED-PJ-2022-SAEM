@@ -51,12 +51,13 @@ const store = new Vuex.Store({
 
         // 모어 변수 업데이트 메서드
         updateMore(dt,pm) { // pm - 업데이트할 숫자
-            // mnum은 리스트 범위수
-            dt.mnum = pm;
+            // mnum은 모어 범위수 : +=로 여러번 모어진행
+            dt.mnum += pm;
 
-            // 업데이트 후, 모어버튼 없애기
-            // $("#more").hide();
-            dt.mbtn = false;
+            // 업데이트 후, 모어버튼 없애기(한계수를 넘으면!)
+            if (dt.mnum >= 25)
+                dt.mbtn = false;
+
         }, //////////////// updateMore ///////////////////
     },
 });

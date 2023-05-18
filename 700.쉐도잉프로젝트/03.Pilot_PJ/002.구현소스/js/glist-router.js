@@ -100,7 +100,7 @@ let More = {
         </div>
 
         <!-- 모어 버튼 표시구역 -->
-        <div id="more"  @click.prevent="$store.commit('updateMore',30)" v-if="$store.state.mbtn">
+        <div id="more"  @click.prevent="$store.commit('updateMore',5)" v-if="$store.state.mbtn">
             <button class="more">
                 MORE
             </button>
