@@ -92,6 +92,41 @@ const myele4 = (
 // 네번째 div요소에 출력하기
 ReactDOM.render(myele4, document.querySelectorAll("#root>div")[3]);
 
+
+// 5번에는 내가 원하는 태그를 출력해본다!!!
+const mydata = [
+    { idx: 1, name: "김수현", movie: "졸리당" },
+    { idx: 2, name: "한가인", movie: "해품달" },
+    { idx: 3, name: "김유정", movie: "ㄴ어란ㅁ,ㅣ" },
+]
+
+// map(value,index,array)을 사용한 태그생성하기
+// map(배열값,순번,배열객체전체자신)
+// 파라미터 구성이 forEach() 메서드와 유사함!
+const mylist = mydata.map((val,idx,obj) =>
+    <li>{val.name} : {val.movie} { val.idx == 3 ? "★예뻐" : "★멋져" }</li>
+    // {}안에 표현식이 사용 가능함!
+);
+
+const myele5 = (
+    <React.Fragment>
+        <h2>배우리스트</h2>
+        <ul>
+            {mylist}
+        </ul>
+
+    </React.Fragment>
+);
+
+// 다섯번째 div요소에 출력하기
+ReactDOM.render(myele5, document.querySelectorAll("#root>div")[4]);
+
+
+/********************************************************* 
+
+*********************************************************/
+
+
 /********************************************************* 
 
 *********************************************************/
