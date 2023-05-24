@@ -247,30 +247,6 @@ new Vue({
         }); ///// click ////////
 
         
-        
-        // 임의로 만든 계산함수
-
-        // function sfsf() {
-            
-        //     let total = store.state.gprice;
-        //     total = total.split(",");
-        //     let res = total[0]+total[1]
-        //     res = res.split("원")
-        //     console.log("total!!!!!!!!!",Number(res[0]));
-        //     // total = total.split("원");
-        //     // let res = total[0]+total[1]
-        //     // console.log("total!!!!!!!!!",res);
-            
-        //     // 가져올 수량
-        //     $("#sum").blur(function(){
-        //         let sum = $(this).val();
-        //         let valnum = Number(sum)
-        //         console.log("블러이벤트 발생!!:",valnum)
-        //         // 최종 출력
-        //         $("#total").text((Number(res[0])*valnum)+"원");
-        //     })
-        // }
-        
     }, ////////////////// mounted ///////////////////////////////
     
     // created 실행구역 : DOM연결전
