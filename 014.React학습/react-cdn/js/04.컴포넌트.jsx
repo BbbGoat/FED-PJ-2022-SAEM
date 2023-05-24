@@ -57,7 +57,48 @@
     // 출력할 요소 -> 클래스를 호출하면 구성된 태그가 들어옴
     // 클래스호출법 : <클래스명 />
 
+    // [ 함수형 컴포넌트 만들기 ]
+    // 첫글자는 대문자!
+    function IronMan() {
+        return (
+            <div>
+                <h2>안녕? 나는 아이언맨이야!</h2>
+                <img src="./images/ab1.jpg" alt="아이언맨" />
+            </div>
+        ); 
+    } //////////// IronMan 컴포넌트 /////////////
 
+    // 랜더링하기 ////////
+    ReactDOM.render(<IronMan />, document.querySelector("#root2"));
+
+
+
+/**************************************************** 
+    [ Props 사용하기 ]
+    props는 properties 에서 나온말
+    속성들... 즉, 변수에 값을 할당하여 전달하는 방법
+    함수의 전달값과 같고 속성으로 컴포넌트에 보낸다!
+    -> props는 05번 다음번에 자세히 다룬다!
+****************************************************/
+// 내가 좋아하는 색 표시하기 컴포넌트 ////
+function Favorite(props) { // props는 속성셋팅 변수집합
+    return (
+        <h2>
+            내가 좋아하는 색은 {props.color}이야! <br />
+            그리고 좋아하는 음식은 {props.food}야! <br />
+            취미는 {props.hobby}이야! 알겠니???
+        </h2>
+    );
+} ////////////// Favorite 컴포넌트 //////////////////
+
+// 좋아하는 색을 props로 전달할 수 있다!
+ReactDOM.render(<Favorite color="빨간색" food="피자" hobby="게임" />, document.querySelector("#root3"));
+
+// 함수 컴포넌트에서는 표현식 안에서 {props.호출시사용한속성명}
+// 여기서는 {props.color} 이런 형식으로 사용함!
+
+// 컴포넌트 재사용하기!!!
+ReactDOM.render(<Favorite color="파란색" food="알리오올리오" hobby="여행" />, document.querySelector("#root4"));
 
 
 /**************************************************** 
