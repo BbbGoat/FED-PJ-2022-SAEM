@@ -34,7 +34,9 @@ let Glist = {
                         v.cat==$store.state.selnm[0] ||
                         v.cat==$store.state.selnm[1] ||
                         v.cat==$store.state.selnm[2]
-                ">
+                    "
+                    @click="$store.commit('setBtn')"
+                >
 
                 
                 <!-- 파라미터가 있는 뷰라우터는 이름으로 호출! -->
@@ -311,7 +313,7 @@ const Detail = {
                             </li>
                             <li class="tot">
                                 <span>총합계</span>
-                                <span id="total">니가계산해!</span>
+                                <span id="total">{{$store.state.gdata[$route.params.id-1].ginfo[3]}}</span>
                             </li>
                         </ol>
 
