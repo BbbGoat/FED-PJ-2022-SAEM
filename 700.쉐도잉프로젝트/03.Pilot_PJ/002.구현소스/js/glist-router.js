@@ -39,7 +39,10 @@ let Glist = {
                 
                 <!-- 파라미터가 있는 뷰라우터는 이름으로 호출! -->
                 <router-link 
-                    v-bind:to="{name:'det',params:{id:v.idx,list: $route.path}}">
+                    v-bind:to="{
+                        name:'det',
+                        params:{id : v.idx, list : $route.path}
+                    }">
                 [{{v.idx}}]
                     <img 
                         v-bind:src="
@@ -89,7 +92,10 @@ let Paging = {
                
             <!-- 파라미터가 있는 뷰라우터는 이름으로 호출! -->
             <router-link 
-                v-bind:to="{name:'det',params:{id:v.idx,list:$route.path}}">
+                v-bind:to="{
+                    name:'det',
+                    params:{id : v.idx, list : $route.path}
+                }">
                 [{{v.idx}}]
                 
                 <img 
@@ -148,8 +154,11 @@ let More = {
                
             <!-- 파라미터가 있는 뷰라우터는 이름으로 호출! -->
             <router-link 
-                v-bind:to="{name:'det',params:{id:v.idx,list:$route.path}}">
-                
+                v-bind:to="{
+                    name:'det',
+                    params:{id : v.idx, list : $route.path}
+                }">
+                    
                 [{{v.idx}}]
                 
                 <img 
@@ -310,8 +319,12 @@ const Detail = {
                     <div>
                         <!--버튼영역-->
                         <button class="btn btn1">BUY NOW</button>
-                        <button class="btn scbtn" v-on:click="$store.commit('setData',$route.params.id-1)">SHOPPING CART</button>
-                        <button class="btn">WISH LIST</button>
+                        <button class="btn scbtn"
+                        @click="$store.commit('setData',$route.params.id-1)"
+                        >SHOPPING CART</button>
+                        <button class="btn"
+                        @click="$store.commit('clearData')"
+                        >CLEAR CART</button>
 
                     </div>
                 </section>

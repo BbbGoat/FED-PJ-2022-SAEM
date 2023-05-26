@@ -12,8 +12,8 @@ const comData = {
         </h1>
         <!-- 1-2.GNB메뉴 : 3개(배너,하단제외) -->
         <nav class="gnb">
-            ALL ITEMS LIST
-            <ul>
+            All ITEMS LIST
+            <ul>                
                 <li>
                     <router-link to="/glist">
                         Filter List
@@ -75,6 +75,7 @@ const comData = {
     </header>
 
     `,
+    
 
     // 하단영역 html 데이터
     barea: `    

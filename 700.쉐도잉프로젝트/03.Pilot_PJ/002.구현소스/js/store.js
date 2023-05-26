@@ -37,9 +37,9 @@ const store = new Vuex.Store({
         // 공통처리 분류명
         name: "",
         // 상품속성코드(클래스명)
-        cls: "m1",
+        cls:"m1",
         // 상품이름
-        gname: "",
+        gname:"",
         // 상품코드
         gcode:"",
         // 상품가격
