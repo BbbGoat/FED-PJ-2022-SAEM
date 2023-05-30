@@ -145,7 +145,8 @@ function Ferrari(props) {
 
 // 일반 함수로 구현! 페라리움직이기! ////////////
 let one = 1;
-function move() {console.log(one);
+function move() {
+    console.log(one);
     let car = document.getElementById("car");
     car.style.transform = one?"translateX(150%) scale(2)":"translateX(0) scale(1)";
     car.style.transition = "2s ease-in-out";
