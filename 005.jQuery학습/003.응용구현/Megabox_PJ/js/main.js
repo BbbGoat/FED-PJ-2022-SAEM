@@ -311,11 +311,31 @@ $(function () { //// jQB2 //////////////////////////
             mv.get(0).play();
             // 멈춤상태일 경우 진한 멈춤버튼으로 변경!
             $(this).attr("src","images/vbt1-1.png");
-
         }
+    }); /////////// click ////////////////
 
+    // 2-2. 소리남/안남 기능 /////////////
+    // 대상: .btnsnd img
+    // 원리: 소리가 나는지 안나는지 속성 -> muted 사용해서 반대로 전환 
+    // 핵심: 현재 소리가 안나는지 상태를 확인함!
+    $(".btnsnd img").click(function(){
+        // 1. 현재 소리가 안나는지 상태 알아오기
+        // 동영상 소리 안남여부 속성 -> muted
+        let sound = mv.get(0).muted;
+        console.log("소리안나나?",sound);
+
+        // 2. 만약 소리가 안나면 나게 / 나면 안나게하기
+        // muted 속성은 현재소리안남 상태값을 불린으로 읽기/쓰기 가능
+        mv.get(0).muted = !sound;
+        // !sound는 true/false 전환 코드임!
+
+        // 3. 아이콘을 현재 소리상태로 넣기
+        // sound가 true이면 반대로 했으므로 소리남 아이콘!
+        if(sound) $(this).attr("src","./images/speaker_blue.png");
+        else $(this).attr("src","./images/speaker-mute_blue.png");
         
-    });
+    }); ////////////// click ////////////////
+
 
 
     ///// 3. 영화페이지 : 스와이퍼 적용하기 //////
