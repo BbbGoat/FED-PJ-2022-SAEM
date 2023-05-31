@@ -22,7 +22,7 @@ function LostDev() {
 
 // 3번 컴포넌트
 function MakeImg(props) {
-    return <img src={props.isrc} alt={props.ialt} />;
+    return <img src={props.isrc} alt={props.ialt} title={props.ialt} />;
 } ////////////// MakeImg /////////////
 
 // 출력 메인 컴포넌트 /////
@@ -33,6 +33,7 @@ function Developer(props) { // 호출시 전달되는 속성 props
     if (isNow) {
         return (
             <React.Fragment>
+                {/* MakeDev 컴포넌트 선택출력 */}
                 <MakeDev />
                 <MakeImg isrc={props.isrc} ialt={props.ialt} />
             </React.Fragment>
@@ -43,6 +44,7 @@ function Developer(props) { // 호출시 전달되는 속성 props
     // return 때문에 컴포넌트를 나감!
     return (
         <React.Fragment>
+            {/* LostDev 컴포넌트 선택출력 */}
             <LostDev />
             <MakeImg isrc={props.isrc} ialt={props.ialt} />
         </React.Fragment>
@@ -141,23 +143,39 @@ const movs = [
     2023년도 무비3
 */
 
-function MyTitle(props) {
-    return <h2>😭개발자가 좋아하는 {props.tit}</h2>;
+function MyList(props) {
+    // year - 영화개봉년도 / mname - 무비명
+    return <li>{props.year}년도의 {props.mname}를 좋아해!</li>
 }
 
 function MyMovie(props) {
-    const movie = props.movs
+    const movie = props.movList
     return (
         <React.Fragment>
-            <MyTitle tit={"영화"}/>
+            <Title tit={"영화"}/>
+            {/* 영화 위시리스트의 길이가 0보다 클때만 출력 */}
             {
-                movs.length > 0 &&
+                movie.length > 0 &&
                 <div>
-                    <h2>영화 : {movie[0].year}</h2>
+                    <h2>
+                        개발자가 좋아하는 영화는 최근 {movie.length}년간 아래와 같습니다!
+                    </h2>
+                    <ul>
+                        {
+                            // 배열값으로 객체가 들어가 있으므로
+                            // 각 배열값은 객체의 속성으로 지정함!
+                            // x.year / x.mtit
+                            movie.map(x=><MyList year={x.year} mname={x.mtit} />)
+                        }
+                    </ul>
                 </div>
+            }
+            {
+                movie.length == 0 &&
+                <h2>아직 개발자영화 리스트가 업데이트 되지 않았습니다!</h2>
             }
         </React.Fragment>
     );
 }
 
-ReactDOM.render(<MyMovie movs={movs} />, document.querySelector("#root4"));
+ReactDOM.render(<MyMovie movList={movs} />, document.querySelector("#root4"));
