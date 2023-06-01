@@ -45,7 +45,11 @@ function bindList(pgnum) { // pgnum - 페이지번호
             blist += `
                 <tr>
                     <td>${bdata[i]["idx"]}</td>
-                    <td>${bdata[i]["tit"]}</td>
+                    <td>
+                        <a href="view.html?idx=${bdata[i]["idx"]}">
+                        ${bdata[i]["tit"]}
+                        </a>
+                    </td>
                     <td>${bdata[i]["writer"]}</td>
                     <td>${bdata[i]["date"]}</td>
                     <td>${bdata[i]["cnt"]}</td>
