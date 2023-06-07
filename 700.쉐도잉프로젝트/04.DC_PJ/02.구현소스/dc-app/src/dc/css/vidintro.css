@@ -1,0 +1,37 @@
+@charset "utf-8";
+/* VidIntro 모듈용 CSS - VidIntro.css */
+
+/* 전체박스 */
+.vidbox{
+    position: relative;
+    display: flex;
+    max-width: 1320px;
+    gap: 30px;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding-bottom: 20px;
+}
+.vb1{
+
+}
+.vb1 iframe {
+    border: none;
+    width: 100%;
+    aspect-ratio: 2/1;
+}
+.vb2{
+    font-family: 'Roboto Condensed','Sans-serif';
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding: 30px;
+    gap: 10px;
+}
+.vb2 h2 {
+    font-size: 30px;
+}
+.vb2 p {
+    line-height: 30px;
+
+}
