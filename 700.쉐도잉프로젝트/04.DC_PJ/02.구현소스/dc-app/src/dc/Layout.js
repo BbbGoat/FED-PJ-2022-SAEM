@@ -34,6 +34,20 @@ const Layout = () => {
         {
             txt:"COMICS",
             link:"/co",
+            sub: [
+                {
+                    txt:"LATEST COMICS",
+                    link:"",
+                },
+                {
+                    txt:"DC UNIVERSE INFINITE",
+                    link:"",
+                },
+                {
+                    txt:"ALL COMICS SERIES",
+                    link:"",
+                },
+            ]
         },
         {
             txt:"MOVIES & TV",
