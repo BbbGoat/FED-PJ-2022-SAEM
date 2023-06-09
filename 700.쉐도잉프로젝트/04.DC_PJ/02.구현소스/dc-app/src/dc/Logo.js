@@ -2,18 +2,30 @@
 import React from "react";
 import isrc from "./Imgsrc";
 
-const Logo = () => {
+const Logo = (props) => { 
+    // props.gb : 상단,하단 구분코드
 
     //객체형 스타일적용: 속성명이 틀리면 아예 출력되지 않는다!
     const mystyle={
-        width:"45px",
-        height:"45px",
-        borderRadius:"50%",
+        top: {
+            width:"45px",
+            height:"45px",
+            marginRight:"30px",
+            borderRadius:"50%",
+        },
+        bottom: {
+           height:"80px"
+        }
     };
 
+    let istyle = {
+        top: "45px",
+        bottom: "80px",
+    }
+
     return (
-        <h1 style={mystyle}>
-            <img src={isrc.logo} style={{width:"45px"}} />
+        <h1 style={mystyle[props.gb]}>
+            <img src={isrc.logo} style={{width: istyle[props.gb]}} />
         </h1>
     );
 }; ///////////////// Logo ///////////////

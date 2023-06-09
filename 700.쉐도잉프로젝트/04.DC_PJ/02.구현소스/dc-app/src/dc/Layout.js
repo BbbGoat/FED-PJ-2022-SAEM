@@ -2,6 +2,9 @@
 import Logo from "./Logo";
 import "./css/layout.css";
 import { Link, Outlet } from "react-router-dom";
+// 폰트어썸 임포트
+import { faCamera, faSearch } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 /********************************************************* 
     [ 리액트 라우터와 연결하여 사용되는 라우터 컴포넌트 ]
@@ -14,38 +17,31 @@ import { Link, Outlet } from "react-router-dom";
 
 const Layout = () => {
 
-    /* 
-        sub:[{
-            txt:"",
-            link:"",
-        }]
-    */
-    
     // GNB메뉴 데이터 구성하기
     const gnb_data = [
-        {
-            txt:"Home",
-            link:"/",
-        },
+        // {
+        //     txt:"Home",
+        //     link:"/",
+        // },
         {
             txt:"CHARACTERS",
             link:"/ct",
         },
         {
             txt:"COMICS",
-            link:"/co",
+            link:"/co1",
             sub: [
                 {
                     txt:"LATEST COMICS",
-                    link:"/lc",
+                    link:"/co1",
                 },
                 {
                     txt:"DC UNIVERSE INFINITE",
-                    link:"/dui",
+                    link:"/co2",
                 },
                 {
                     txt:"ALL COMICS SERIES",
-                    link:"/acs",
+                    link:"/co3",
                 },
             ]
         },
@@ -55,15 +51,15 @@ const Layout = () => {
             sub: [
                 {
                     txt:"DC MOVIES",
-                    link:"/dm",
+                    link:"/mv",
                 },
                 {
                     txt:"DC SERIES",
-                    link:"/ds",
+                    link:"/mv",
                 },
                 {
                     txt:"DC ON HBO MAX",
-                    link:"/hbo",
+                    link:"/mv",
                 },
             ]
         },
@@ -80,6 +76,30 @@ const Layout = () => {
             link:"/vd",
         },
     ]
+
+    /* 하단링크 데이터 셋업! */
+    const bmenu = [
+        {
+            tit: "PRIVACY POLICY",
+            link: "https://www.warnermediaprivacy.com/policycenter/b2c/WM/",
+        },
+        {
+            tit: "TERMS",
+            link: "https://www.dcuniverseinfinite.com/terms",
+        },
+        {
+            tit: "AD CHOICES",
+            link: "https://www.warnermediaprivacy.com/policycenter/b2c/wm/",
+        },
+        {
+            tit: "ACCESSIBILITY",
+            link: "https://policies.warnerbros.com/terms/en-us/#accessibility",
+        },
+        {
+            tit: "COOKIE SETTINGS",
+            link: "#compliance-link",
+        },
+    ]
     
 return (
     <>
@@ -89,7 +109,9 @@ return (
             <nav className="gnb">
                 <ul>
                     <li>
-                        <Logo />
+                        <Link to="/">
+                            <Logo gb="top" />
+                        </Link>
                     </li>
                     {
                         gnb_data.map((v,i) =>
@@ -119,6 +141,19 @@ return (
                             </li>
                         )
                     }
+                    <li style={{marginLeft: "auto"}}>
+                        <FontAwesomeIcon icon={faSearch} />
+                    </li>
+                    <li>
+                        <Link to="/signup">
+                            SIGN UP
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/login">
+                            LOG IN
+                        </Link>
+                    </li>
                 </ul>
             </nav>
         </header>
@@ -129,6 +164,24 @@ return (
         </main>
         {/* 3.하단영역 */}
         <footer className="info">
+            <ul>
+                <li>
+                    <Logo gb="bottom" />
+                </li>
+                <li>
+                    <ol className="bmenu">
+                        {
+                            bmenu.map((v,i)=>
+                                <li key={i}>
+                                    <a href={v.link} target="_blank">{v.tit}</a>
+                                </li>
+                            )
+                        }
+                    </ol>
+                </li>
+                <li></li>
+            </ul>
+            
             All Site Content © &amp; TM DC, unless otherwise noted here.
             <br /> 
             All rights reserved. 
