@@ -37,21 +37,35 @@ const Layout = () => {
             sub: [
                 {
                     txt:"LATEST COMICS",
-                    link:"",
+                    link:"/lc",
                 },
                 {
                     txt:"DC UNIVERSE INFINITE",
-                    link:"",
+                    link:"/dui",
                 },
                 {
                     txt:"ALL COMICS SERIES",
-                    link:"",
+                    link:"/acs",
                 },
             ]
         },
         {
             txt:"MOVIES & TV",
             link:"/mv",
+            sub: [
+                {
+                    txt:"DC MOVIES",
+                    link:"/dm",
+                },
+                {
+                    txt:"DC SERIES",
+                    link:"/ds",
+                },
+                {
+                    txt:"DC ON HBO MAX",
+                    link:"/hbo",
+                },
+            ]
         },
         {
             txt:"GAMES",
@@ -81,6 +95,27 @@ return (
                         gnb_data.map((v,i) =>
                             <li key={i}>
                                 <Link to={v.link}>{v.txt}</Link>
+                                {/* v.sub가 없으면 undefined */}
+                                {/* {console.log(v.sub)} */}
+                                {
+                                    // 조건식 && 출력코드
+                                    // 조건 : sub데이터가 없지 않으면
+                                    // undefined - 정의되지 않은 값
+                                    // null - 빈값
+                                    // 위의 두가지는 데이터가 없다는 값임!
+                                    v.sub != undefined &&
+                                    <div className="smenu">
+                                        <ol>
+                                            {
+                                                v.sub.map((v,i)=>
+                                                    <li key={i}>
+                                                        <Link to={v.link}>{v.txt}</Link>
+                                                    </li>
+                                                )
+                                            }
+                                        </ol>
+                                    </div>
+                                }
                             </li>
                         )
                     }
