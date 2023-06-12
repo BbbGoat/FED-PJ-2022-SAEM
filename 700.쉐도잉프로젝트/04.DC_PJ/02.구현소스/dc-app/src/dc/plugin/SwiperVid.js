@@ -24,9 +24,6 @@ export default function SwiperVid(props) {
     // 데이터 셋팅
     const sdt = swipervid_data;
 
-    // 하나당 슬라이드수
-    const [perSld,setPerSld] = useState(4)
-
     // 비디오보이기 함수
     const showVid = (src,tit) => { 
         // src-비디오경로, tit-비디오제목
@@ -48,27 +45,29 @@ export default function SwiperVid(props) {
         });
     }; //////////// showVid ///////////////////
 
-    // 이벤트 함수/////////////
-    const evtFn = () => {
-        $(()=>{
-            $(window).resize(function(){
-                let nowW = $(this).width();
-                console.log(nowW);
-                if(nowW <= 1000 && nowW > 700) setPerSld(3);
-                else if(nowW <= 700) setPerSld(2);
-                else setPerSld(4);
-
-            })
-        })
-    };
-
+    
     return (
         <>
             <Swiper
-                slidesPerView={perSld}
+                // 한화면당 개수를 Hook변수사용!
+                // slidesPerView={2}
                 spaceBetween={20}
                 navigation={true}
                 modules={[Navigation]}
+                breakpoints={{
+                    200: {
+                        slidesPerView: 2,
+                    },
+                    700: {
+                        slidesPerView: 2,
+                    },
+                    1000: {
+                        slidesPerView: 3,
+                    },
+                    1200: {
+                        slidesPerView: 4,
+                    },
+                }}
                 className="mySwiper">
                 {sdt.map((v, i) => (
                     <SwiperSlide key={i}>
@@ -95,7 +94,6 @@ export default function SwiperVid(props) {
                     </SwiperSlide>
                 ))}
             </Swiper>
-            {evtFn()}
         </>
     );
 }
