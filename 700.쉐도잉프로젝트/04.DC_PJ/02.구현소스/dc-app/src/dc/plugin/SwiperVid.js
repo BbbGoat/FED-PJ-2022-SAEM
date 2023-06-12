@@ -8,6 +8,11 @@ import $ from 'jquery';
 import "swiper/css";
 import "swiper/css/navigation";
 
+
+/* 폰트어썸 임포트 */
+import { faPlayCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import "./swipervid.css";
 
 // import required modules
@@ -18,6 +23,9 @@ import swipervid_data from "../data/swipervid";
 export default function SwiperVid(props) {
     // 데이터 셋팅
     const sdt = swipervid_data;
+
+    // 하나당 슬라이드수
+    const [perSld,setPerSld] = useState(4)
 
     // 비디오보이기 함수
     const showVid = (src,tit) => { 
@@ -40,10 +48,24 @@ export default function SwiperVid(props) {
         });
     }; //////////// showVid ///////////////////
 
+    // 이벤트 함수/////////////
+    const evtFn = () => {
+        $(()=>{
+            $(window).resize(function(){
+                let nowW = $(this).width();
+                console.log(nowW);
+                if(nowW <= 1000 && nowW > 700) setPerSld(3);
+                else if(nowW <= 700) setPerSld(2);
+                else setPerSld(4);
+
+            })
+        })
+    };
+
     return (
         <>
             <Swiper
-                slidesPerView={4}
+                slidesPerView={perSld}
                 spaceBetween={20}
                 navigation={true}
                 modules={[Navigation]}
@@ -55,6 +77,14 @@ export default function SwiperVid(props) {
                             {/* 동영상이미지영역 */}
                             <div className="vidimg">
                                 <img src={v.isrc} alt={v.tit}></img>
+                                <FontAwesomeIcon icon={faPlayCircle} 
+                                style={{
+                                    position:"absolute",
+                                    bottom:"55%",
+                                    left:"10%",
+                                    color:"#fff",
+                                    fontSize:"50px"
+                                    }} />
                             </div>
                             {/* 동영상타이틀영역 */}
                             <div className="vidtit">
@@ -65,6 +95,7 @@ export default function SwiperVid(props) {
                     </SwiperSlide>
                 ))}
             </Swiper>
+            {evtFn()}
         </>
     );
 }

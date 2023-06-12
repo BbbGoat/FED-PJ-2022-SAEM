@@ -1,25 +1,39 @@
 @charset "utf-8";
 /* 메인배너용 CSS - ban.css */
-.banner {
+.banner{
     position: relative;
     overflow: hidden;
     /* 넘치는 배너 숨기기 */
 }
-.bantit {
+.bantit{
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 5%;
+    left: 5%;
+    width: 30%;
     padding: 25px;
     color: #fff;
     text-shadow: 0 0 3px #000;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.bantit h3{
+    font-size: 16px;
+}
+.bantit h2{
+    font-size: 36px;
+    margin: 10px 0 20px;
+}
+.bantit p{
+    font-size: 15px;
+    line-height: 1.8;
+    font-weight: bold;
 }
 /* 배너슬라이드 */
-.slider {
+.slider{
     position: relative;
     left: 0;
     display: flex;
 }
-.slider li {
+.slider li{
     position: relative;
     /* 부모자격 */
     width: 100%;
@@ -27,20 +41,26 @@
     /* 강제축소옵션 해제 */
 }
 /* 배너 컨텐츠버튼 */
-.banner button {
-    border-radius: 20px;
-    padding: 10px;
-    background-color: transparent;
-    color: #fff;
-    border: 1px solid #fff;
+.banner button{
+    border-radius: 25px;
+    padding: 8px 40px;
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 15px;
+    transition: .3s;
+    margin-top: 20px;
+    cursor: pointer;
+    border: none;
 }
-.banner button:hover {
+.banner button:hover{
     background-color: #0074e8;
+    color: #fff;
 }
-.banimg {
+.banimg{
     width: 100%;
 }
-
 
 /* 이동버튼 */
 .banner .abtn{

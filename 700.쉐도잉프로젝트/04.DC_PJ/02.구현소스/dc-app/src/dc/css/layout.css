@@ -6,7 +6,7 @@
     width: 100%;
     height: 58px;
     z-index: 9999;
-    background-color: #fff;
+    background-color: #fff;    
     font-family: 'Roboto Condensed', sans-serif;
 }
 .gnb{
@@ -17,10 +17,10 @@
     display: flex;
     align-items: center;
     list-style: none;
-    gap: 0 20px;
+    gap: 0 20px
 }
-.gnb > ul > li{
-    /* margin: 0 10px; */
+.gnb>ul>li{
+    /* 상위메뉴 부모자격 */
     position: relative;
     line-height: 58px;
 }
@@ -28,33 +28,33 @@
     color: #111;
     font-weight: bold;
     text-decoration: none;
+    transition: .3s;
 }
-.gnb a:hover{
-    color: hotpink;
-    text-decoration: underline;
-    text-decoration-style: wavy;
-    text-shadow: 2px 2px 2px #555;
+.gnb a:hover{    
+    color: #007aff;
 }
 
+
+
 /* 서브메뉴 */
-.smenu {
+.smenu{
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.503);
     white-space: nowrap;
-    line-height: 2;
+    line-height: 2.5;
     /* 처음에 안보임 */
     display: none;
 }
 /* 오버시보임 */
-.gnb > ul > li:hover .smenu {
+.gnb>ul>li:hover .smenu{
     display: block;
 }
-.smenu::before {
+.smenu::before{
     content: '';
     position: absolute;
     top: -17px;
@@ -62,11 +62,13 @@
     transform: translateX(-50%);
     width: 0;
     height: 0;
-    border-bottom: 15px solid rgba(0, 0, 0, 0.089);
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
+    border-bottom: 16px solid rgba(0, 0, 0, 0.291);
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+
+
 }
-.smenu::after {
+.smenu::after{
     content: '';
     position: absolute;
     top: -15px;
@@ -77,8 +79,9 @@
     border-bottom: 15px solid #fff;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-}
 
+
+}
 
 h1{
     text-align: center;
@@ -91,13 +94,32 @@ h1{
 .info{
     text-align: center;
     padding: 30px;
-    background-image: linear-gradient(to bottom, #CCC, #777);
+    background-color: #000;
     color: #fff;
     display: flex;
     flex-direction: column;
 }
-.bmenu {
+.info>ul>li:last-child{
+    font-weight: bold;
+}
+.bmenu{
+    font-family: 'Roboto Condensed', sans-serif;
     display: flex;
     justify-content: center;
-    gap: 0 30px;
+    margin: 15px 0;
+}
+.bmenu li{
+    padding: 0 10px;
+}
+.bmenu li + li{
+    border-left: 2px solid #fff;
+}
+.bmenu a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .3s;
+}
+.bmenu a:hover{
+    color: #007aff;
 }
