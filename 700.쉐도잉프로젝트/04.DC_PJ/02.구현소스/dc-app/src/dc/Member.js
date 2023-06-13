@@ -111,14 +111,12 @@ function Member() {
 
     // 4. 사용자이름 유효성검사
     const changeUserName = (e) => {
-        // 1. 에러상태를 먼저 false로 셋팅
-        if (userName !== "") setUserNameError(false);
+        // 1. 빈값 체크
+        if (e.target.value !== "") setUserNameError(false);
         else setUserNameError(true);
 
         // 2. 입력값 반영하기
         setUserName(e.target.value);
-
-        // 3. 
 
     }; ////////////////// changeChkPwd /////////////////////
 
