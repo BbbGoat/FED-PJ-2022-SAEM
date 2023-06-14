@@ -69,7 +69,7 @@ function Member() {
         "This ID is already in use!",
         "That's a great ID!",
     ];
-    
+
     // 후크변수 메시지
     const [idMsg,setIdMsg] = useState(msgId[0]);
     
@@ -91,20 +91,51 @@ function Member() {
         if (valid.test(e.target.value)) {
             // 아이디 형식에는 맞지만 사용중인 아이디인지 검사하기
             let memData = localStorage.getItem("mem-data");
+            console.log("로컬스",memData);
             // 로컬스 null이 아닌경우
             if(memData){
-                // 
-            }
-            else {
-                console.log("DB가 없어욧!!!");
-            }
+                // 로컬스에 기존 아이디중 있는지 확인하기
+                // 문자형 데이터를 객체형 데이터로 변환 (배열형!)
+                memData = JSON.parse(memData);
+                console.log("검사:",memData);
+                
+                let isOK = true;
+                
+                // 검사돌기!
+                memData.forEach((v) => {
+                    // 기존의 아이디와 같은 경우!
+                    if (v["uid"] === e.target.value) {
+                        console.log(v["uid"]);
+                        // 메시지변경
+                        setIdMsg(msgId[1]);
+                        // 아이디에러상태값 업데이트
+                        setUserIdError(true);
+                        // 존재여부 업데이트
+                        isOK = false;
+                    } ////// if /////
+                }); ///////// forEach //////////////
+                
+                // 기존아이디가 없으면 들어감!
+                if(isOK){
+                    console.log("바깥");
+                    // 메시지변경(처음메시지로 변경)
+                    setIdMsg(msgId[0]);              
+                    // 아이디에러상태값 업데이트
+                    setUserIdError(false);
 
-            setUserIdError(false); // 에러아님상태!
-        } 
-        else setUserIdError(true); // 에러상태!
+                } /////////// if : isOK /////////
+                else {
+                    console.log("DB가 없어욧!!!");
+                }
+
+                // setUserIdError(false); // 에러아님상태!
+            } // if /////////
+            else setUserIdError(true); // 에러상태!
+        } //// if 
 
         // 4. 실제 userId 후크변수값이 업데이트 되어야 화면에 출력됨!
         setUserId(e.target.value);
+        
     }; ///////////////// changeUserId ///////////////////
 
     // 2. 비밀번호 유효성 검사
@@ -273,6 +304,7 @@ function Member() {
                             {
                                 // 에러일 경우 메시지 보여주기
                                 // 조건문 && 요소 -> 조건 true일때 요소 출력
+                                // 후크 데이터 idMsg로 변경출력!
                                 userIdError && (
                                     <div className="msg">
                                         <small style={{ color: "red", fontSize: "10px" }}>
@@ -280,7 +312,20 @@ function Member() {
                                         </small>
                                     </div>
                                 )
-
+                            }
+                            {
+                                // "훌륭한 아이디네요"일 경우!
+                                // 아이디에러가 false일때 출력!
+                                // 고정데이터 배열 msgId 세번째값 출력
+                                // 조건추가 : userId가 입력전일때는 안보임
+                                // userId가 입력전엔 false를 리턴함!
+                                !userIdError && userId && (
+                                    <div className="msg">
+                                        <small style={{ color: "green", fontSize: "10px" }}>
+                                            {msgId[2]}
+                                        </small>
+                                    </div>
+                                )
                                 // value={userId} 값은 setUserId를 통해서만
                                 // 업데이트되어 실제화면에 반영된다!
 
