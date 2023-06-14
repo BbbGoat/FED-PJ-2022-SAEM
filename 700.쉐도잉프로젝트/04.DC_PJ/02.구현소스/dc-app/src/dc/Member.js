@@ -1,5 +1,6 @@
 // Member 모듈 : Member.js
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import $ from "jquery";
 import "./css/member.css";
 
@@ -62,6 +63,17 @@ function Member() {
     // 5. 이메일에러변수
     const [emailError, setEmailError] = useState(false);
 
+    // [ 아이디관련 메시지 프리셋 ]
+    const msgId = [
+        "The user ID must contain at least 5 characters or numbers.",
+        "This ID is already in use!",
+        "That's a great ID!",
+    ];
+    
+    // 후크변수 메시지
+    const [idMsg,setIdMsg] = useState(msgId[0]);
+    
+
     // [ 3. 유효성 검사 메서드 ]
     // 1. 아이디 유효성 검사
     const changeUserId = (e) => {
@@ -76,7 +88,19 @@ function Member() {
         // 조건: 유효성 검사 결과가 true인가? 에러상태! false
         // 정규식.test() -> 정규식 검사결과 리턴 메서드
         // 결과: true이면 에러상태값 false / false이면 에러상태값 true
-        if (valid.test(e.target.value)) setUserIdError(false); // 에러아님상태!
+        if (valid.test(e.target.value)) {
+            // 아이디 형식에는 맞지만 사용중인 아이디인지 검사하기
+            let memData = localStorage.getItem("mem-data");
+            // 로컬스 null이 아닌경우
+            if(memData){
+                // 
+            }
+            else {
+                console.log("DB가 없어욧!!!");
+            }
+
+            setUserIdError(false); // 에러아님상태!
+        } 
         else setUserIdError(true); // 에러상태!
 
         // 4. 실제 userId 후크변수값이 업데이트 되어야 화면에 출력됨!
@@ -145,7 +169,10 @@ function Member() {
         if(!userName) setUserNameError(true);
         if(!email) setEmailError(true);
 
-        // 에러 후크 변수가 모두 false일 경우 true값 리턴
+        // 통과조건:
+        // 1. 빈값이 아님
+        // 2. 에러 후크 변수가 모두 false
+        // 위의 2가지 만족시 true값 리턴
         if(userId && pwd && chkPwd && userName && email &&
             !userIdError && !pwdError && !chkPwdError && !userNameError && !emailError) return true;
         else return false; // 하나라도 에러면 false값 리턴!
@@ -161,12 +188,63 @@ function Member() {
 
         // 유효성검사 전체 통과시
         if (totalValid()) {
-            alert("처리페이지로 이동!");
+            // alert("처리페이지로 이동!");
+
+
+            // 만약 로컬스 "mem-data"가 null이면 만들어준다!
+            if(localStorage.getItem("mem-data")===null){
+                localStorage.setItem("mem-data",`
+                    [
+                        {
+                            "idx": "1",
+                            "uid":"tomtom",
+                            "pwd":"1111",
+                            "unm":"Tom",
+                            "eml":"tom@gmail.com"
+                        }
+                    ]
+                `)
+            }
+
+            // 로컬스 변수할당
+            let memData = localStorage.getItem("mem-data");
+
+            console.log(memData);
+
+            // 로컬스 객체로 변환하기
+            memData = JSON.parse(memData);
+
+            console.log(memData);
+
+            // 새로운 데이터구성
+            let newObj = {
+                "idx": memData.length+1,
+                "uid": userId,
+                "pwd": pwd,
+                "unm": userName,
+                "eml": email
+            };
+
+            // 데이터 추가하기 : 배열에 데이터 추가임 -> push()
+            memData.push(newObj);
+
+            // 추가후 확인
+            console.log(memData);
+
+            // 로컬쓰에 반영하기
+            localStorage.setItem("mem-data",JSON.stringify(memData))
+
+            // 로컬쓰 확인
+            console.log(localStorage.getItem("mem-data"));
+            
+            
         } // if //////
         // 불통과시
         else {
-            alert("입력을 수정하세요!");
+            // alert("입력을 수정하세요!");
         } // else /////
+
+
 
         
     } /////////////////// onSubmit /////////////////////
@@ -198,7 +276,7 @@ function Member() {
                                 userIdError && (
                                     <div className="msg">
                                         <small style={{ color: "red", fontSize: "10px" }}>
-                                            The user ID must contain at least 5 characters or numbers.
+                                            {idMsg}
                                         </small>
                                     </div>
                                 )
@@ -312,7 +390,8 @@ function Member() {
                         </li>
                         <li>
                             {/* 7.로그인페이지링크 */}
-
+                            Are you already a member? 
+                            <Link to="/login">Log In</Link>
                         </li>
                     </ul>
                 </form>
