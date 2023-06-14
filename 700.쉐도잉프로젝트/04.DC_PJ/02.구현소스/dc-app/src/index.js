@@ -42,8 +42,8 @@ import ScrollTop from "./dc/common/ScrollTop";
 // 출력해야하기 때문에 스스로 내보내기를 셋팅하는것임!
 export default function App(){
     return(
-        <HashRouter>
-        {/* <BrowserRouter> */}
+        <BrowserRouter>
+        {/* <HashRouter> */}
         {/* <BrowserRouter basename={process.env.PUBLIC_URL}> */}
             {/* 라우터 갱신될때 스크롤 상단이동 모듈 작동함! */}
             <ScrollTop />
@@ -67,8 +67,8 @@ export default function App(){
                </Route>
 
             </Routes>
-        {/* </BrowserRouter> */}
-        </HashRouter>
+        {/* </HashRouter> */}
+        </BrowserRouter>
     );
 } //////////////// App 컴포넌트 //////////////////
 
