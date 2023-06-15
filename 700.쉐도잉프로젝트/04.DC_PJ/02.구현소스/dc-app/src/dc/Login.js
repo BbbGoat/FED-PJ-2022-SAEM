@@ -4,7 +4,7 @@
 import { useState } from "react";
 import "./css/member.css";
 
-export default function Login(){
+export default function LogIn(){
 
     
     // [ 후크 useState 메서드 셋팅하기 ]
@@ -22,14 +22,17 @@ export default function Login(){
     const [pwdError, setPwdError] = useState(false);
 
     // [ 아이디관련 메시지 프리셋 ]
-    const msgId = [
-        "The user ID must contain at least 5 characters or numbers.",
-        "This ID is already in use!",
-        "That's a great ID!",
+    const msgTxt = [
+        "This is a required entry", // 필수입력
+        "ID does not exist",
+        "Password doesn't match",
     ];
 
     // 후크변수 메시지
-    const [idMsg,setIdMsg] = useState(msgId[0]);
+    // 아이디메시지
+    const [idMsg,setIdMsg] = useState(msgTxt[0]);
+    // 비번메시지
+    const [pwdMsg,setPwdMsg] = useState(msgTxt[0]);
     
 
     // [ 3. 유효성 검사 메서드 ]
@@ -52,14 +55,33 @@ export default function Login(){
         // 2. 입력값 반영하기
         setPwd(e.target.value);
     }; ///////////////// changePwd /////////////////////
+
+    
+    // 3. 전체 유효성 검사함수
+    const totalValid = () => {
+
+        // 모든 입력창 검사 (빈값일 경우 모두 에러를 후크변수에 전달!)
+        if(!userId) setUserIdError(true);
+        if(!pwd) setPwdError(true);
+
+        // 통과조건:
+        // 1. 빈값이 아님
+        // 2. 에러 후크 변수가 모두 false
+        // 위의 2가지 만족시 true값 리턴
+        if(userId && pwd && !userIdError && !pwdError) return true;
+        else return false; // 하나라도 에러면 false값 리턴!
+
+    }; ////////////////// totalValid ////////////////////
+    
+    
     
     
     return(
         <>
             <div className="outbx">
                 {/* 모듈코드 */}
-                <section className="membx">
-                    <h2>Join Us</h2>
+                <section className="membx" style={{minHeight:"300px"}}>
+                    <h2>Log In</h2>
 
                     <form method="post" action="process.php">
                         <ul>
@@ -104,81 +126,14 @@ export default function Login(){
                                     pwdError && (
                                         <div className="msg">
                                             <small style={{ color: "red", fontSize: "10px" }}>
-                                                Password must be at least 8 characters long and must contain at least one letter and one number each.
+                                                {pwdMsg}
                                             </small>
                                         </div>
                                     )
                                 }
                             </li>
                                 
-                            <li>
-                                {/* 3.비밀번호확인 */}
-                                <label>Confirm password : </label>
-                                <input
-                                    type="password"
-                                    maxLength="20"
-                                    placeholder="Please Confirm your Password"
-                                    value={chkPwd}
-                                    onChange={changeChkPwd}
-                                />
-                                {
-                                    // 에러일 경우 메시지 보여주기
-                                    // 조건문 && 요소 -> 조건 true일때 요소 출력
-                                    chkPwdError && (
-                                        <div className="msg">
-                                            <small style={{ color: "red", fontSize: "10px" }}>
-                                                Password verification does not match
-                                            </small>
-                                        </div>
-                                    )
-                                }
-                                
-                            </li>
-                            <li>
-                                {/* 4.이름 */}
-                                <label>User Name : </label>
-                                <input
-                                    type="text"
-                                    maxLength="20"
-                                    placeholder="Please enter your Name"
-                                    value={userName}
-                                    onChange={changeUserName}
-                                />
-                                {
-                                    // 에러일 경우 메시지 보여주기
-                                    // 조건문 && 요소 -> 조건 true일때 요소 출력
-                                    userNameError && (
-                                        <div className="msg">
-                                            <small style={{ color: "red", fontSize: "10px" }}>
-                                                This is a required entry
-                                            </small>
-                                        </div>
-                                    )
-                                }
-                                
-                            </li>
-                            <li>
-                                {/* 5.이메일 */}
-                                <label>Email : </label>
-                                <input
-                                    type="text"
-                                    maxLength="50"
-                                    placeholder="Please enter your Email"
-                                    value={email}
-                                    onChange={changeEmail}
-                                />
-                                {
-                                    // 에러일 경우 메시지 보여주기
-                                    // 조건문 && 요소 -> 조건 true일때 요소 출력
-                                    emailError && (
-                                        <div className="msg">
-                                            <small style={{ color: "red", fontSize: "10px" }}>
-                                                Please enter a valid email format
-                                            </small>
-                                        </div>
-                                    )
-                                }
-                            </li>
+                         
                             <li style={{overflow:"hidden"}}>
                                 {/* 6.버튼 */}
                                 <button className="sbtn" onClick={onSubmit}>
@@ -187,11 +142,6 @@ export default function Login(){
                                 {/* input submit 버튼이 아니어도 form요소 
                                 내부의 button은 submit기능이 있다! */}
                             </li>
-                            <li>
-                                {/* 7.로그인페이지링크 */}
-                                Are you already a member? 
-                                <Link to="/login">Log In</Link>
-                            </li>
                         </ul>
                     </form>
                 </section>
@@ -199,4 +149,4 @@ export default function Login(){
             </div>
         </>
     );
-} ///////////////////// Login 컴포넌트 /////////////////////
+} ///////////////////// LogIn 컴포넌트 /////////////////////
