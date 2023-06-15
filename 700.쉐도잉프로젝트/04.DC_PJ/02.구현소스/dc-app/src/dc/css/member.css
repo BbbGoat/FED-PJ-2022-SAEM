@@ -1,6 +1,10 @@
 @charset "utf-8";
 /* Member 모듈용 CSS - member.css  */
 
+.outbx {
+    padding: 25px;
+}
+
 main.cont{
     padding: 25px;
 }
