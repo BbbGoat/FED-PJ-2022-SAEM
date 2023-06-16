@@ -3,6 +3,7 @@ import Logo from "./Logo";
 import "./css/layout.css";
 import { Link, Outlet } from "react-router-dom";
 import { gnb_data, bmenu } from "./data/common";
+import ScrollTop from "../dc/common/ScrollTop";
 
 // 폰트어썸 임포트
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -37,7 +38,8 @@ const Layout = () => {
         transform: "translateX(-50%)"
     }; ////////// logStyle //////////////
 
-    // 로그인 셋팅함수 //////////
+    // 로그인 셋팅함수 /////////////////////
+    // -> ScrollTop.js 의 useEffect 함수구역에서 호출!
     const setLogin = () => {
         // 1. 로그인 Hook변수 업데이트하기
         setLogSts(localStorage.getItem("minfo"));
@@ -47,17 +49,33 @@ const Layout = () => {
             // 메시지 셋팅하기 : 객체안의 "unm"속성이 사용자이름!
             setLogMsg("Welcome "+JSON.parse(localStorage.getItem("minfo"))["unm"]);
         } ///////////// if //////////////
-    }
+    }; /////////////// setLogin 함수 /////////////////
+
+    // 로그아웃 함수 //////////////////////
+    // -> LOGOUT 버튼에서 호출함!
+    const logout = () => {
+        // 1. 로컬스 "minfo" 삭제하기
+        localStorage.removeItem("minfo");
+        // 2. 로그인상태 Hook 변수 업데이트하기
+        setLogSts(null);
+        console.log("로그아웃됨!", logSts);
+
+    }; /////////////// logout 함수 //////////////////
+    
 
     return (
         <>
+            {/* 라우터 갱신될때 스크롤 상단이동 모듈 작동함!
+            + 로그인셋팅함수 호출전달하기! 자식에게 setLogin 함수 전달 */}
+            <ScrollTop sfn={setLogin} />
+            
             {/* 1. 상단영역 */}
             <header className="top">
 
                 {/* 로그인 환영 메시지 : 조건 - logSts값이 logsts */}
                 {
                     logSts !== null &&
-                    <div className="logmsg" style={{logStyle}}>
+                    <div className="logmsg" style={logStyle}>
                         {logMsg}
                     </div>
 
@@ -103,16 +121,26 @@ const Layout = () => {
                         <li style={{marginLeft: "auto"}}>
                             <FontAwesomeIcon icon={faSearch} />
                         </li>
-                        <li>
-                            <Link to="/mem">
-                                JOIN US
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="/login">
-                                LOG IN
-                            </Link>
-                        </li>
+                        {
+                            /* 회원가입, 로그인은 로그인 아닌 상태일때만! */
+                            logSts === null &&
+                            <>
+                                <li>
+                                    <Link to="/mem">JOIN US</Link>
+                                </li>
+                                <li>
+                                    <Link to="/login">
+                                        LOG IN
+                                    </Link>
+                                </li>
+                            </>
+                        }
+
+                        {
+                            /* 로그아웃버튼은 로그인 상태일때만! */
+                            logSts !== null &&
+                            <li><a href="#" onClick={logout}>LOGOUT</a></li>
+                        }
                     </ul>
                 </nav>
             </header>
