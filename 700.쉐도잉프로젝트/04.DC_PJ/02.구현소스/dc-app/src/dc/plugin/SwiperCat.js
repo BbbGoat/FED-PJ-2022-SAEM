@@ -19,6 +19,7 @@ import cat_data from "../data/cat";
 export default function SwiperCat(props) {
     // 데이터 셋팅
     const sdt = cat_data;    
+    console.log(sdt);
 
     return (
         <>
@@ -30,13 +31,13 @@ export default function SwiperCat(props) {
                 // 스와이퍼 사이즈별 슬라이드수 변경!
                 breakpoints={{
                     200: {
-                        slidesPerView: 4,
+                        slidesPerView: 2,
                     },
                     700: {
-                        slidesPerView: 5,
+                        slidesPerView: 3,
                     },
                     1000: {
-                        slidesPerView: 6,
+                        slidesPerView: 5,
                     },
                     1200: {
                         slidesPerView: 7,
@@ -45,25 +46,15 @@ export default function SwiperCat(props) {
                 className="mySwiper">
                 {sdt.map((v, i) => (
                     <SwiperSlide key={i}>
-                        <section className="swinbx" onClick={() => showVid(v.vsrc, v.tit)}>
-                            {/* 동영상이미지영역 */}
-                            <div className="vidimg">
-                                <img src={v.isrc} alt={v.tit}></img>
-                                <FontAwesomeIcon
-                                    icon={faPlayCircle}
-                                    style={{
-                                        position: "absolute",
-                                        bottom: "55%",
-                                        left: "10%",
-                                        color: "#fff",
-                                        fontSize: "50px",
-                                    }}
-                                />
+                        <section className="swinbx">
+                            {/* 캐릭터이미지영역 */}
+                            <div className="catimg">
+                                <img src={v.tmsrc} alt={v.cname} />
+
                             </div>
                             {/* 동영상타이틀영역 */}
-                            <div className="vidtit">
-                                <h4>{v.cat}</h4>
-                                <h3>{v.tit}</h3>
+                            <div className="cattit">
+                                <h3>{v.cname}</h3>
                             </div>
                         </section>
                     </SwiperSlide>
