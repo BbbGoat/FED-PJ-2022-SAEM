@@ -1,7 +1,7 @@
 // 메인 레이아웃 컴포넌트
 import Logo from "./Logo";
 import "./css/layout.css";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { gnb_data, bmenu } from "./data/common";
 import ScrollTop from "../dc/common/ScrollTop";
 
@@ -22,6 +22,10 @@ import { useState } from "react";
 
 const Layout = () => {
 
+    // 라우터 이동메서드 셋팅!
+    const goNav = useNavigate();
+    
+    
     // 자식컴포넌트 값 전달 테스트 함수
     const callMe = (x) => {
         console.log("누구?",x);
@@ -62,6 +66,32 @@ const Layout = () => {
 
     }; /////////////// logout 함수 //////////////////
     
+    // 검색창 보이기 함수
+    const showSearch = () => {
+        // 1. a요소 숨기기
+        document.querySelector(".searchingGnb + a").style.opacity = "0";
+        // 2. 검색창 보이기
+        let tg = document.querySelector(".searchingGnb");
+        tg.style.display = "block";
+        tg.querySelector("input").focus();
+        
+        
+    }; /////////// showSearch 함수 ////////////////
+
+
+    // 입력창에서 엔터키를 누르면 검색함수 호출!
+    const enterKey = (e) => {
+        if (e.key === "Enter") goSearch();
+    }; //////////// enterKey 함수 ////////////
+
+    // 검색페이지로 검색어와 함께 이동하기 ///////
+    const goSearch = (e) => {
+        // 검색어 읽어오기
+        let kw = document.querySelector(".searchingGnb input").value;
+        console.log("검색어:",kw);
+        // 라우터이동하기: 전달값 가져가기(검색어)
+        goNav('/res',{state:{keyword:kw}})
+    }
 
     return (
         <>
@@ -119,9 +149,28 @@ const Layout = () => {
                             )
                         }
                         <li style={{marginLeft: "auto"}}>
-                            <Link to="/sch">
+                            {/* 검색입력박스 */}
+                            {/* 검색박스 */}
+                            <div className="searchingGnb">
+                                {/* 검색버튼 돋보기아이콘 */}
+                                <FontAwesomeIcon
+                                    icon={faSearch}
+                                    className="schbtnGnb"
+                                    title="Open search"
+                                    onClick={goSearch}
+                                />
+                                {/* 입력창 */}
+                                <input
+                                    id="schinGnb"
+                                    type="text"
+                                    placeholder="Filter by Keyword"
+                                    onKeyUp={enterKey}
+                                />
+                            </div>
+                            {/* 검색기능링크 - 클릭시 검색창보이기! */}
+                            <a href="#" onClick={showSearch}>
                                 <FontAwesomeIcon icon={faSearch} />
-                            </Link>
+                            </a>
                         </li>
                         {
                             /* 회원가입, 로그인은 로그인 아닌 상태일때만! */
@@ -131,9 +180,7 @@ const Layout = () => {
                                     <Link to="/mem">JOIN US</Link>
                                 </li>
                                 <li>
-                                    <Link to="/login">
-                                        LOG IN
-                                    </Link>
+                                    <Link to="/login">LOG IN</Link>
                                 </li>
                             </>
                         }
@@ -162,7 +209,7 @@ const Layout = () => {
                             {
                                 bmenu.map((v,i)=>
                                     <li key={i}>
-                                        <a href={v.link} target="_blank">{v.tit}</a>
+                                        <a href={v.link} target="_blank">{v.txt.toUpperCase()}</a>
                                     </li>
                                 )
                             }

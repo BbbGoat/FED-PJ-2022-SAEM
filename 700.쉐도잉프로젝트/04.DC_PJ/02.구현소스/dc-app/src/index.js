@@ -14,7 +14,7 @@ import Video from "./dc/Video";
 import Member from "./dc/Member";
 import LogIn from "./dc/LogIn";
 import Detail from "./dc/Detail";
-import Search from "./dc/modules/Search";
+import Result from "./dc/Result";
 import Board from "./dc/Board";
 
 /********************************************* 
@@ -66,7 +66,7 @@ export default function App(){
                     <Route path="mem" element={<Member />} />
                     <Route path="login" element={<LogIn />} />
                     <Route path="det" element={<Detail />} />
-                    <Route path="sch" element={<Search />} />
+                    <Route path="res" element={<Result />} />
                     <Route path="board" element={<Board />} />
                </Route>
 
