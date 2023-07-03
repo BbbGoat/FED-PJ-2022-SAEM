@@ -38,6 +38,7 @@
     font-family: 'Roboto Condensed', sans-serif;
     text-align-last: left;
     padding: 30px;
+    box-sizing: border-box;
 }
 .vb2 h2{
     font-size: 40px;

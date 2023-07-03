@@ -1,4 +1,5 @@
 // 메인 레이아웃 컴포넌트
+import $ from "jquery";
 import Logo from "./Logo";
 import "./css/layout.css";
 import { Link, Outlet, useNavigate } from "react-router-dom";
@@ -92,6 +93,11 @@ const Layout = () => {
         // 라우터이동하기: 전달값 가져가기(검색어)
         goNav('/res',{state:{keyword:kw}})
     }
+
+    // 상단메뉴 변경 함수 ///////////////////
+    // .top.on 이면 메뉴가 나타남!
+    const chgMenu = () => $(".top").toggleClass("on");
+    
 
     return (
         <>
@@ -191,6 +197,8 @@ const Layout = () => {
                             <li><a href="#" onClick={logout}>LOGOUT</a></li>
                         }
                     </ul>
+                    {/* 햄버거버튼 */}
+                    <button className="hambtn" onClick={chgMenu}></button>
                 </nav>
             </header>
             {/* 2. 메인영역 */}
