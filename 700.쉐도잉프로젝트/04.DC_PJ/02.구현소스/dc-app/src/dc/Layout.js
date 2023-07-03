@@ -97,7 +97,7 @@ const Layout = () => {
     // 상단메뉴 변경 함수 ///////////////////
     // .top.on 이면 메뉴가 나타남!
     const chgMenu = () => $(".top").toggleClass("on");
-    
+
 
     return (
         <>
@@ -128,7 +128,7 @@ const Layout = () => {
                         </li>
                         {
                             gnb_data.map((v,i) =>
-                                <li key={i}>
+                                <li key={i} onClick={chgMenu}>
                                     <Link to={v.link}>{v.txt}</Link>
                                     {/* v.sub가 없으면 undefined */}
                                     {/* {console.log(v.sub)} */}
@@ -182,10 +182,10 @@ const Layout = () => {
                             /* 회원가입, 로그인은 로그인 아닌 상태일때만! */
                             logSts === null &&
                             <>
-                                <li>
+                                <li onClick={chgMenu}>
                                     <Link to="/mem">JOIN US</Link>
                                 </li>
-                                <li>
+                                <li onClick={chgMenu}>
                                     <Link to="/login">LOG IN</Link>
                                 </li>
                             </>
@@ -194,7 +194,7 @@ const Layout = () => {
                         {
                             /* 로그아웃버튼은 로그인 상태일때만! */
                             logSts !== null &&
-                            <li><a href="#" onClick={logout}>LOGOUT</a></li>
+                            <li onClick={chgMenu}><a href="#" onClick={logout}>LOGOUT</a></li>
                         }
                     </ul>
                     {/* 햄버거버튼 */}
