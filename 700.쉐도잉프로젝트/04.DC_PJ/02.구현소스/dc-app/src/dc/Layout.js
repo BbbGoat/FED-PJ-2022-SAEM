@@ -94,9 +94,12 @@ const Layout = () => {
         goNav('/res',{state:{keyword:kw}})
     }
 
-    // 상단메뉴 변경 함수 ///////////////////
+    ///////// 상단메뉴 변경 함수 ///////////////
     // .top.on 이면 메뉴가 나타남!
-    const chgMenu = () => $(".top").toggleClass("on");
+    const chgMenu = () => $(".top").toggleClass('on');
+
+    // 메뉴클릭시 닫기 부가기능 함수!
+    const rmCls = () => $(".top").removeClass('on');
 
 
     return (
@@ -128,7 +131,7 @@ const Layout = () => {
                         </li>
                         {
                             gnb_data.map((v,i) =>
-                                <li key={i} onClick={chgMenu}>
+                                <li key={i} onClick={rmCls}>
                                     <Link to={v.link}>{v.txt}</Link>
                                     {/* v.sub가 없으면 undefined */}
                                     {/* {console.log(v.sub)} */}
@@ -182,10 +185,10 @@ const Layout = () => {
                             /* 회원가입, 로그인은 로그인 아닌 상태일때만! */
                             logSts === null &&
                             <>
-                                <li onClick={chgMenu}>
+                                <li onClick={rmCls}>
                                     <Link to="/mem">JOIN US</Link>
                                 </li>
-                                <li onClick={chgMenu}>
+                                <li onClick={rmCls}>
                                     <Link to="/login">LOG IN</Link>
                                 </li>
                             </>
@@ -194,7 +197,7 @@ const Layout = () => {
                         {
                             /* 로그아웃버튼은 로그인 상태일때만! */
                             logSts !== null &&
-                            <li onClick={chgMenu}><a href="#" onClick={logout}>LOGOUT</a></li>
+                            <li onClick={rmCls}><a href="#" onClick={logout}>LOGOUT</a></li>
                         }
                     </ul>
                     {/* 햄버거버튼 */}

@@ -3,7 +3,7 @@ import $ from 'jquery';
 import "jquery-ui-dist/jquery-ui";
 import "./css/board.css";
 import orgdata from "./data/data.json"
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 // 제이쿼리 로드구역 함수 /////////
 function jqFn(){
@@ -17,19 +17,18 @@ let jsn = orgdata;
 function Board(){
     // [ 제이슨 파일 데이터 로컬스토리지에 넣기 ]
 // 1. 변수에 제이슨 파일을 엑시오스로 불러온다
-console.log(jsn);
+// console.log(jsn);
 
 
 
 // 2. 로컬스토리지 변수를 설정하여 할당하기
 localStorage.setItem("bdata", JSON.stringify(jsn));
-console.log("로컬스:", localStorage.getItem("bdata"));
+// console.log("로컬스:", localStorage.getItem("bdata"));
 
 // 3. 로컬스토리지 데이터를 파싱하여 게시판 리스트에 넣기
 // 3-1. 로컬 스토리지 데이터 파싱하기
 let bdata = JSON.parse(localStorage.getItem("bdata"));
-console.log("로컬스파싱:",bdata,
-"/개수:",bdata.length);
+// console.log("로컬스파싱:",bdata,"/개수:",bdata.length);
 
 
 // 페이지번호 : 페이지단위별 순서번호
@@ -77,7 +76,7 @@ function bindList(pgnum){ // pgnum - 페이지번호
         } //////////// if ////////////
     } /////////// for 문 ///////////////
     
-    console.log("코드:", blist);
+    // console.log("코드:", blist);
 
     // 2. 리스트 코드 테이블에 넣기
     $("#board tbody").html(blist);
@@ -127,8 +126,40 @@ function bindList(pgnum){ // pgnum - 페이지번호
 
 } /////////////// bindList함수 ///////////////
 
-const callFn = () => bindList(1);
-useEffect(callFn,[])
+
+// 로그인 상태 체크 함수 /////////
+const chkLogin = () => {
+    // 로컬스에 'minfo'가 있는지 체크
+    let chk = localStorage.getItem('minfo');
+    // 로컬스에 셋팅했을 경우 상태 Hook에 true값 업데이트!
+    if (chk) setLog(true);
+    else setLog(false);
+}; //////////// chkLogin ////////////
+
+
+// 게시판 모드별 상태구분 Hook 변수 만들기
+// 모드구분값 : CRUD (Create/Read/Update/Delete)
+// C - 글쓰기 / R - 글읽기 / U - 글수정 / D - 삭제
+// 상태추가 : L - 글목록 
+const [bdmode,setBdmode] = useState('L');
+
+// 로그인 상태 Hook 변수 만들기
+// 상태값 : false - 로그아웃상태 / true - 로그인상태
+const [log,setLog] = useState(false);
+
+// 로딩 체크함수 : useEffect에서 호출함! ///
+const callFn = () => {
+    // 리스트 상태일때만 호출!
+    if (bdmode == 'L') bindList(1);
+    // 로그인상태 체크함수 호출!
+    chkLogin();
+
+    console.log("로그인:",log,"/모드:",bdmode);
+    
+}; ////////// callFn ////////////
+
+// 로딩체크함수 호출!
+useEffect(callFn, []);
 
     return(
         <>
@@ -167,16 +198,59 @@ useEffect(callFn,[])
         </table>
 
         <br />
+        {/* 버튼 그룹박스 */}
         <table className="dtbl btngrp">
             <tbody>
                 <tr>
                     <td>
-                        <button>
-                            <a href="list.php">List</a>
-                        </button>
-                        <button className="wbtn">
-                            <a href="write.php">Write</a>
-                        </button>
+                        {
+                            // 리스트모드(L)
+                            bdmode == 'L' && log &&
+                            <>     
+                                <button>
+                                    <a href="#">Write</a>
+                                </button>
+                            </>
+                        }
+                        {
+                            // 글쓰기모드(C) : 서브밋 + 리스트버튼
+                            bdmode == 'C' &&
+                            <>     
+                                <button>
+                                    <a href="#">Submit</a>
+                                </button>
+                                <button>
+                                    <a href="#">List</a>
+                                </button>
+                            </>
+                        }
+                        {
+                            // 읽기모드(R) : 리스트 + 수정모드버튼
+                            bdmode == 'R' &&
+                            <>     
+                                <button>
+                                    <a href="#">List</a>
+                                </button>
+                                <button>
+                                    <a href="#">Modify</a>
+                                </button>
+                            </>
+                        }
+                        {
+                            // 수정모드(U) : 서브밋 + 삭제 + 리스트버튼
+                            bdmode == 'U' &&
+                            <>     
+                                <button>
+                                    <a href="#">Submit</a>
+                                </button>
+                                <button>
+                                    <a href="#">Delete</a>
+                                </button>
+                                <button>
+                                    <a href="#">List</a>
+                                </button>
+                            </>
+                        }
                     </td>
                 </tr>
             </tbody>
