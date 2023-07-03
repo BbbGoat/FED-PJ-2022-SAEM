@@ -12,168 +12,221 @@ function jqFn(){
     }); //////// jQB ///////////
 } ////////////// jQFn ///////////
 
+// 컴포넌트에서 제이슨 데이터를 담지말고
+// 반드시 바깥에서 담을것!
 let jsn = orgdata;
+
+// 제이슨 데이터 배열정렬하기(내림차순:최신등록순번이 1번)
+jsn.sort((x,y)=>{
+    return Number(x.idx) == Number(y.idx) ? 0 : Number(x.idx) > Number(y.idx) ? -1 : 1;
+});
 
 function Board(){
     // [ 제이슨 파일 데이터 로컬스토리지에 넣기 ]
-// 1. 변수에 제이슨 파일을 엑시오스로 불러온다
-// console.log(jsn);
+    // 1. 변수에 제이슨 파일을 엑시오스로 불러온다
+    // console.log(jsn);
 
 
 
-// 2. 로컬스토리지 변수를 설정하여 할당하기
-localStorage.setItem("bdata", JSON.stringify(jsn));
-// console.log("로컬스:", localStorage.getItem("bdata"));
+    // 2. 로컬스토리지 변수를 설정하여 할당하기
+    localStorage.setItem("bdata", JSON.stringify(jsn));
+    // console.log("로컬스:", localStorage.getItem("bdata"));
 
-// 3. 로컬스토리지 데이터를 파싱하여 게시판 리스트에 넣기
-// 3-1. 로컬 스토리지 데이터 파싱하기
-let bdata = JSON.parse(localStorage.getItem("bdata"));
-// console.log("로컬스파싱:",bdata,"/개수:",bdata.length);
+    // 3. 로컬스토리지 데이터를 파싱하여 게시판 리스트에 넣기
+    // 3-1. 로컬 스토리지 데이터 파싱하기
+    let bdata = JSON.parse(localStorage.getItem("bdata"));
+    // console.log("로컬스파싱:",bdata,"/개수:",bdata.length);
 
 
-// 페이지번호 : 페이지단위별 순서번호
-// let pgnum = 1; -> 함수내 전달변수로 처리!
+    // 페이지번호 : 페이지단위별 순서번호
+    // let pgnum = 1; -> 함수내 전달변수로 처리!
 
-// 페이지단위수 : 한 페이지당 레코드수
-const pgblock = 9;
+    // 페이지단위수 : 한 페이지당 레코드수
+    const pgblock = 9;
 
-// 시작번호생성 : (페이지번호-1) * 페이지단위수
-// -> (pgnum-1) * pgblock
-// 끝번호생성 : 페이지번호 * 페이지단위수
-// -> pgnum * pgblock
+    // 시작번호생성 : (페이지번호-1) * 페이지단위수
+    // -> (pgnum-1) * pgblock
+    // 끝번호생성 : 페이지번호 * 페이지단위수
+    // -> pgnum * pgblock
 
-/******************************************* 
-    함수명: bindList
-    기능: 페이지별 리스트를 생성하여 바인딩함
-*******************************************/
-function bindList(pgnum){ // pgnum - 페이지번호
-    // 0. 게시판 리스트 생성하기
-    let blist = "";
-    // 전체 레코드 개수
-    let totnum = bdata.length;
-    console.log(pgnum);
-    
-    // 1.일반형 for문으로 특정대상 배열 데이터 가져오기
-    // 데이터 순서: 번호,글제목,글쓴이,등록일자,조회수
-    for (let i = (pgnum - 1) * pgblock; i < pgnum * pgblock; i++) {
-        // 마지막 번호한계값 조건으로 마지막페이지 데이터 
-        // 존재하는 데이터까지만 바인딩하기
-        if(i < totnum){
-
-            blist += `
-                <tr>
-                    <td>${bdata[i]["idx"]}</td>
-                    <td>
-                        <a href="view.html?idx=${bdata[i]["idx"]}">
-                            ${bdata[i]["tit"]}
-                        </a>
-                    </td>
-                    <td>${bdata[i]["writer"]}</td>
-                    <td>${bdata[i]["date"]}</td>
-                    <td>${bdata[i]["cnt"]}</td>
-                </tr>
-            `;
-        } //////////// if ////////////
-    } /////////// for 문 ///////////////
-    
-    // console.log("코드:", blist);
-
-    // 2. 리스트 코드 테이블에 넣기
-    $("#board tbody").html(blist);
-
-    // 3. 페이징 블록 만들기
-    // 3-1.전체 페이지 번호수 계산하기
-    // 전체레코드수 / 페이지단위수 (나머지있으면+ 1 )
-    // 전체 레코드 수 : totnum 변수에 이미 할당
-    let pgtotal = Math.floor(totnum / pgblock);
-    let pgadd = totnum % pgblock;
-    console.log("페이징 전체수:",pgtotal);
-    console.log("페이징 나머지:",pgadd);
-
-    // 페이징코드변수
-    let pgcode = "";
-
-    // 3-2. 페이징코드 만들기
-    // 나머지가 있으면 1을 더함
-    if(pgadd!=0) pgtotal = pgtotal+1;
-
-    // 코드만들기 for문
-    for(let i = 1; i <= pgtotal; i++){
-
-        pgcode += 
-        // 페이지번호와 i가 같으면 a링크를 만들지 않는다!
-        pgnum == i ? `<b>${i}</b>` : `<a href="#">${i}</a>`;
-
-        // 사이구분자(마지막번호 뒤는 제외)
-        if(i!=pgtotal) pgcode += " | ";
+    /******************************************* 
+        함수명: bindList
+        기능: 페이지별 리스트를 생성하여 바인딩함
+    *******************************************/
+    function bindList(pgnum){ // pgnum - 페이지번호
+        // 0. 게시판 리스트 생성하기
+        let blist = "";
+        // 전체 레코드 개수
+        let totnum = bdata.length;
+        // console.log(pgnum);
         
+        // 1.일반형 for문으로 특정대상 배열 데이터 가져오기
+        // 데이터 순서: 번호,글제목,글쓴이,등록일자,조회수
+        for (let i = (pgnum - 1) * pgblock; i < pgnum * pgblock; i++) {
+            // 마지막 번호한계값 조건으로 마지막페이지 데이터 
+            // 존재하는 데이터까지만 바인딩하기
+            // 순번은 리스트상 순서번호를 넣는다!(idx아님!)
+            if(i < totnum){
 
-    } /////////// for문 ///////////////
+                blist += `
+                    <tr>
+                        <td>${i+1}</td>
+                        <td>
+                            <a href="view.html?idx=${bdata[i]["idx"]}">
+                                ${bdata[i]["tit"]}
+                            </a>
+                        </td>
+                        <td>${bdata[i]["writer"]}</td>
+                        <td>${bdata[i]["date"]}</td>
+                        <td>${bdata[i]["cnt"]}</td>
+                    </tr>
+                `;
+            } //////////// if ////////////
+        } /////////// for 문 ///////////////
+        
+        // console.log("코드:", blist);
 
-    // 3-3. 페이징코드 넣기
-    $(".paging").html(pgcode);
+        // 2. 리스트 코드 테이블에 넣기
+        $("#board tbody").html(blist);
 
-    // 3-5. 이벤트링크 생성하기
-    $(".paging a").click(function(e){
-        // 기본이동막기
+        // 3. 페이징 블록 만들기
+        // 3-1.전체 페이지 번호수 계산하기
+        // 전체레코드수 / 페이지단위수 (나머지있으면+ 1 )
+        // 전체 레코드 수 : totnum 변수에 이미 할당
+        let pgtotal = Math.floor(totnum / pgblock);
+        let pgadd = totnum % pgblock;
+        // console.log("페이징 전체수:",pgtotal);
+        // console.log("페이징 나머지:",pgadd);
+
+        // 페이징코드변수
+        let pgcode = "";
+
+        // 3-2. 페이징코드 만들기
+        // 나머지가 있으면 1을 더함
+        if(pgadd!=0) pgtotal = pgtotal+1;
+
+        // 코드만들기 for문
+        for(let i = 1; i <= pgtotal; i++){
+
+            pgcode += 
+            // 페이지번호와 i가 같으면 a링크를 만들지 않는다!
+            pgnum == i ? `<b>${i}</b>` : `<a href="#">${i}</a>`;
+
+            // 사이구분자(마지막번호 뒤는 제외)
+            if(i!=pgtotal) pgcode += " | ";
+            
+
+        } /////////// for문 ///////////////
+
+        // 3-3. 페이징코드 넣기
+        $(".paging").html(pgcode);
+
+        // 3-5. 이벤트링크 생성하기
+        $(".paging a").click(function(e){
+            // 기본이동막기
+            e.preventDefault();
+            // 바인딩함수 호출!(페이지번호 보냄)
+            bindList($(this).text());
+
+        }); /////////// click /////////////
+    } /////////////// bindList함수 ///////////////
+
+
+    // 현재로그인 사용자 정보
+    let [nowmem,setNowmem] = useState('');
+
+    // 로그인 상태 체크 함수 /////////
+    const chkLogin = () => {
+        // 로컬스에 'minfo'가 있는지 체크
+        let chk = localStorage.getItem('minfo');
+        // 로컬스에 셋팅했을 경우 상태 Hook에 true값 업데이트!
+        if (chk) setLog(true);
+        else setLog(false);
+
+        // 현재 로그인한 맴버정보
+        if (chk) {
+            nowmem = JSON.parse(chk);
+            console.log("현재너:",nowmem);
+        }
+        
+    }; //////////// chkLogin ////////////
+
+
+    // 게시판 모드별 상태구분 Hook 변수 만들기
+    // 모드구분값 : CRUD (Create/Read/Update/Delete)
+    // C - 글쓰기 / R - 글읽기 / U - 글수정 / D - 삭제
+    // 상태추가 : L - 글목록 
+    const [bdmode,setBdmode] = useState('L');
+
+    // 로그인 상태 Hook 변수 만들기
+    // 상태값 : false - 로그아웃상태 / true - 로그인상태
+    const [log,setLog] = useState(false);
+
+
+    // 모드전환함수 ////////////////////
+    const chgMode = e => {
+        // 기본이동막기(하위a)
         e.preventDefault();
-        // 바인딩함수 호출!(페이지번호 보냄)
-        bindList($(this).text());
 
-    }); /////////// click /////////////
+        let txt = $(e.target).text();
+        console.log("버튼:",txt);
+
+        // (1) 글쓰기 버튼 클릭
+        if (txt == "Write") {
+            // 모드 상태값 업데이트
+            setBdmode('C')
+            // 읽기전용 입력창에 기본정보 셋팅
+            $(()=>{
+                $(".dtblview .name").text(nowmem.unm);
+                $(".dtblview .email").text(nowmem.eml);
+            });
+        }
+        // (2) 리스트 버튼 클릭
+        else if (txt == "List") setBdmode('L');
+        // (3) 글쓰기모드(C) 일때 실행(Submit) 버튼 클릭
+        else if (txt == "Submit" && bdmode == 'C') {
+            
+            // 타이틀
+            let tit = $(".dtblview .subject").val();
+            // 내용
+            let cont = $(".dtblview .content").val();
+            
+            // 제목/내용 빈값 체크
+            if (tit.trim()=="" || cont.trim()=="") {
+                alert("Title and content are required");
+            }
+            /* {
+                "idx" : "3",
+                "tit" : "This is a Title3",
+                "cont" : "I wanna talk to you now3",
+                "att" : "",
+                "date" : "2023-06-01",
+                "writer" : "admin",
+                "pwd" : "1111",
+                "cnt" : "1"
+            }, */
+        }
+
+        // 리스트 태그로딩구역에서 일괄호출!
+        // 리스트 태그가 출력되었을때 적용됨!
+        $(()=>bindList(1));
+
+    }
 
 
+    // 로딩 체크함수 : useEffect에서 호출함! ///
+    const callFn = () => {
+        // 리스트 상태일때만 호출!
+        if (bdmode == 'L') bindList(1);
+        // 로그인상태 체크함수 호출!
+        chkLogin();
 
-} /////////////// bindList함수 ///////////////
+        console.log("로그인:",log,"/모드:",bdmode);
+        
+    }; ////////// callFn ////////////
 
-
-// 로그인 상태 체크 함수 /////////
-const chkLogin = () => {
-    // 로컬스에 'minfo'가 있는지 체크
-    let chk = localStorage.getItem('minfo');
-    // 로컬스에 셋팅했을 경우 상태 Hook에 true값 업데이트!
-    if (chk) setLog(true);
-    else setLog(false);
-}; //////////// chkLogin ////////////
-
-
-// 게시판 모드별 상태구분 Hook 변수 만들기
-// 모드구분값 : CRUD (Create/Read/Update/Delete)
-// C - 글쓰기 / R - 글읽기 / U - 글수정 / D - 삭제
-// 상태추가 : L - 글목록 
-const [bdmode,setBdmode] = useState('L');
-
-// 로그인 상태 Hook 변수 만들기
-// 상태값 : false - 로그아웃상태 / true - 로그인상태
-const [log,setLog] = useState(false);
-
-
-// 모드전환함수 ////////////////////
-const chgMode = e => {
-    // 기본이동막기(하위a)
-    e.preventDefault();
-
-    let txt = $(e.target).text();
-    console.log("버튼:",txt);
-
-    if (txt == "Write") setBdmode('C');
-    else if (txt == "List") setBdmode('L');
-}
-
-
-// 로딩 체크함수 : useEffect에서 호출함! ///
-const callFn = () => {
-    // 리스트 상태일때만 호출!
-    if (bdmode == 'L') bindList(1);
-    // 로그인상태 체크함수 호출!
-    chkLogin();
-
-    console.log("로그인:",log,"/모드:",bdmode);
-    
-}; ////////// callFn ////////////
-
-// 로딩체크함수 호출!
-useEffect(callFn, []);
+    // 로딩체크함수 호출!
+    useEffect(callFn, []);
 
     return(
         <>
@@ -219,7 +272,47 @@ useEffect(callFn, []);
         {/* 2. 글쓰기 테이블 : 게시판 모드 'C'일때만 출력 */}
         {
             bdmode == 'C' &&
-            <h1>글쓰기양~~~!</h1>
+            <>
+                <h1>글쓰기양~~~!</h1>
+                <table className="dtblview">
+                    <caption>OPINION</caption>
+                    <tbody>
+                        <tr>
+                            <td width="100">
+                                Name
+                            </td>
+                            <td width="650">
+                                <input type="text" className="name" size="20" readOnly />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Email
+                            </td>
+                            <td>
+                                <input type="text" className="email" size="40" readOnly />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Title
+                            </td>
+                            <td>
+                                <input type="text" className="subject" size="60" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Content
+                            </td>
+                            <td>
+                                <textarea className="content" cols="60" rows="10"></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </>
+            
         }
 
         <br />
