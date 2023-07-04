@@ -253,15 +253,15 @@ function Board(){
                 // 날짜데이터처리
                 let today = new Date();
                 let yy = today.getFullYear();
-                let mm = today.getMonth();
-                mm = mm<10?"0"+mm:mm
+                let mm = today.getMonth()+1; // 숫자월은 +1
+                mm = mm < 10 ? "0" + mm : mm;
                 let dd = today.getDate();
-                dd = dd<10?"0"+dd:dd
+                dd = dd < 10 ? "0" + dd : dd;
 
-                // 원본데이터 변수할당
+                // 1. 원본데이터 변수할당
                 let orgtemp = jsn;
                 
-                // 임시변수에 입력할 객체 데이터 생성하기
+                // 2. 임시변수에 입력할 객체 데이터 생성하기
                 let temp = {
                     "idx" : jsn.length+1, // 현재개수 +1
                     "tit" : tit,
