@@ -35,7 +35,7 @@ function Board(){
     const [jsn,setJsn] = useState(org); // 초기데이터 셋팅
     
     // 현재로그인 사용자 정보 : 처음에 현재로그인 정보로 셋팅함!
-    const [nowmem,setNowmem] = useState(JSON.parse(localStorage.getItem('minfo')));
+    const [nowmem,setNowmem] = useState(localStorage.getItem('minfo') ? JSON.parse(localStorage.getItem('minfo')) : '');
 
     // 게시판 모드별 상태구분 Hook 변수 만들기
     // 모드구분값 : CRUD (Create/Read/Update/Delete)
@@ -172,10 +172,10 @@ function Board(){
             setBdmode('R');
             // 현재 글번호(고유값 idx) 읽어오기
             let selnum = $(this).attr('data-idx');
-            // 원본데이터에서 해당 idx 데이터 찾기
+            // 원본데이터에서 해당 idx의 데이터 찾기
             let seldt = jsn.find(x=>{ if(x.idx == selnum) return true});
 
-            console.log(selnum,seldt);
+            console.log("selnum과 seldt:",selnum,seldt);
 
             // 글쓴이(seldt.writer)와 현재로그인한이(nowmem.uid)가 같으면
             // 수정하기 버튼 상태값 true로 업데이트 아니면 false
